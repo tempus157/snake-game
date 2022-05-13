@@ -1,5 +1,13 @@
 #include "window.hpp"
 
+Window::Border::Border() : topLeft(' '), topMid(' '), topRight(' '),
+                           midLeft(' '), midRight(' '), bottomLeft(' '),
+                           bottomMid(' '), bottomRight(' ') {}
+
+Window::Border::Border(unsigned int ch) : topLeft(ch), topMid(ch), topRight(ch),
+                                          midLeft(ch), midRight(ch), bottomLeft(ch),
+                                          bottomMid(ch), bottomRight(ch) {}
+
 Window::Window()
 {
     scale.x = getmaxx(window);
@@ -35,12 +43,22 @@ void Window::render()
 {
     clear();
 
+    if (border)
+    {
+        renderBorder();
+    }
+
     for (auto object : objects)
     {
         object->render();
     }
 
     refresh();
+}
+
+void Window::useObject(Object *object)
+{
+    objects.push_back(object);
 }
 
 Vector Window::getScale()
@@ -67,7 +85,30 @@ void Window::setColor(Color foreground, Color background)
     bkgd(COLOR_PAIR(color.getAttribute()));
 }
 
-void Window::useObject(Object *object)
+void Window::useBorder(Border border)
 {
-    objects.push_back(object);
+    this->border = border;
+}
+
+void Window::useNoBorder()
+{
+    border = nullptr;
+}
+
+void Window::renderBorder()
+{
+    if (border.value.color)
+    {
+        attron(COLOR_PAIR(border.value.color.value.getAttribute()));
+    }
+
+    border(border.value.midLeft, border.value.midRight,
+           border.value.topMid, border.value.bottomMid,
+           border.value.topLeft, border.value.topRight,
+           border.value.bottomLeft, border.value.bottomRight);
+
+    if (border.value.color)
+    {
+        attroff(COLOR_PAIR(border.value.color.value.getAttribute()));
+    }
 }

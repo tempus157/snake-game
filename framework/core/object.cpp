@@ -1,7 +1,7 @@
 #include "object.hpp"
 
-Object::Object() : useColor(false) {}
-Object::Object(std::string text) : text(text), useColor(false) {}
+Object::Object() {}
+Object::Object(std::string text) : text(text) {}
 
 std::string Object::getText()
 {
@@ -24,34 +24,32 @@ void Object::setPosition(int x, int y)
     position.y = y;
 }
 
-ColorPair Object::getColor()
+Optional<ColorPair> Object::getColor()
 {
     return color;
 }
 
 void Object::setColor(Color foreground, Color background)
 {
-    color.foreground = foreground;
-    color.background = background;
-    useColor = true;
+    color = ColorPair(foreground, background);
 }
 
 void Object::useWindowColor()
 {
-    useColor = false;
+    color = nullptr;
 }
 
 void Object::render()
 {
-    if (useColor)
+    if (color)
     {
-        attron(COLOR_PAIR(color.getAttribute()));
+        attron(COLOR_PAIR(color.value.getAttribute()));
     }
 
     mvprintw(position.y, position.x, text.c_str());
 
-    if (useColor)
+    if (color)
     {
-        attroff(COLOR_PAIR(color.getAttribute()));
+        attroff(COLOR_PAIR(color.value.getAttribute()));
     }
 }

@@ -3,6 +3,7 @@
 
 #include "../utils/vector.hpp"
 #include "../utils/color.hpp"
+#include "../utils/optional.hpp"
 
 #include <ncurses.h>
 #include <string>
@@ -18,7 +19,7 @@ public:
     Vector getPosition();
     void setPosition(int x, int y);
 
-    ColorPair getColor();
+    Optional<ColorPair> getColor();
     void setColor(Color foreground, Color background);
     void useWindowColor();
     void render();
@@ -26,8 +27,7 @@ public:
 private:
     std::string text;
     Vector position;
-    bool useColor;
-    ColorPair color;
+    Optional<ColorPair> color;
 };
 
 #endif

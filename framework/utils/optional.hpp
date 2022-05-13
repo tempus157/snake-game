@@ -10,12 +10,32 @@ public:
     T value;
     bool hasValue;
 
-    Optional();
-    Optional(std::nullptr_t value);
-    Optional(T value);
+    Optional() : hasValue(false) {}
+    Optional(std::nullptr_t value) : Optional() {}
+    Optional(T value) : value(value), hasValue(true) {}
 
-    Optional<T> operator=(std::nullptr_t value);
-    Optional<T> operator=(T value);
+    operator bool()
+    {
+        return hasValue;
+    }
+
+    operator T()
+    {
+        return value;
+    }
+
+    Optional<T> operator=(std::nullptr_t value)
+    {
+        hasValue = false;
+        return *this;
+    }
+
+    Optional<T> operator=(T value)
+    {
+        this->value = value;
+        this->hasValue = true;
+        return *this;
+    }
 };
 
 #endif
