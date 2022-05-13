@@ -3,10 +3,10 @@
 
 struct Vector
 {
+public:
     int x;
     int y;
 
-public:
     Vector();
     Vector(int x, int y);
 };
