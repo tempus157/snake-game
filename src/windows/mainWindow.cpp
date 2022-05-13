@@ -1,5 +1,6 @@
 #include "mainWindow.hpp"
 #include "../../framework/core/input.hpp"
+#include "../../framework/core/app.hpp"
 #include <ncurses.h>
 
 void MainWindow::init()
@@ -17,6 +18,6 @@ void MainWindow::update()
 
     if (Input::keyPressed())
     {
-        title->setText(std::string(1, static_cast<char>(Input::currentKey())));
+        App::quit();
     }
 }

@@ -197,6 +197,7 @@ void Input::readKey()
         break;
     case ' ':
         Input::key = Key::Space;
+        break;
     default:
         Input::key = Key::None;
         break;

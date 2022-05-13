@@ -8,6 +8,7 @@ class App
 {
 public:
     static App *create();
+    static void quit();
     App *useWindow(Window *window);
     void execute();
 

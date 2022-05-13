@@ -24,6 +24,11 @@ App *App::create()
     return new App();
 }
 
+void App::quit()
+{
+    App::progress = false;
+}
+
 App *App::useWindow(Window *window)
 {
     windows.push_back(window);
