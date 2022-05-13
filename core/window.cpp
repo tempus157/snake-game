@@ -4,6 +4,18 @@ Window::Window()
 {
     scale.x = getmaxx(window);
     scale.y = getmaxy(window);
+    start_color();
+    ColorPair color;
+
+    for (auto foreground = 0; foreground < 8; foreground++)
+    {
+        for (auto background = 0; background < 8; background++)
+        {
+            color.foreground = static_cast<Color>(foreground);
+            color.background = static_cast<Color>(background);
+            init_pair(color.getAttribute(), foreground, background);
+        }
+    }
 }
 
 Window::~Window()
@@ -33,9 +45,11 @@ Vector Window::getScale()
     return scale;
 }
 
-void Window::setScale(Vector scale)
+void Window::setScale(int x, int y)
 {
-    resize_term(scale.y, scale.x);
+    scale.x = x;
+    scale.y = y;
+    resize_term(y, x);
 }
 
 void Window::useObject(Object *object)

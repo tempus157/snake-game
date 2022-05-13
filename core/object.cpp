@@ -19,12 +19,26 @@ Vector Object::getPosition()
     return position;
 }
 
-void Object::setPosition(Vector position)
+void Object::setPosition(int x, int y)
 {
-    this->position = position;
+    position.x = x;
+    position.y = y;
+}
+
+ColorPair Object::getColor()
+{
+    return color;
+}
+
+void Object::setColor(Color foreground, Color background)
+{
+    color.foreground = foreground;
+    color.background = background;
 }
 
 void Object::render()
 {
+    attron(COLOR_PAIR(color.getAttribute()));
     mvprintw(position.y, position.x, text.c_str());
+    attroff(COLOR_PAIR(color.getAttribute()));
 }

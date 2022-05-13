@@ -2,9 +2,10 @@
 
 void MainWindow::init()
 {
-    setScale(Vector(80, 25));
+    setScale(80, 25);
     useObject(title);
-    title->setPosition(Vector(3, 4));
+    title->setPosition(3, 4);
+    title->setColor(Color::Red, Color::White);
 }
 
 void MainWindow::update()
