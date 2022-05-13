@@ -1,4 +1,3 @@
-#include <ncurses.h>
 #include "../core/app.hpp"
 #include "./windows/mainWindow.hpp"
 
