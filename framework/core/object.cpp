@@ -1,8 +1,7 @@
 #include "object.hpp"
-#include <ncurses.h>
 
-Object::Object() {}
-Object::Object(std::string text) : text(text) {}
+Object::Object() : useColor(false) {}
+Object::Object(std::string text) : text(text), useColor(false) {}
 
 std::string Object::getText()
 {
@@ -34,11 +33,25 @@ void Object::setColor(Color foreground, Color background)
 {
     color.foreground = foreground;
     color.background = background;
+    useColor = true;
+}
+
+void Object::useWindowColor()
+{
+    useColor = false;
 }
 
 void Object::render()
 {
-    attron(COLOR_PAIR(color.getAttribute()));
+    if (useColor)
+    {
+        attron(COLOR_PAIR(color.getAttribute()));
+    }
+
     mvprintw(position.y, position.x, text.c_str());
-    attroff(COLOR_PAIR(color.getAttribute()));
+
+    if (useColor)
+    {
+        attroff(COLOR_PAIR(color.getAttribute()));
+    }
 }

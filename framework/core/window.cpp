@@ -22,6 +22,12 @@ Window::Window()
 
 Window::~Window()
 {
+    for (auto object : objects)
+    {
+        delete object;
+    }
+
+    objects.clear();
     endwin();
 }
 
@@ -36,10 +42,6 @@ void Window::render()
 
     refresh();
 }
-
-void Window::init() {}
-void Window::update() {}
-void Window::release() {}
 
 Vector Window::getScale()
 {

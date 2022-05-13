@@ -17,6 +17,8 @@ App::~App()
     {
         delete window;
     }
+
+    windows.clear();
 }
 
 App *App::create()

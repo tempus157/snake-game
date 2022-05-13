@@ -3,6 +3,8 @@
 
 #include "../utils/vector.hpp"
 #include "../utils/color.hpp"
+
+#include <ncurses.h>
 #include <string>
 
 class Object
@@ -18,11 +20,13 @@ public:
 
     ColorPair getColor();
     void setColor(Color foreground, Color background);
+    void useWindowColor();
     void render();
 
 private:
     std::string text;
     Vector position;
+    bool useColor;
     ColorPair color;
 };
 

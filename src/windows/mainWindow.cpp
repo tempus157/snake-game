@@ -10,11 +10,9 @@ void MainWindow::init()
 
     useObject(title);
     title->setPosition(1, 1);
-    title->setColor(Color::Blue, Color::Yellow);
 
     useObject(subTitle);
     subTitle->setPosition(1, 2);
-    subTitle->setColor(Color::Blue, Color::Yellow);
 }
 
 void MainWindow::update()
