@@ -6,18 +6,19 @@
 void MainWindow::init()
 {
     setScale(80, 25);
-    setBackgroundColor(Color::Blue);
+    setColor(Color::Blue, Color::Yellow);
 
     useObject(title);
-    title->setPosition(3, 4);
-    title->setColor(Color::Red, Color::White);
+    title->setPosition(1, 1);
+    title->setColor(Color::Blue, Color::Yellow);
+
+    useObject(subTitle);
+    subTitle->setPosition(1, 2);
+    subTitle->setColor(Color::Blue, Color::Yellow);
 }
 
 void MainWindow::update()
 {
-    tickCount++;
-    title->setText(std::to_string(tickCount));
-
     if (Input::keyPressed())
     {
         App::quit();

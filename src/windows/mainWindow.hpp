@@ -8,6 +8,6 @@ public:
     void update() override;
 
 private:
-    Object *title = new Object("화면에 ■ □ ✅⬛⬛⬜💘 💓인쇄");
-    int tickCount = 0;
+    Object *title = new Object("C++ programming");
+    Object *subTitle = new Object("Computer Science @ Kookmin Univ.");
 };

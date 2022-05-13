@@ -21,14 +21,14 @@ public:
 protected:
     Vector getScale();
     void setScale(int x, int y);
-    Color getBackgroundColor();
-    void setBackgroundColor(Color color);
+    ColorPair getColor();
+    void setColor(Color foreground, Color background);
     void useObject(Object *object);
 
 private:
     WINDOW *window = initscr();
     Vector scale;
-    ColorPair color = ColorPair(Color::Black, Color::Black);
+    ColorPair color;
     std::vector<Object *> objects;
 };
 
