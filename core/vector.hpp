@@ -9,6 +9,6 @@ struct Vector
 public:
     Vector();
     Vector(int x, int y);
-}
+};
 
 #endif
