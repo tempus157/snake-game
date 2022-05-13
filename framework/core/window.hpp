@@ -1,7 +1,7 @@
-#ifndef __CORE_WINDOW__
-#define __CORE_WINDOW__
+#ifndef __FRAMEWORK_CORE__WINDOW__
+#define __FRAMEWORK_CORE__WINDOW__
 
-#include "vector.hpp"
+#include "../util/vector.hpp"
 #include "object.hpp"
 
 #include <ncurses.h>

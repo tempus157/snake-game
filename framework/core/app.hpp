@@ -1,5 +1,5 @@
-#ifndef __CORE_APP__
-#define __CORE_APP__
+#ifndef __FRAMEWORK_CORE_APP__
+#define __FRAMEWORK_CORE_APP__
 
 #include "window.hpp"
 #include <vector>

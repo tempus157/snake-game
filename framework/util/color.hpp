@@ -1,5 +1,5 @@
-#ifndef __CORE_COLOR__
-#define __CORE_COLOR__
+#ifndef __FRAMEWORK_UTIL_COLOR__
+#define __FRAMEWORK_UTIL_COLOR__
 
 enum class Color
 {

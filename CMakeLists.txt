@@ -5,5 +5,5 @@ set (CMAKE_CXX_STANDARD 11)
 find_package (Curses REQUIRED)
 include_directories(${CURSES_INCLUDE_DIR})
 
-add_executable (game.out src/main.cpp src/windows/mainWindow.cpp core/app.cpp core/color.cpp core/object.cpp core/vector.cpp core/window.cpp)
+add_executable (game.out src/main.cpp src/windows/mainWindow.cpp framework/core/app.cpp framework/util/color.cpp framework/core/object.cpp framework/util/vector.cpp framework/core/window.cpp)
 target_link_libraries (game.out ${CURSES_LIBRARIES})

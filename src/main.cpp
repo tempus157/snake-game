@@ -1,4 +1,4 @@
-#include "../core/app.hpp"
+#include "../framework/core/app.hpp"
 #include "./windows/mainWindow.hpp"
 
 int main()
