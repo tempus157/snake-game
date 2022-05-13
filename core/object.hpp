@@ -7,14 +7,18 @@
 class Object
 {
 public:
-    std::string text;
-    Vector position;
-
     Object();
     Object(std::string text);
+
+    std::string getText();
+    void setText(std::string text);
+    Vector getPosition();
+    void setPosition(Vector position);
     void render();
 
 private:
+    std::string text;
+    Vector position;
 };
 
 #endif

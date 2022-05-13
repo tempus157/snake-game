@@ -35,7 +35,7 @@ Vector Window::getScale()
 
 void Window::setScale(Vector scale)
 {
-    resize_term(scale.x, scale.y);
+    resize_term(scale.y, scale.x);
 }
 
 void Window::useObject(Object *object)

@@ -2,13 +2,13 @@
 
 void MainWindow::init()
 {
-    setScale(80, 25);
+    setScale(Vector(80, 25));
     useObject(title);
-    title->position = Vector(3, 4);
+    title->setPosition(Vector(3, 4));
 }
 
 void MainWindow::update()
 {
     tickCount++;
-    title->text = std::to_string(tickCount);
+    title->setText(std::to_string(tickCount));
 }
