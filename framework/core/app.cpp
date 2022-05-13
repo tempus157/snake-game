@@ -1,8 +1,8 @@
 #include "app.hpp"
+#include "input.hpp"
 
 #include <clocale>
-#include <thread>
-#include <chrono>
+#include <unistd.h>
 
 bool App::progress = true;
 
@@ -34,11 +34,12 @@ void App::execute()
 {
     initWindows();
 
-    while (progress)
+    while (App::progress)
     {
+        Input::readKey();
         updateWindows();
         renderWindows();
-        std::this_thread::sleep_for(std::chrono::milliseconds(20));
+        usleep(20000);
     }
 
     releaseWindows();

@@ -1,4 +1,6 @@
 #include "mainWindow.hpp"
+#include "../../framework/core/input.hpp"
+#include <ncurses.h>
 
 void MainWindow::init()
 {
@@ -12,4 +14,9 @@ void MainWindow::update()
 {
     tickCount++;
     title->setText(std::to_string(tickCount));
+
+    if (Input::keyPressed())
+    {
+        title->setText(std::string(1, static_cast<char>(Input::currentKey())));
+    }
 }

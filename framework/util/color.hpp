@@ -10,7 +10,7 @@ enum class Color
     Blue = 4,
     Magenta = 5,
     Cyan = 6,
-    White = 7
+    White = 7,
 };
 
 struct ColorPair

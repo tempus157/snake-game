@@ -8,6 +8,6 @@ public:
     void update() override;
 
 private:
-    Object *title = new Object();
+    Object *title = new Object("화면에 ■ □ ✅⬛⬛⬜💘 💓인쇄");
     int tickCount = 0;
 };

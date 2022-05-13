@@ -4,6 +4,8 @@ Window::Window()
 {
     scale.x = getmaxx(window);
     scale.y = getmaxy(window);
+
+    nodelay(window, true);
     start_color();
     ColorPair color;
 
@@ -32,7 +34,6 @@ void Window::render()
         object->render();
     }
 
-    border('*', '*', '*', '*', '*', '*', '*', '*');
     refresh();
 }
 
