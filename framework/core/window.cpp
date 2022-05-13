@@ -53,6 +53,18 @@ void Window::setScale(int x, int y)
     resize_term(y, x);
 }
 
+Color Window::getBackgroundColor()
+{
+    return color.background;
+}
+
+void Window::setBackgroundColor(Color color)
+{
+    this->color.background = color;
+    this->color.foreground = color;
+    bkgd(COLOR_PAIR(this->color.getAttribute()));
+}
+
 void Window::useObject(Object *object)
 {
     objects.push_back(object);

@@ -6,6 +6,8 @@
 void MainWindow::init()
 {
     setScale(80, 25);
+    setBackgroundColor(Color::Blue);
+
     useObject(title);
     title->setPosition(3, 4);
     title->setColor(Color::Red, Color::White);
