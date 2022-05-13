@@ -6,11 +6,12 @@
 class Window
 {
 public:
-    virtual ~Window();
+    ~Window();
+    void render();
+
     virtual void init();
     virtual void update();
     virtual void release();
-    void render();
 
 private:
     WINDOW *window = initscr();
