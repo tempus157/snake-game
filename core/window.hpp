@@ -2,7 +2,10 @@
 #define __CORE_WINDOW__
 
 #include "vector.hpp"
+#include "object.hpp"
+
 #include <ncurses.h>
+#include <vector>
 
 class Window
 {
@@ -19,10 +22,12 @@ protected:
     Vector getScale();
     void setScale(Vector scale);
     void setScale(int x, int y);
+    void useObject(Object *object);
 
 private:
     WINDOW *window = initscr();
     Vector scale;
+    std::vector<Object *> objects;
 };
 
 #endif

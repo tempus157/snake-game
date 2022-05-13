@@ -3,10 +3,12 @@
 void MainWindow::init()
 {
     setScale(80, 25);
+    useObject(title);
+    title->position = Vector(3, 4);
 }
 
 void MainWindow::update()
 {
     tickCount++;
-    printf("%d ", tickCount);
+    title->text = std::to_string(tickCount);
 }

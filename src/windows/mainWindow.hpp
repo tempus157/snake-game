@@ -8,5 +8,6 @@ public:
     void update() override;
 
 private:
+    Object *title = new Object();
     int tickCount = 0;
 };

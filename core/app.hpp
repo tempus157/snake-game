@@ -8,7 +8,7 @@ class App
 {
 public:
     static App *create();
-    App *attachWindow(Window *window);
+    App *useWindow(Window *window);
     void execute();
 
 private:

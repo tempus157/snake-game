@@ -24,7 +24,7 @@ App *App::create()
     return new App();
 }
 
-App *App::attachWindow(Window *window)
+App *App::useWindow(Window *window)
 {
     windows.push_back(window);
     return this;

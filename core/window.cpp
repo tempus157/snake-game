@@ -13,7 +13,15 @@ Window::~Window()
 
 void Window::render()
 {
-    wrefresh(window);
+    clear();
+
+    for (auto object : objects)
+    {
+        object->render();
+    }
+
+    border('*', '*', '*', '*', '*', '*', '*', '*');
+    refresh();
 }
 
 void Window::init() {}
@@ -35,4 +43,9 @@ void Window::setScale(int x, int y)
     scale.x = x;
     scale.y = y;
     resize_term(y, x);
+}
+
+void Window::useObject(Object *object)
+{
+    objects.push_back(object);
 }

@@ -4,7 +4,7 @@
 int main()
 {
     App::create()
-        ->attachWindow(new MainWindow())
+        ->useWindow(new MainWindow())
         ->execute();
     return 0;
 }
