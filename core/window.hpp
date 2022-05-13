@@ -21,7 +21,6 @@ public:
 protected:
     Vector getScale();
     void setScale(Vector scale);
-    void setScale(int x, int y);
     void useObject(Object *object);
 
 private:
