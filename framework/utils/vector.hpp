@@ -1,5 +1,5 @@
-#ifndef __FRAMEWORK_UTIL_VECTOR__
-#define __FRAMEWORK_UTIL_VECTOR__
+#ifndef __FRAMEWORK_UTILS_VECTOR__
+#define __FRAMEWORK_UTILS_VECTOR__
 
 struct Vector
 {

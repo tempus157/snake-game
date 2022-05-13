@@ -1,8 +1,8 @@
 #ifndef __FRAMEWORK_CORE_OBJECT__
 #define __FRAMEWORK_CORE_OBJECT__
 
-#include "../util/vector.hpp"
-#include "../util/color.hpp"
+#include "../utils/vector.hpp"
+#include "../utils/color.hpp"
 #include <string>
 
 class Object
