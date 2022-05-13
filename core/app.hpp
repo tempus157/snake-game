@@ -17,6 +17,11 @@ private:
 
     App();
     ~App();
+
+    void initWindows();
+    void updateWindows();
+    void renderWindows();
+    void releaseWindows();
 };
 
 #endif

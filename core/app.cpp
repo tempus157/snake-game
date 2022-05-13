@@ -1,5 +1,8 @@
 #include "app.hpp"
+
 #include <clocale>
+#include <thread>
+#include <chrono>
 
 App::App()
 {
@@ -28,10 +31,47 @@ App *App::attachWindow(Window *window)
 
 void App::execute()
 {
+    initWindows();
+
     while (progress)
     {
-        // do someting
+        updateWindows();
+        renderWindows();
+        std::this_thread::sleep_for(std::chrono::milliseconds(20));
     }
 
+    releaseWindows();
     delete this;
+}
+
+void App::initWindows()
+{
+    for (auto window : windows)
+    {
+        window->init();
+    }
+}
+
+void App::updateWindows()
+{
+    for (auto window : windows)
+    {
+        window->update();
+    }
+}
+
+void App::renderWindows()
+{
+    for (auto window : windows)
+    {
+        window->render();
+    }
+}
+
+void App::releaseWindows()
+{
+    for (auto window : windows)
+    {
+        window->release();
+    }
 }

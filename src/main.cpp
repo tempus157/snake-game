@@ -1,5 +1,6 @@
 #include <ncurses.h>
-#include "core/app.hpp"
+#include "../core/app.hpp"
+#include "./windows/mainWindow.hpp"
 
 // int main()
 // {
@@ -33,7 +34,7 @@
 int main()
 {
     App::create()
-        ->attachWindow(nullptr)
+        ->attachWindow(new MainWindow())
         ->execute();
     return 0;
 }
