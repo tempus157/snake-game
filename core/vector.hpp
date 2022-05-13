@@ -7,12 +7,12 @@ public:
     int x = 0;
     int y = 0;
 
-    static Vector zero;
-    static Vector one;
-    static Vector up;
-    static Vector down;
-    static Vector left;
-    static Vector right;
+    static const Vector zero;
+    static const Vector one;
+    static const Vector up;
+    static const Vector down;
+    static const Vector left;
+    static const Vector right;
 
     Vector();
     Vector(int x, int y);
