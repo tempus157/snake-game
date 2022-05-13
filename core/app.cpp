@@ -4,9 +4,10 @@
 #include <thread>
 #include <chrono>
 
+bool App::progress = true;
+
 App::App()
 {
-    progress = true;
     setlocale(LC_ALL, "");
 }
 

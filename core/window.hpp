@@ -6,16 +6,14 @@
 class Window
 {
 public:
-    Window();
-    ~Window();
-
+    virtual ~Window();
     virtual void init();
     virtual void update();
     virtual void release();
     void render();
 
 private:
-    WINDOW *window;
+    WINDOW *window = initscr();
 };
 
 #endif
