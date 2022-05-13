@@ -2,27 +2,29 @@
 
 int main()
 {
-    WINDOW *win1;
-
     initscr();
-    resize_term(25, 25);
+    resize_term(25, 80);
     start_color();
-    init_pair(1, COLOR_WHITE, COLOR_RED);
+    init_pair(1, COLOR_BLUE, COLOR_YELLOW);
+    init_pair(2, COLOR_RED, COLOR_GREEN);
 
+    keypad(stdscr, true);
+    curs_set(0);
+    noecho();
+
+    bkgd(COLOR_PAIR(1));
+    attron(COLOR_PAIR(1));
+    mvprintw(1, 1, "C++ programming");
+    mvprintw(2, 1, "Computer Science @ Kookmin Univ.");
+    attroff(COLOR_PAIR(1));
+
+    attron(COLOR_PAIR(2));
     border('*', '*', '*', '*', '*', '*', '*', '*');
-    mvprintw(1, 1, "A default window");
+    attroff(COLOR_PAIR(2));
+
     refresh();
     getch();
-
-    win1 = newwin(20, 20, 3, 3);
-    wbkgd(win1, COLOR_PAIR(1));
-    wattron(win1, COLOR_PAIR(1));
-    mvwprintw(win1, 1, 1, "A new window");
-    wborder(win1, '@', '@', '@', '@', '@', '@', '@', '@');
-    wrefresh(win1);
-
-    getch();
-    delwin(win1);
     endwin();
+
     return 0;
 }
