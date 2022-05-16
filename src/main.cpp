@@ -3,8 +3,7 @@
 
 int main()
 {
-    App::create()
+    return App::create()
         ->useWindow(new MainWindow())
         ->execute();
-    return 0;
 }

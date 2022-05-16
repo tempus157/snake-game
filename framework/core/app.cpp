@@ -37,7 +37,7 @@ App *App::useWindow(Window *window)
     return this;
 }
 
-void App::execute()
+int App::execute()
 {
     initWindows();
 
@@ -51,6 +51,7 @@ void App::execute()
 
     releaseWindows();
     delete this;
+    return 0;
 }
 
 void App::initWindows()

@@ -10,7 +10,7 @@ public:
     static App *create();
     static void quit();
     App *useWindow(Window *window);
-    void execute();
+    int execute();
 
 private:
     static bool progress;
