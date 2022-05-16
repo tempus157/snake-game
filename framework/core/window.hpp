@@ -28,6 +28,7 @@ public:
 
         Border();
         Border(unsigned int ch);
+        void render();
     };
 
     Window();
@@ -54,8 +55,6 @@ private:
     Vector scale;
     ColorPair color;
     Optional<Border> border;
-
-    void renderBorder();
 };
 
 #endif

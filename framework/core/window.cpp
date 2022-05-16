@@ -8,6 +8,22 @@ Window::Border::Border(unsigned int ch) : topLeft(ch), topMid(ch), topRight(ch),
                                           midLeft(ch), midRight(ch), bottomLeft(ch),
                                           bottomMid(ch), bottomRight(ch) {}
 
+void Window::Border::render()
+{
+    if (color)
+    {
+        attron(COLOR_PAIR(color.value.getAttribute()));
+    }
+
+    border(midLeft, midRight, topMid, bottomMid,
+           topLeft, topRight, bottomLeft, bottomRight);
+
+    if (color)
+    {
+        attroff(COLOR_PAIR(color.value.getAttribute()));
+    }
+}
+
 Window::Window()
 {
     scale.x = getmaxx(window);
@@ -45,7 +61,7 @@ void Window::render()
 
     if (border)
     {
-        renderBorder();
+        border.value.render();
     }
 
     for (auto object : objects)
@@ -93,22 +109,4 @@ void Window::useBorder(Border border)
 void Window::useNoBorder()
 {
     border = nullptr;
-}
-
-void Window::renderBorder()
-{
-    if (border.value.color)
-    {
-        attron(COLOR_PAIR(border.value.color.value.getAttribute()));
-    }
-
-    border(border.value.midLeft, border.value.midRight,
-           border.value.topMid, border.value.bottomMid,
-           border.value.topLeft, border.value.topRight,
-           border.value.bottomLeft, border.value.bottomRight);
-
-    if (border.value.color)
-    {
-        attroff(COLOR_PAIR(border.value.color.value.getAttribute()));
-    }
 }

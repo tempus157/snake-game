@@ -28,7 +28,7 @@ App *App::create()
 
 void App::quit()
 {
-    App::progress = false;
+    progress = false;
 }
 
 App *App::useWindow(Window *window)
@@ -41,7 +41,7 @@ int App::execute()
 {
     initWindows();
 
-    while (App::progress)
+    while (progress)
     {
         Input::readKey();
         updateWindows();
