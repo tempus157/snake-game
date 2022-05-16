@@ -24,13 +24,13 @@ public:
         return value;
     }
 
-    Optional<T> operator=(std::nullptr_t value)
+    Optional<T> &operator=(std::nullptr_t value)
     {
         hasValue = false;
         return *this;
     }
 
-    Optional<T> operator=(T value)
+    Optional<T> &operator=(T value)
     {
         this->value = value;
         this->hasValue = true;
