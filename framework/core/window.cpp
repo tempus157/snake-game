@@ -82,11 +82,11 @@ Vector Window::getScale()
     return scale;
 }
 
-void Window::setScale(int x, int y)
+void Window::setScale(Vector scale)
 {
-    scale.x = x;
-    scale.y = y;
-    resize_term(y, x);
+    this->scale.x = scale.x;
+    this->scale.y = scale.y;
+    resize_term(scale.y, scale.x);
 }
 
 ColorPair Window::getColor()
@@ -94,19 +94,19 @@ ColorPair Window::getColor()
     return color;
 }
 
-void Window::setColor(Color foreground, Color background)
+void Window::setColor(ColorPair color)
 {
-    color.foreground = foreground;
-    color.background = background;
+    this->color.foreground = color.foreground;
+    this->color.background = color.background;
     bkgd(COLOR_PAIR(color.getAttribute()));
 }
 
-void Window::useBorder(Border border)
+Optional<Window::Border> Window::getBorder()
 {
-    this->border = border;
+    return border;
 }
 
-void Window::useNoBorder()
+void Window::setBorder(Optional<Window::Border> border)
 {
-    border = nullptr;
+    this->border = border;
 }

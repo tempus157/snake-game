@@ -42,12 +42,12 @@ public:
 protected:
     void useObject(Object *object);
     Vector getScale();
-    void setScale(int x, int y);
+    void setScale(Vector scale);
 
     ColorPair getColor();
-    void setColor(Color foreground, Color background);
-    void useBorder(Border border);
-    void useNoBorder();
+    void setColor(ColorPair color);
+    Optional<Border> getBorder();
+    void setBorder(Optional<Border> border);
 
 private:
     WINDOW *window = initscr();

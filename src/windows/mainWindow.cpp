@@ -5,18 +5,18 @@
 
 void MainWindow::init()
 {
-    setScale(80, 25);
-    setColor(Color::Blue, Color::Yellow);
+    setScale(Vector(80, 25));
+    setColor(ColorPair(Color::Blue, Color::Yellow));
 
     auto border = Window::Border('*');
     border.color = ColorPair(Color::Red, Color::Green);
-    useBorder(border);
+    setBorder(border);
 
     useObject(title);
-    title->setPosition(1, 1);
+    title->position = Vector(1, 1);
 
     useObject(subTitle);
-    subTitle->setPosition(1, 2);
+    subTitle->position = Vector(1, 1);
 }
 
 void MainWindow::update()
