@@ -29,11 +29,12 @@ public:
 
 private:
     Window();
-    WINDOW *window;
-    std::vector<const Object *> objects;
+
+    const WINDOW *window;
     Vector scale;
     ColorPair color;
     Optional<const Border *> border;
+    std::vector<const Object *> objects;
 };
 
 #endif
