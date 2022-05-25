@@ -1,8 +1,9 @@
 #ifndef __FRAMEWORK_CORE__
 #define __FRAMEWORK_CORE__
 
-#include <functional>
 #include <string>
+#include <vector>
+#include <functional>
 
 struct Vector
 {
@@ -38,6 +39,12 @@ class Window
 {
 public:
     static Window &create();
+    Window &setScale(Vector scale);
+    Window &setScale(int x, int y);
+    Window &useObject(Object const &object);
+
+private:
+    std::vector<Object const &> objects;
 };
 
 class App

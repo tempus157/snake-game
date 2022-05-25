@@ -1,4 +1,5 @@
 #include "core.hpp"
+#include <ncurses.h>
 
 const Vector Vector::zero = Vector(0, 0);
 const Vector Vector::one = Vector(1, 1);
@@ -34,12 +35,35 @@ Object &Object::setPosition(int x, int y)
     return *this;
 }
 
+Window &Window::create()
+{
+    return *new Window();
+}
+
+Window &Window::setScale(Vector scale)
+{
+    resize_term(scale.y, scale.x);
+    return *this;
+}
+
+Window &Window::setScale(int x, int y)
+{
+    resize_term(y, x);
+    return *this;
+}
+
+Window &Window::useObject(Object const &object)
+{
+    objects.push_back(object);
+    return *this;
+}
+
 App &App::create()
 {
     return *new App();
 }
 
-App &App::useWindow(std::function<void()> window)
+App &App::useWindow(std::function<Window()> window)
 {
     return *this;
 }
