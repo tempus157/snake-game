@@ -8,6 +8,7 @@ include_directories(${CURSES_INCLUDE_DIR})
 add_executable (
     game.out
     src/main.cpp
+    src/windows/myWindow.cpp
     framework/core/app.cpp
     framework/core/border.cpp
     framework/core/label.cpp
