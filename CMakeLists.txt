@@ -11,7 +11,6 @@ add_executable (
     src/windows/myWindow.cpp
     framework/core/app.cpp
     framework/core/border.cpp
-    framework/core/label.cpp
     framework/core/window.cpp
     framework/utils/color.cpp
     framework/utils/vector.cpp

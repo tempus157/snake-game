@@ -2,18 +2,17 @@
 
 Window *myWindow()
 {
-    auto border = Border::create()
-                      ->setCharacter('*')
-                      ->setColor(Color::Yellow, Color::Blue);
+    auto border = Border();
+    border.color = ColorPair(Color::Yellow, Color::Blue);
 
-    auto title = Label::create()
-                     ->setText("C++ programming with ncurses")
-                     ->setColor(Color::Red, Color::Green)
-                     ->setPosition(3, 4);
+    auto title = Object();
+    title.text = "C++ programming with ncurses ■";
+    title.color = ColorPair(Color::Red, Color::Green);
+    title.position = Vector(3, 4);
 
     return Window::create()
         ->setScale(80, 25)
         ->setColor(Color::Blue, Color::Yellow)
-        ->useObject(border)
+        ->setBorder(border)
         ->useObject(title);
 }

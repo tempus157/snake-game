@@ -3,7 +3,6 @@
 
 #include "./core/app.hpp"
 #include "./core/border.hpp"
-#include "./core/label.hpp"
 #include "./core/object.hpp"
 #include "./core/window.hpp"
 #include "./utils/color.hpp"

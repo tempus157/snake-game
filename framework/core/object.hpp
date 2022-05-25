@@ -1,12 +1,17 @@
 #ifndef __FRAMEWORK_CORE_OBJECT__
 #define __FRAMEWORK_CORE_OBJECT__
 
-class IObject
+#include "../utils/vector.hpp"
+#include "../utils/optional.hpp"
+#include "../utils/color.hpp"
+#include <string>
+
+class Object
 {
 public:
-    virtual ~IObject() = default;
-    virtual bool isActive() = 0;
-    virtual void render() = 0;
+    std::string text;
+    Vector position;
+    Optional<ColorPair> color;
 };
 
 #endif

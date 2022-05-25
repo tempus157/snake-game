@@ -21,7 +21,7 @@ public:
 
     ColorPair();
     ColorPair(Color foreground, Color background);
-    short getAttribute();
+    short getAttribute() const;
 };
 
 #endif
