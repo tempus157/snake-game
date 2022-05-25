@@ -1,5 +1,4 @@
-#include <iostream>
-#include "../framework/core.hpp"
+#include "../framework/framework.hpp"
 
 Window *mainWindow()
 {

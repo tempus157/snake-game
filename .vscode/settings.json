@@ -1,5 +1,7 @@
 {
   "files.associations": {
-    "__node_handle": "cpp"
+    "__node_handle": "cpp",
+    "functional": "cpp",
+    "string": "cpp"
   }
 }
