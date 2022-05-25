@@ -25,43 +25,48 @@ short ColorPair::getAttribute()
     return lhs + rhs;
 }
 
-Object *Object::create()
+Label *Label::create()
 {
-    return new Object();
+    return new Label();
 }
 
-Object *Object::setText(std::string text)
+Label *Label::setText(std::string text)
 {
     this->text = text;
     return this;
 }
 
-Object *Object::setPosition(Vector position)
+Label *Label::setPosition(Vector position)
 {
     this->position = position;
     return this;
 }
 
-Object *Object::setPosition(int x, int y)
+Label *Label::setPosition(int x, int y)
 {
     position.x = x;
     position.y = y;
     return this;
 }
 
-Object *Object::setColor(ColorPair color)
+Label *Label::setColor(Optional<ColorPair> color)
 {
     this->color = color;
     return this;
 }
 
-Object *Object::setColor(Color foreground, Color background)
+Label *Label::setColor(Color foreground, Color background)
 {
     color = ColorPair(foreground, background);
     return this;
 }
 
-void Object::render()
+bool Label::isActive()
+{
+    return true;
+}
+
+void Label::render()
 {
     if (color.hasValue)
     {
@@ -74,6 +79,84 @@ void Object::render()
     {
         attroff(COLOR_PAIR(color.value.getAttribute()));
     }
+}
+
+Border *Border::create()
+{
+    return new Border();
+}
+
+Border *Border::setCharacter(unsigned int character)
+{
+    left = character;
+    right = character;
+    top = character;
+    bottom = character;
+    topLeft = character;
+    topRight = character;
+    bottomLeft = character;
+    bottomRight = character;
+    return this;
+}
+
+Border *Border::setLeft(unsigned int character)
+{
+    left = character;
+    return this;
+}
+
+Border *Border::setRight(unsigned int character)
+{
+    right = character;
+    return this;
+}
+
+Border *Border::setTop(unsigned int character)
+{
+    top = character;
+    return this;
+}
+
+Border *Border::setBottom(unsigned int character)
+{
+    bottom = character;
+    return this;
+}
+
+Border *Border::setTopLeft(unsigned int character)
+{
+    topLeft = character;
+    return this;
+}
+
+Border *Border::setTopRight(unsigned int character)
+{
+    topRight = character;
+    return this;
+}
+
+Border *Border::setBottomLeft(unsigned int character)
+{
+    bottomLeft = character;
+    return this;
+}
+
+Border *Border::setBottomRight(unsigned int character)
+{
+    bottomRight = character;
+    return this;
+}
+
+Border *Border::setColor(Optional<ColorPair> color)
+{
+    this->color = color;
+    return this;
+}
+
+Border *Border::setColor(Color foreground, Color background)
+{
+    color = ColorPair(foreground, background);
+    return this;
 }
 
 Window *Window::create()
@@ -107,10 +190,30 @@ Window *Window::setColor(Color foreground, Color background)
     return this;
 }
 
-Window *Window::useObject(Object *object)
+Window *Window::useObject(IObject *object)
 {
     objects.push_back(object);
     return this;
+}
+
+bool Border::isActive()
+{
+    return true;
+}
+
+void Border::render()
+{
+    if (color.hasValue)
+    {
+        attron(COLOR_PAIR(color.value.getAttribute()));
+    }
+
+    border(left, right, top, bottom, topLeft, topRight, bottomLeft, bottomRight);
+
+    if (color.hasValue)
+    {
+        attroff(COLOR_PAIR(color.value.getAttribute()));
+    }
 }
 
 void Window::init()

@@ -70,21 +70,60 @@ public:
     }
 };
 
-class Object
+class IObject
 {
 public:
-    static Object *create();
-    Object *setText(std::string text);
-    Object *setPosition(Vector position);
-    Object *setPosition(int x, int y);
-    Object *setColor(ColorPair color);
-    Object *setColor(Color foreground, Color background);
+    virtual bool isActive() = 0;
+    virtual void render() = 0;
+};
 
-    void render();
+class Label : public IObject
+{
+public:
+    static Label *create();
+    Label *setText(std::string text);
+    Label *setPosition(Vector position);
+    Label *setPosition(int x, int y);
+    Label *setColor(Optional<ColorPair> color);
+    Label *setColor(Color foreground, Color background);
+
+    bool isActive() override;
+    void render() override;
 
 private:
     std::string text;
     Vector position;
+    Optional<ColorPair> color;
+};
+
+class Border : public IObject
+{
+public:
+    static Border *create();
+    Border *setCharacter(unsigned int character);
+    Border *setLeft(unsigned int character);
+    Border *setRight(unsigned int character);
+    Border *setTop(unsigned int character);
+    Border *setBottom(unsigned int character);
+    Border *setTopLeft(unsigned int character);
+    Border *setTopRight(unsigned int character);
+    Border *setBottomLeft(unsigned int character);
+    Border *setBottomRight(unsigned int character);
+    Border *setColor(Optional<ColorPair> color);
+    Border *setColor(Color foreground, Color background);
+
+    bool isActive() override;
+    void render() override;
+
+private:
+    unsigned int left;
+    unsigned int right;
+    unsigned int top;
+    unsigned int bottom;
+    unsigned int topLeft;
+    unsigned int topRight;
+    unsigned int bottomLeft;
+    unsigned int bottomRight;
     Optional<ColorPair> color;
 };
 
@@ -96,14 +135,14 @@ public:
     Window *setScale(int x, int y);
     Window *setColor(ColorPair color);
     Window *setColor(Color foreground, Color background);
-    Window *useObject(Object *object);
+    Window *useObject(IObject *object);
 
     void init();
     void render();
     void release();
 
 private:
-    std::vector<Object *> objects;
+    std::vector<IObject *> objects;
     Vector scale;
     ColorPair color;
 };

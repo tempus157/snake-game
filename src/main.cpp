@@ -3,7 +3,11 @@
 
 Window *mainWindow()
 {
-    auto title = Object::create()
+    auto border = Border::create()
+                      ->setCharacter('*')
+                      ->setColor(Color::Yellow, Color::Blue);
+
+    auto title = Label::create()
                      ->setText("C++ programming with ncurses")
                      ->setColor(Color::Red, Color::Green)
                      ->setPosition(3, 4);
@@ -11,6 +15,7 @@ Window *mainWindow()
     return Window::create()
         ->setScale(80, 25)
         ->setColor(Color::Blue, Color::Yellow)
+        ->useObject(border)
         ->useObject(title);
 }
 
