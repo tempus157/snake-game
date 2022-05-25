@@ -159,6 +159,18 @@ Border *Border::setColor(Color foreground, Color background)
     return this;
 }
 
+Window::Window() {}
+
+Window::~Window()
+{
+    for (auto const object : objects)
+    {
+        delete object;
+    }
+
+    endwin();
+}
+
 Window *Window::create()
 {
     return new Window();
@@ -235,11 +247,6 @@ void Window::render()
     refresh();
 }
 
-void Window::release()
-{
-    endwin();
-}
-
 bool App::progress = true;
 
 App::App()
@@ -249,7 +256,7 @@ App::App()
 
 App::~App()
 {
-    for (auto window : windows)
+    for (auto const window : windows)
     {
         delete window;
     }
@@ -273,12 +280,10 @@ int App::execute()
 
     while (progress)
     {
-        updateWindows();
         renderWindows();
         usleep(20000);
     }
 
-    releaseWindows();
     delete this;
     return 0;
 }
@@ -307,25 +312,10 @@ void App::initColors()
     }
 }
 
-void App::updateWindows()
-{
-    for (auto window : windows)
-    {
-    }
-}
-
 void App::renderWindows()
 {
     for (auto window : windows)
     {
         window->render();
-    }
-}
-
-void App::releaseWindows()
-{
-    for (auto window : windows)
-    {
-        window->release();
     }
 }

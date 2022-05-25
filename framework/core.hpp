@@ -73,6 +73,7 @@ public:
 class IObject
 {
 public:
+    virtual ~IObject() = default;
     virtual bool isActive() = 0;
     virtual void render() = 0;
 };
@@ -81,14 +82,14 @@ class Label : public IObject
 {
 public:
     static Label *create();
+    bool isActive() override;
+    void render() override;
+
     Label *setText(std::string text);
     Label *setPosition(Vector position);
     Label *setPosition(int x, int y);
     Label *setColor(Optional<ColorPair> color);
     Label *setColor(Color foreground, Color background);
-
-    bool isActive() override;
-    void render() override;
 
 private:
     std::string text;
@@ -100,6 +101,9 @@ class Border : public IObject
 {
 public:
     static Border *create();
+    bool isActive() override;
+    void render() override;
+
     Border *setCharacter(unsigned int character);
     Border *setLeft(unsigned int character);
     Border *setRight(unsigned int character);
@@ -111,9 +115,6 @@ public:
     Border *setBottomRight(unsigned int character);
     Border *setColor(Optional<ColorPair> color);
     Border *setColor(Color foreground, Color background);
-
-    bool isActive() override;
-    void render() override;
 
 private:
     unsigned int left;
@@ -130,7 +131,9 @@ private:
 class Window
 {
 public:
+    ~Window();
     static Window *create();
+
     Window *setScale(Vector scale);
     Window *setScale(int x, int y);
     Window *setColor(ColorPair color);
@@ -139,9 +142,9 @@ public:
 
     void init();
     void render();
-    void release();
 
 private:
+    Window();
     std::vector<IObject *> objects;
     Vector scale;
     ColorPair color;
@@ -163,9 +166,7 @@ private:
 
     void initWindows();
     void initColors();
-    void updateWindows();
     void renderWindows();
-    void releaseWindows();
 };
 
 #endif
