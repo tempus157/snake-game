@@ -1,3 +1,3 @@
-#include "../framework/framework.hpp"
+#include "../framework/main.hpp"
 
 Window *myWindow();
