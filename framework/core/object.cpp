@@ -1,7 +1,6 @@
 #include "object.hpp"
 
 Object::Object() {}
-Object::Object(std::string text) : text(text) {}
 
 void Object::render()
 {

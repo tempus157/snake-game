@@ -16,8 +16,6 @@ public:
     Optional<ColorPair> color;
 
     Object();
-    Object(std::string text);
-
     void render();
 };
 

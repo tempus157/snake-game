@@ -13,9 +13,11 @@ void MainWindow::init()
     setBorder(border);
 
     useObject(title);
+    title->text = "C++ Programming";
     title->position = Vector(1, 1);
 
     useObject(subTitle);
+    subTitle->text = "Computer Science @ Kookmin Univ.";
     subTitle->position = Vector(1, 1);
 }
 

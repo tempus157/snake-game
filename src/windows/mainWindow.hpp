@@ -8,6 +8,6 @@ public:
     void update() override;
 
 private:
-    Object *title = new Object("C++ programming");
-    Object *subTitle = new Object("Computer Science @ Kookmin Univ.");
+    Object *title = new Object();
+    Object *subTitle = new Object();
 };
