@@ -14,6 +14,17 @@ const Vector Vector::right = Vector(1, 0);
 Vector::Vector() {}
 Vector::Vector(int x, int y) : x(x), y(y) {}
 
+ColorPair::ColorPair() {}
+ColorPair::ColorPair(Color foreground, Color background)
+    : foreground(foreground), background(background) {}
+
+short ColorPair::getAttribute()
+{
+    auto lhs = static_cast<int>(foreground) * 10;
+    auto rhs = static_cast<int>(background);
+    return lhs + rhs;
+}
+
 Object *Object::create()
 {
     return new Object();
@@ -38,9 +49,31 @@ Object *Object::setPosition(int x, int y)
     return this;
 }
 
+Object *Object::setColor(ColorPair color)
+{
+    this->color = color;
+    return this;
+}
+
+Object *Object::setColor(Color foreground, Color background)
+{
+    color = ColorPair(foreground, background);
+    return this;
+}
+
 void Object::render()
 {
+    if (color.hasValue)
+    {
+        attron(COLOR_PAIR(color.value.getAttribute()));
+    }
+
     mvprintw(position.y, position.x, text.c_str());
+
+    if (color.hasValue)
+    {
+        attroff(COLOR_PAIR(color.value.getAttribute()));
+    }
 }
 
 Window *Window::create()
@@ -61,6 +94,19 @@ Window *Window::setScale(int x, int y)
     return this;
 }
 
+Window *Window::setColor(ColorPair color)
+{
+    this->color = color;
+    return this;
+}
+
+Window *Window::setColor(Color foreground, Color background)
+{
+    color.foreground = foreground;
+    color.background = background;
+    return this;
+}
+
 Window *Window::useObject(Object *object)
 {
     objects.push_back(object);
@@ -71,6 +117,7 @@ void Window::init()
 {
     initscr();
     resize_term(scale.y, scale.x);
+    bkgd(COLOR_PAIR(color.getAttribute()));
 }
 
 void Window::render()
@@ -119,6 +166,7 @@ App *App::useWindow(Window *window)
 int App::execute()
 {
     initWindows();
+    initColors();
 
     while (progress)
     {
@@ -137,6 +185,22 @@ void App::initWindows()
     for (auto window : windows)
     {
         window->init();
+    }
+}
+
+void App::initColors()
+{
+    start_color();
+    ColorPair color;
+
+    for (auto foreground = 0; foreground < 8; foreground++)
+    {
+        for (auto background = 0; background < 8; background++)
+        {
+            color.foreground = static_cast<Color>(foreground);
+            color.background = static_cast<Color>(background);
+            init_pair(color.getAttribute(), foreground, background);
+        }
     }
 }
 
