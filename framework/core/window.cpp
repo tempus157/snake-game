@@ -4,7 +4,7 @@ Window::Window() {}
 
 Window::~Window()
 {
-    for (auto const object : objects)
+    for (auto object : objects)
     {
         delete object;
     }
@@ -17,39 +17,39 @@ Window *Window::create()
     return new Window();
 }
 
-Window *Window::setScale(Vector const &scale)
+Window *Window::setScale(const Vector &scale)
 {
     this->scale = scale;
     return this;
 }
 
-Window *Window::setScale(int const x, int const y)
+Window *Window::setScale(int x, int y)
 {
     scale.x = x;
     scale.y = y;
     return this;
 }
 
-Window *Window::setColor(ColorPair const &color)
+Window *Window::setColor(const ColorPair &color)
 {
     this->color = color;
     return this;
 }
 
-Window *Window::setColor(Color const &foreground, Color const &background)
+Window *Window::setColor(const Color &foreground, const Color &background)
 {
     color.foreground = foreground;
     color.background = background;
     return this;
 }
 
-Window *Window::setBorder(Border const *border)
+Window *Window::setBorder(const Border *border)
 {
     this->border = border;
     return this;
 }
 
-Window *Window::useObject(Object const *object)
+Window *Window::useObject(const Object *object)
 {
     objects.push_back(object);
     return this;
@@ -84,7 +84,7 @@ void Window::render() const
         }
     }
 
-    for (auto const object : objects)
+    for (auto object : objects)
     {
         if (object->color.hasValue)
         {

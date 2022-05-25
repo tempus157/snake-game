@@ -8,4 +8,4 @@ const Vector Vector::left = Vector(-1, 0);
 const Vector Vector::right = Vector(1, 0);
 
 Vector::Vector() {}
-Vector::Vector(int const x, int const y) : x(x), y(y) {}
+Vector::Vector(int x, int y) : x(x), y(y) {}

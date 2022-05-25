@@ -11,16 +11,16 @@ public:
     bool hasValue;
 
     Optional() : hasValue(false) {}
-    Optional(std::nullptr_t const &value) : Optional() {}
-    Optional(T const &value) : value(value), hasValue(true) {}
+    Optional(const std::nullptr_t &value) : Optional() {}
+    Optional(const T &value) : value(value), hasValue(true) {}
 
-    Optional<T> &operator=(std::nullptr_t const &value)
+    Optional<T> &operator=(const std::nullptr_t &value)
     {
         hasValue = false;
         return *this;
     }
 
-    Optional<T> &operator=(T const &value)
+    Optional<T> &operator=(const T &value)
     {
         this->value = value;
         this->hasValue = true;

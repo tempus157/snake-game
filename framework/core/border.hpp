@@ -8,7 +8,7 @@ class Border
 {
 public:
     Border();
-    Border(unsigned int const character);
+    Border(unsigned int character);
 
     unsigned int left;
     unsigned int right;

@@ -17,12 +17,12 @@ public:
     ~Window();
     static Window *create();
 
-    Window *setScale(Vector const &scale);
-    Window *setScale(int const x, int const y);
+    Window *setScale(const Vector &scale);
+    Window *setScale(int x, int y);
     Window *setColor(ColorPair const &color);
-    Window *setColor(Color const &foreground, Color const &background);
-    Window *setBorder(Border const *border);
-    Window *useObject(Object const *object);
+    Window *setColor(const Color &foreground, const Color &background);
+    Window *setBorder(const Border *border);
+    Window *useObject(const Object *object);
 
     void init();
     void render() const;
@@ -30,10 +30,10 @@ public:
 private:
     Window();
     WINDOW *window;
-    std::vector<Object const *> objects;
+    std::vector<const Object *> objects;
     Vector scale;
     ColorPair color;
-    Optional<Border const *> border;
+    Optional<const Border *> border;
 };
 
 #endif

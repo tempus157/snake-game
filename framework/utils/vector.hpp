@@ -15,7 +15,7 @@ public:
     static const Vector right;
 
     Vector();
-    Vector(int const x, int const y);
+    Vector(int x, int y);
 };
 
 #endif

@@ -12,7 +12,7 @@ App::App()
 
 App::~App()
 {
-    for (auto const window : windows)
+    for (auto window : windows)
     {
         delete window;
     }
@@ -46,7 +46,7 @@ int App::execute()
 
 void App::initWindows()
 {
-    for (auto const window : windows)
+    for (auto window : windows)
     {
         window->init();
     }
@@ -70,7 +70,7 @@ void App::initColors() const
 
 void App::renderWindows() const
 {
-    for (auto const window : windows)
+    for (auto window : windows)
     {
         window->render();
     }
