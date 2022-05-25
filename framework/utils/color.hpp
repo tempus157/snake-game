@@ -20,7 +20,7 @@ public:
     Color background = Color::Black;
 
     ColorPair();
-    ColorPair(Color foreground, Color background);
+    ColorPair(Color const foreground, Color const background);
     short getAttribute() const;
 };
 

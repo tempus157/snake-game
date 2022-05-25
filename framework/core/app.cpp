@@ -52,7 +52,7 @@ void App::initWindows()
     }
 }
 
-void App::initColors()
+void App::initColors() const
 {
     start_color();
     ColorPair color;
@@ -68,7 +68,7 @@ void App::initColors()
     }
 }
 
-void App::renderWindows()
+void App::renderWindows() const
 {
     for (auto window : windows)
     {

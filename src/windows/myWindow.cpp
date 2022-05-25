@@ -2,13 +2,13 @@
 
 Window *myWindow()
 {
-    auto border = Border();
-    border.color = ColorPair(Color::Yellow, Color::Blue);
+    auto border = new Border();
+    border->color = ColorPair(Color::Yellow, Color::Blue);
 
-    auto title = Object();
-    title.text = "C++ programming with ncurses ■";
-    title.color = ColorPair(Color::Red, Color::Green);
-    title.position = Vector(3, 4);
+    auto title = new Object();
+    title->text = "C++ programming with ncurses ■";
+    title->color = ColorPair(Color::Red, Color::Green);
+    title->position = Vector(3, 4);
 
     return Window::create()
         ->setScale(80, 25)

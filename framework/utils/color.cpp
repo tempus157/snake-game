@@ -2,7 +2,7 @@
 
 ColorPair::ColorPair() {}
 
-ColorPair::ColorPair(Color foreground, Color background)
+ColorPair::ColorPair(Color const foreground, Color const background)
     : foreground(foreground), background(background) {}
 
 short ColorPair::getAttribute() const

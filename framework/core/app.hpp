@@ -19,8 +19,8 @@ private:
     ~App();
 
     void initWindows();
-    void initColors();
-    void renderWindows();
+    void initColors() const;
+    void renderWindows() const;
 };
 
 #endif

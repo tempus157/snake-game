@@ -3,10 +3,13 @@
 
 #include "border.hpp"
 #include "object.hpp"
+
 #include "../utils/color.hpp"
 #include "../utils/optional.hpp"
 #include "../utils/vector.hpp"
+
 #include <vector>
+#include <ncurses.h>
 
 class Window
 {
@@ -14,22 +17,23 @@ public:
     ~Window();
     static Window *create();
 
-    Window *setScale(Vector scale);
-    Window *setScale(int x, int y);
-    Window *setColor(ColorPair color);
-    Window *setColor(Color foreground, Color background);
-    Window *setBorder(Border border);
-    Window *useObject(Object object);
+    Window *setScale(Vector const scale);
+    Window *setScale(int const x, int const y);
+    Window *setColor(ColorPair const color);
+    Window *setColor(Color const foreground, Color const background);
+    Window *setBorder(Border const *border);
+    Window *useObject(Object const *object);
 
     void init();
-    void render();
+    void render() const;
 
 private:
     Window();
-    std::vector<Object> objects;
+    WINDOW *window;
+    std::vector<Object const *> objects;
     Vector scale;
     ColorPair color;
-    Optional<Border> border;
+    Optional<Border const *> border;
 };
 
 #endif

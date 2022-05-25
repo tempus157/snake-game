@@ -14,13 +14,13 @@ public:
     Optional(std::nullptr_t value) : Optional() {}
     Optional(T value) : value(value), hasValue(true) {}
 
-    Optional<T> &operator=(std::nullptr_t value)
+    Optional<T> &operator=(std::nullptr_t const value)
     {
         hasValue = false;
         return *this;
     }
 
-    Optional<T> &operator=(T value)
+    Optional<T> &operator=(T const value)
     {
         this->value = value;
         this->hasValue = true;

@@ -1,10 +1,14 @@
 #include "window.hpp"
-#include <ncurses.h>
 
 Window::Window() {}
 
 Window::~Window()
 {
+    for (auto const object : objects)
+    {
+        delete object;
+    }
+
     endwin();
 }
 
@@ -13,39 +17,39 @@ Window *Window::create()
     return new Window();
 }
 
-Window *Window::setScale(Vector scale)
+Window *Window::setScale(Vector const scale)
 {
     this->scale = scale;
     return this;
 }
 
-Window *Window::setScale(int x, int y)
+Window *Window::setScale(int const x, int const y)
 {
     scale.x = x;
     scale.y = y;
     return this;
 }
 
-Window *Window::setColor(ColorPair color)
+Window *Window::setColor(ColorPair const color)
 {
     this->color = color;
     return this;
 }
 
-Window *Window::setColor(Color foreground, Color background)
+Window *Window::setColor(Color const foreground, Color const background)
 {
     color.foreground = foreground;
     color.background = background;
     return this;
 }
 
-Window *Window::setBorder(Border border)
+Window *Window::setBorder(Border const *border)
 {
     this->border = border;
     return this;
 }
 
-Window *Window::useObject(Object object)
+Window *Window::useObject(Object const *object)
 {
     objects.push_back(object);
     return this;
@@ -53,45 +57,45 @@ Window *Window::useObject(Object object)
 
 void Window::init()
 {
-    initscr();
+    window = initscr();
     resize_term(scale.y, scale.x);
     bkgd(COLOR_PAIR(color.getAttribute()));
 }
 
-void Window::render()
+void Window::render() const
 {
     clear();
 
     if (border.hasValue)
     {
-        if (border.value.color.hasValue)
+        if (border.value->color.hasValue)
         {
-            attron(COLOR_PAIR(border.value.color.value.getAttribute()));
+            attron(COLOR_PAIR(border.value->color.value.getAttribute()));
         }
 
-        border(border.value.left, border.value.right,
-               border.value.top, border.value.bottom,
-               border.value.topLeft, border.value.topRight,
-               border.value.bottomLeft, border.value.bottomRight);
+        border(border.value->left, border.value->right,
+               border.value->top, border.value->bottom,
+               border.value->topLeft, border.value->topRight,
+               border.value->bottomLeft, border.value->bottomRight);
 
-        if (border.value.color.hasValue)
+        if (border.value->color.hasValue)
         {
-            attroff(COLOR_PAIR(border.value.color.value.getAttribute()));
+            attroff(COLOR_PAIR(border.value->color.value.getAttribute()));
         }
     }
 
     for (auto const object : objects)
     {
-        if (object.color.hasValue)
+        if (object->color.hasValue)
         {
-            attron(COLOR_PAIR(object.color.value.getAttribute()));
+            attron(COLOR_PAIR(object->color.value.getAttribute()));
         }
 
-        mvprintw(object.position.y, object.position.x, object.text.c_str());
+        mvprintw(object->position.y, object->position.x, object->text.c_str());
 
-        if (object.color.hasValue)
+        if (object->color.hasValue)
         {
-            attroff(COLOR_PAIR(object.color.value.getAttribute()));
+            attroff(COLOR_PAIR(object->color.value.getAttribute()));
         }
     }
 
