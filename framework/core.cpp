@@ -1,4 +1,7 @@
 #include "core.hpp"
+
+#include <clocale>
+#include <unistd.h>
 #include <ncurses.h>
 
 const Vector Vector::zero = Vector(0, 0);
@@ -11,64 +14,143 @@ const Vector Vector::right = Vector(1, 0);
 Vector::Vector() {}
 Vector::Vector(int x, int y) : x(x), y(y) {}
 
-Object &Object::create()
+Object *Object::create()
 {
-    return *new Object();
+    return new Object();
 }
 
-Object &Object::setText(std::string text)
+Object *Object::setText(std::string text)
 {
     this->text = text;
-    return *this;
+    return this;
 }
 
-Object &Object::setPosition(Vector position)
+Object *Object::setPosition(Vector position)
 {
     this->position = position;
-    return *this;
+    return this;
 }
 
-Object &Object::setPosition(int x, int y)
+Object *Object::setPosition(int x, int y)
 {
     position.x = x;
     position.y = y;
-    return *this;
+    return this;
 }
 
-Window &Window::create()
+void Object::render()
 {
-    return *new Window();
+    mvprintw(position.y, position.x, text.c_str());
 }
 
-Window &Window::setScale(Vector scale)
+Window *Window::create()
 {
-    resize_term(scale.y, scale.x);
-    return *this;
+    return new Window();
 }
 
-Window &Window::setScale(int x, int y)
+Window *Window::setScale(Vector scale)
 {
-    resize_term(y, x);
-    return *this;
+    this->scale = scale;
+    return this;
 }
 
-Window &Window::useObject(Object const &object)
+Window *Window::setScale(int x, int y)
+{
+    scale.x = x;
+    scale.y = y;
+    return this;
+}
+
+Window *Window::useObject(Object *object)
 {
     objects.push_back(object);
-    return *this;
+    return this;
 }
 
-App &App::create()
+void Window::init()
 {
-    return *new App();
+    initscr();
+    resize_term(scale.y, scale.x);
 }
 
-App &App::useWindow(std::function<Window()> window)
+void Window::render()
 {
-    return *this;
+    clear();
+
+    for (auto object : objects)
+    {
+        object->render();
+    }
+
+    refresh();
+}
+
+bool App::progress = true;
+
+App::App()
+{
+    setlocale(LC_ALL, "");
+}
+
+App::~App()
+{
+    for (auto window : windows)
+    {
+        delete window;
+    }
+}
+
+App *App::create()
+{
+    return new App();
+}
+
+App *App::useWindow(Window *window)
+{
+    windows.push_back(window);
+    return this;
 }
 
 int App::execute()
 {
+    initWindows();
+
+    while (progress)
+    {
+        updateWindows();
+        renderWindows();
+        usleep(20000);
+    }
+
+    releaseWindows();
+    delete this;
     return 0;
+}
+
+void App::initWindows()
+{
+    for (auto window : windows)
+    {
+        window->init();
+    }
+}
+
+void App::updateWindows()
+{
+    for (auto window : windows)
+    {
+    }
+}
+
+void App::renderWindows()
+{
+    for (auto window : windows)
+    {
+        window->render();
+    }
+}
+
+void App::releaseWindows()
+{
+    endwin();
 }
