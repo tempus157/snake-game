@@ -17,7 +17,7 @@ Window *Window::create()
     return new Window();
 }
 
-Window *Window::setScale(Vector const scale)
+Window *Window::setScale(Vector const &scale)
 {
     this->scale = scale;
     return this;
@@ -30,13 +30,13 @@ Window *Window::setScale(int const x, int const y)
     return this;
 }
 
-Window *Window::setColor(ColorPair const color)
+Window *Window::setColor(ColorPair const &color)
 {
     this->color = color;
     return this;
 }
 
-Window *Window::setColor(Color const foreground, Color const background)
+Window *Window::setColor(Color const &foreground, Color const &background)
 {
     color.foreground = foreground;
     color.background = background;

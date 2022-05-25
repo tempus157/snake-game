@@ -1,7 +1,7 @@
 #ifndef __FRAMEWORK_UTILS_VECTOR__
 #define __FRAMEWORK_UTILS_VECTOR__
 
-struct Vector
+class Vector
 {
 public:
     int x = 0;

@@ -13,14 +13,14 @@ enum class Color
     White = 7,
 };
 
-struct ColorPair
+class ColorPair
 {
 public:
     Color foreground = Color::White;
     Color background = Color::Black;
 
     ColorPair();
-    ColorPair(Color const foreground, Color const background);
+    ColorPair(Color const &foreground, Color const &background);
     short getAttribute() const;
 };
 

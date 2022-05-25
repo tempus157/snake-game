@@ -46,7 +46,7 @@ int App::execute()
 
 void App::initWindows()
 {
-    for (auto window : windows)
+    for (auto const window : windows)
     {
         window->init();
     }
@@ -70,7 +70,7 @@ void App::initColors() const
 
 void App::renderWindows() const
 {
-    for (auto window : windows)
+    for (auto const window : windows)
     {
         window->render();
     }

@@ -17,10 +17,10 @@ public:
     ~Window();
     static Window *create();
 
-    Window *setScale(Vector const scale);
+    Window *setScale(Vector const &scale);
     Window *setScale(int const x, int const y);
-    Window *setColor(ColorPair const color);
-    Window *setColor(Color const foreground, Color const background);
+    Window *setColor(ColorPair const &color);
+    Window *setColor(Color const &foreground, Color const &background);
     Window *setBorder(Border const *border);
     Window *useObject(Object const *object);
 

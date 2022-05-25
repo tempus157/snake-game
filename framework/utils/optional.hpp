@@ -4,23 +4,23 @@
 #include <__nullptr>
 
 template <typename T>
-struct Optional
+class Optional
 {
 public:
     T value;
     bool hasValue;
 
     Optional() : hasValue(false) {}
-    Optional(std::nullptr_t value) : Optional() {}
-    Optional(T value) : value(value), hasValue(true) {}
+    Optional(std::nullptr_t const &value) : Optional() {}
+    Optional(T const &value) : value(value), hasValue(true) {}
 
-    Optional<T> &operator=(std::nullptr_t const value)
+    Optional<T> &operator=(std::nullptr_t const &value)
     {
         hasValue = false;
         return *this;
     }
 
-    Optional<T> &operator=(T const value)
+    Optional<T> &operator=(T const &value)
     {
         this->value = value;
         this->hasValue = true;
