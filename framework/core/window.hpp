@@ -14,7 +14,20 @@
 class Window
 {
 public:
-    ~Window();
+    class Hooks
+    {
+    public:
+        Hooks(Window *window);
+        ~Hooks();
+        void init();
+        void render() const;
+
+    private:
+        Window *window;
+        void renderBorder(const Border *border) const;
+        void renderObjects() const;
+    };
+
     static Window *create();
 
     Window *setScale(const Vector &scale);
@@ -24,11 +37,9 @@ public:
     Window *setBorder(const Border *border);
     Window *useObject(const Object *object);
 
-    void init();
-    void render() const;
-
 private:
     Window();
+    ~Window();
 
     const WINDOW *window;
     Vector scale;

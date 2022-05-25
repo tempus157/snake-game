@@ -12,9 +12,9 @@ App::App()
 
 App::~App()
 {
-    for (auto window : windows)
+    for (auto hooks : windowHooks)
     {
-        delete window;
+        delete hooks;
     }
 }
 
@@ -25,7 +25,7 @@ App *App::create()
 
 App *App::useWindow(Window *window)
 {
-    windows.push_back(window);
+    windowHooks.push_back(new Window::Hooks(window));
     return this;
 }
 
@@ -46,9 +46,9 @@ int App::execute()
 
 void App::initWindows()
 {
-    for (auto window : windows)
+    for (auto hooks : windowHooks)
     {
-        window->init();
+        hooks->init();
     }
 }
 
@@ -70,8 +70,8 @@ void App::initColors() const
 
 void App::renderWindows() const
 {
-    for (auto window : windows)
+    for (auto hooks : windowHooks)
     {
-        window->render();
+        hooks->render();
     }
 }

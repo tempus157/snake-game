@@ -13,7 +13,7 @@ public:
 
 private:
     static bool progress;
-    std::vector<Window *> windows;
+    std::vector<Window::Hooks *> windowHooks;
 
     App();
     ~App();

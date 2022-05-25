@@ -55,36 +55,52 @@ Window *Window::useObject(const Object *object)
     return this;
 }
 
-void Window::init()
+Window::Hooks::Hooks(Window *window) : window(window) {}
+
+Window::Hooks::~Hooks()
 {
-    window = initscr();
-    resize_term(scale.y, scale.x);
-    bkgd(COLOR_PAIR(color.getAttribute()));
+    delete window;
 }
 
-void Window::render() const
+void Window::Hooks::init()
+{
+    window->window = initscr();
+    resize_term(window->scale.y, window->scale.x);
+    bkgd(COLOR_PAIR(window->color.getAttribute()));
+}
+
+void Window::Hooks::render() const
 {
     clear();
 
-    if (border.hasValue)
+    if (window->border.hasValue)
     {
-        if (border.value->color.hasValue)
-        {
-            attron(COLOR_PAIR(border.value->color.value.getAttribute()));
-        }
-
-        border(border.value->left, border.value->right,
-               border.value->top, border.value->bottom,
-               border.value->topLeft, border.value->topRight,
-               border.value->bottomLeft, border.value->bottomRight);
-
-        if (border.value->color.hasValue)
-        {
-            attroff(COLOR_PAIR(border.value->color.value.getAttribute()));
-        }
+        renderBorder(window->border.value);
     }
 
-    for (auto object : objects)
+    renderObjects();
+    refresh();
+}
+
+void Window::Hooks::renderBorder(const Border *border) const
+{
+    if (border->color.hasValue)
+    {
+        attron(COLOR_PAIR(border->color.value.getAttribute()));
+    }
+
+    border(border->left, border->right, border->top, border->bottom,
+           border->topLeft, border->topRight, border->bottomLeft, border->bottomRight);
+
+    if (border->color.hasValue)
+    {
+        attroff(COLOR_PAIR(border->color.value.getAttribute()));
+    }
+}
+
+void Window::Hooks::renderObjects() const
+{
+    for (auto object : window->objects)
     {
         if (object->color.hasValue)
         {
@@ -98,6 +114,4 @@ void Window::render() const
             attroff(COLOR_PAIR(object->color.value.getAttribute()));
         }
     }
-
-    refresh();
 }

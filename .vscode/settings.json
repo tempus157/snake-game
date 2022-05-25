@@ -65,6 +65,7 @@
     "__functional_base": "cpp",
     "algorithm": "cpp",
     "iterator": "cpp",
-    "utility": "cpp"
+    "utility": "cpp",
+    "__memory": "cpp"
   }
 }
