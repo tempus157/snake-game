@@ -47,6 +47,7 @@ public:
 
     void init();
     void render();
+    void release();
 
 private:
     std::vector<Object *> objects;

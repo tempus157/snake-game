@@ -85,6 +85,11 @@ void Window::render()
     refresh();
 }
 
+void Window::release()
+{
+    endwin();
+}
+
 bool App::progress = true;
 
 App::App()
@@ -152,5 +157,8 @@ void App::renderWindows()
 
 void App::releaseWindows()
 {
-    endwin();
+    for (auto window : windows)
+    {
+        window->release();
+    }
 }
