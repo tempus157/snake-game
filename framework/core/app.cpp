@@ -34,9 +34,11 @@ int App::execute()
     initWindows();
     initColors();
     initInput();
+    startWindows();
 
     while (progress)
     {
+        updateWindows();
         renderWindows();
         usleep(20000);
     }
@@ -75,6 +77,22 @@ void App::initInput() const
     nodelay(stdscr, true);
     curs_set(0);
     noecho();
+}
+
+void App::startWindows() const
+{
+    for (auto hooks : windowHooks)
+    {
+        hooks->start();
+    }
+}
+
+void App::updateWindows() const
+{
+    for (auto hooks : windowHooks)
+    {
+        hooks->update();
+    }
 }
 
 void App::renderWindows() const

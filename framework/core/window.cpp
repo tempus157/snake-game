@@ -55,6 +55,18 @@ Window *Window::useObject(const Object *object)
     return this;
 }
 
+Window *Window::onStart(std::function<void()> callback)
+{
+    startCallbacks.push_back(callback);
+    return this;
+}
+
+Window *Window::onUpdate(std::function<void()> callback)
+{
+    updateCallbacks.push_back(callback);
+    return this;
+}
+
 Window::Hooks::Hooks(Window *window) : window(window) {}
 
 Window::Hooks::~Hooks()
@@ -67,6 +79,22 @@ void Window::Hooks::init()
     window->window = initscr();
     resize_term(window->scale.y, window->scale.x);
     bkgd(COLOR_PAIR(window->color.getAttribute()));
+}
+
+void Window::Hooks::start() const
+{
+    for (const auto callback : window->startCallbacks)
+    {
+        callback();
+    }
+}
+
+void Window::Hooks::update() const
+{
+    for (const auto callback : window->updateCallbacks)
+    {
+        callback();
+    }
 }
 
 void Window::Hooks::render() const

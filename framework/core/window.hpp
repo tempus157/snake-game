@@ -9,6 +9,7 @@
 #include "../utils/vector.hpp"
 
 #include <vector>
+#include <functional>
 #include <ncurses.h>
 
 class Window
@@ -20,6 +21,8 @@ public:
         Hooks(Window *window);
         ~Hooks();
         void init();
+        void start() const;
+        void update() const;
         void render() const;
 
     private:
@@ -36,6 +39,8 @@ public:
     Window *setColor(const Color &foreground, const Color &background);
     Window *setBorder(const Border *border);
     Window *useObject(const Object *object);
+    Window *onStart(const std::function<void()> callback);
+    Window *onUpdate(const std::function<void()> callback);
 
 private:
     Window();
@@ -45,7 +50,10 @@ private:
     Vector scale;
     ColorPair color;
     Optional<const Border *> border;
+
     std::vector<const Object *> objects;
+    std::vector<const std::function<void()>> startCallbacks;
+    std::vector<const std::function<void()>> updateCallbacks;
 };
 
 #endif
