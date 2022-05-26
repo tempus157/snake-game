@@ -33,6 +33,7 @@ int App::execute()
 {
     initWindows();
     initColors();
+    initInput();
 
     while (progress)
     {
@@ -66,6 +67,14 @@ void App::initColors() const
             init_pair(color.getAttribute(), foreground, background);
         }
     }
+}
+
+void App::initInput() const
+{
+    keypad(stdscr, true);
+    nodelay(stdscr, true);
+    curs_set(0);
+    noecho();
 }
 
 void App::renderWindows() const

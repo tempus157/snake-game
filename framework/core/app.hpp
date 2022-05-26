@@ -20,6 +20,7 @@ private:
 
     void initWindows();
     void initColors() const;
+    void initInput() const;
     void renderWindows() const;
 };
 
