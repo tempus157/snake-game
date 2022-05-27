@@ -8,10 +8,12 @@
 
 class App final {
 public:
+    static void quit();
     App &addWindow(const Window &window);
     int run() const;
 
 private:
+    static bool progress;
     const Input input = Input();
     std::vector<const Window> windows;
     void mountWindows() const;

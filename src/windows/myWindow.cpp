@@ -4,8 +4,8 @@ Window myWindow() {
     auto border = Border('*');
     border.color = ColorPair(Color::Yellow, Color::Green);
 
-    onKeyPress(Key::Any, [](Key key) {
-        printw("%d ", key);
+    onKeyPress(Key::Escape, [](Key key) {
+        quitApp();
     });
 
     return createWindow()

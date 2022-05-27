@@ -4,6 +4,12 @@
 #include <clocale>
 #include <ncurses.h>
 
+bool App::progress = true;
+
+void App::quit() {
+    progress = false;
+}
+
 App &App::addWindow(const Window &window) {
     windows.push_back(window);
     return *this;
@@ -18,7 +24,7 @@ int App::run() const {
         window.update();
     }
 
-    while (true) {
+    while (progress) {
         const auto key = input.readKey();
         input.notifyListeners(key);
     }
