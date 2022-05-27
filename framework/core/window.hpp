@@ -6,11 +6,10 @@
 #include "vector.hpp"
 
 #include <functional>
-#include <vector>
 #include <ncurses.h>
+#include <vector>
 
-class Window final
-{
+class Window final {
 public:
     const std::function<void()> mount;
     const std::function<void()> update;
@@ -21,8 +20,7 @@ public:
            const std::function<void()> &destroy);
 };
 
-class WindowData final
-{
+class WindowData final {
 public:
     WindowData &setScale(const Vector &scale);
     WindowData &setScale(int x, int y);

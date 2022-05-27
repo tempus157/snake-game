@@ -13,6 +13,7 @@ add_executable (
     framework/main.cpp
     framework/core/app.cpp
     framework/core/color.cpp
+    framework/core/input.cpp
     framework/core/object.cpp
     framework/core/vector.cpp
     framework/core/window.cpp

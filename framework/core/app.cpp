@@ -1,4 +1,5 @@
 #include "app.hpp"
+#include "input.hpp"
 
 #include <clocale>
 #include <ncurses.h>
@@ -11,15 +12,20 @@ App &App::addWindow(const Window &window)
 
 int App::run() const
 {
-    initWindows();
-    initColors();
+    mountWindows();
+    input.mount();
+    ColorPair::mount();
 
     for (const auto &window : windows)
     {
         window.update();
     }
 
-    getch();
+    while (true)
+    {
+        const auto key = input.readKey();
+        input.notifyListeners(key);
+    }
 
     for (const auto &window : windows)
     {
@@ -30,28 +36,12 @@ int App::run() const
     return 0;
 }
 
-void App::initWindows() const
+void App::mountWindows() const
 {
     setlocale(LC_ALL, "");
 
     for (const auto &window : windows)
     {
         window.mount();
-    }
-}
-
-void App::initColors() const
-{
-    start_color();
-    ColorPair color;
-
-    for (auto foreground = 0; foreground < 8; foreground++)
-    {
-        for (auto background = 0; background < 8; background++)
-        {
-            color.foreground = static_cast<Color>(foreground);
-            color.background = static_cast<Color>(background);
-            init_pair(color.getAttribute(), foreground, background);
-        }
     }
 }

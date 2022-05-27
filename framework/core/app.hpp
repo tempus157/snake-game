@@ -1,6 +1,7 @@
 #ifndef __FRAMEWORK_APP__
 #define __FRAMEWORK_APP__
 
+#include "input.hpp"
 #include "window.hpp"
 #include <vector>
 
@@ -11,9 +12,9 @@ public:
     int run() const;
 
 private:
+    const Input input = Input();
     std::vector<const Window> windows;
-    void initWindows() const;
-    void initColors() const;
+    void mountWindows() const;
 };
 
 #endif

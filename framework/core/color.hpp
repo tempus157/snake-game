@@ -21,6 +21,8 @@ public:
 
     ColorPair();
     ColorPair(const Color &foreground, const Color &background);
+
+    static void mount();
     short getAttribute() const;
 };
 

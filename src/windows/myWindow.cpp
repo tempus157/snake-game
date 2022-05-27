@@ -1,7 +1,10 @@
 #include "../main.hpp"
 
-Window myWindow()
-{
+Window myWindow() {
+    onKeyPress(Key::A, [] {
+        printf("Exit");
+    });
+
     return createWindow()
         .setScale(40, 20)
         .setColor(Color::Blue, Color::Red)

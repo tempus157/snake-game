@@ -1,7 +1,7 @@
 #include "main.hpp"
 #include <memory>
 
-Object label(const string &text)
+Object label(const std::string &text)
 {
     auto render = [=]
     {
@@ -11,7 +11,7 @@ Object label(const string &text)
     return Object(render, [] {});
 }
 
-Object label(const string &text, const Vector &position)
+Object label(const std::string &text, const Vector &position)
 {
     auto render = [=]
     {
@@ -21,7 +21,7 @@ Object label(const string &text, const Vector &position)
     return Object(render, [] {});
 }
 
-Object label(const string &text, const ColorPair &color)
+Object label(const std::string &text, const ColorPair &color)
 {
     auto render = [=]
     {
@@ -33,7 +33,7 @@ Object label(const string &text, const ColorPair &color)
     return Object(render, [] {});
 }
 
-Object label(const string &text, const Vector &position, const ColorPair &color)
+Object label(const std::string &text, const Vector &position, const ColorPair &color)
 {
     auto render = [=]
     {
@@ -43,6 +43,11 @@ Object label(const string &text, const Vector &position, const ColorPair &color)
     };
 
     return Object(render, [] {});
+}
+
+void onKeyPress(Key key, const std::function<void()> &fn)
+{
+    Input::addListener(key, fn);
 }
 
 ObjectData &createObject()
