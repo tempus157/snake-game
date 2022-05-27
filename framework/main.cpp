@@ -1,7 +1,7 @@
 #include "main.hpp"
 #include <memory>
 
-Object label(string text, Optional<ColorPair> color)
+Object label(const string &text, const Optional<ColorPair> &color)
 {
     auto render = [=]
     {
@@ -21,7 +21,7 @@ Object label(string text, Optional<ColorPair> color)
     return Object(render, [] {});
 }
 
-Object label(string text, Vector position, Optional<ColorPair> color)
+Object label(const string &text, const Vector &position, const Optional<ColorPair> &color)
 {
     auto render = [=]
     {
