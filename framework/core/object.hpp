@@ -9,16 +9,11 @@
 #include <string>
 #include <vector>
 
-#include <ncurses.h>
-
 class Object final
 {
 public:
-    Object(std::function<void()> render);
-    void operator()() const;
-
-private:
-    std::function<void()> render;
+    Object(const std::function<void()> &render);
+    const std::function<void()> render;
 };
 
 class ObjectCreator final

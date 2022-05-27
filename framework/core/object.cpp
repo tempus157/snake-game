@@ -1,11 +1,6 @@
 #include "object.hpp"
 
-Object::Object(std::function<void()> render) : render(render) {}
-
-void Object::operator()() const
-{
-    render();
-}
+Object::Object(const std::function<void()> &renderer) : render(render) {}
 
 ObjectCreator &ObjectCreator::use(const Object &object)
 {
@@ -15,11 +10,11 @@ ObjectCreator &ObjectCreator::use(const Object &object)
 
 Object ObjectCreator::done() const
 {
-    auto render = [=]
+    const auto render = [=]
     {
         for (const auto &child : children)
         {
-            child();
+            child.render();
         }
     };
 
