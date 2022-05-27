@@ -1,7 +1,7 @@
-#ifndef __FRAMEWORK_UTILS_VECTOR__
-#define __FRAMEWORK_UTILS_VECTOR__
+#ifndef __FRAMEWORK_VECTOR__
+#define __FRAMEWORK_VECTOR__
 
-class Vector
+class Vector final
 {
 public:
     int x = 0;

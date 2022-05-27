@@ -1,10 +1,10 @@
-#ifndef __FRAMEWORK_UTILS_OPTIONAL__
-#define __FRAMEWORK_UTILS_OPTIONAL__
+#ifndef __FRAMEWORK_OPTIONAL__
+#define __FRAMEWORK_OPTIONAL__
 
 #include <__nullptr>
 
 template <typename T>
-struct Optional
+class Optional final
 {
 public:
     T value;

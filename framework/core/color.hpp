@@ -1,5 +1,5 @@
-#ifndef __FRAMEWORK_UTILS_COLOR__
-#define __FRAMEWORK_UTILS_COLOR__
+#ifndef __FRAMEWORK_COLOR__
+#define __FRAMEWORK_COLOR__
 
 enum class Color
 {
@@ -13,7 +13,7 @@ enum class Color
     White = 7,
 };
 
-struct ColorPair
+class ColorPair final
 {
 public:
     Color foreground = Color::White;
