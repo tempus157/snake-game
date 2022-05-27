@@ -8,9 +8,11 @@
 
 class App final {
 public:
+    static App *instance;
     static void quit();
     App &useWindow(const Window &window);
     int run() const;
+    void updateWindows() const;
 
 private:
     static bool progress;

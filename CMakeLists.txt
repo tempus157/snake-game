@@ -8,7 +8,7 @@ include_directories(${CURSES_INCLUDE_DIR})
 add_executable (
     game.out
     src/main.cpp
-    src/objects/title.cpp
+    src/objects/counter.cpp
     src/windows/myWindow.cpp
     framework/main.cpp
     framework/core/app.cpp

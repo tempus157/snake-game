@@ -5,6 +5,7 @@
 #include <ncurses.h>
 
 bool App::progress = true;
+App *App::instance = nullptr;
 
 void App::quit() {
     progress = false;
@@ -20,9 +21,7 @@ int App::run() const {
     input.mount();
     ColorPair::mount();
 
-    for (const auto &window : windows) {
-        window.update();
-    }
+    updateWindows();
 
     while (progress) {
         const auto key = input.readKey();
@@ -42,5 +41,11 @@ void App::mountWindows() const {
 
     for (const auto &window : windows) {
         window.mount();
+    }
+}
+
+void App::updateWindows() const {
+    for (const auto &window : windows) {
+        window.update();
     }
 }

@@ -1,5 +1,4 @@
 #include "main.hpp"
-#include <memory>
 
 ObjectData &createObject() {
     return *new ObjectData();
@@ -10,15 +9,16 @@ WindowData &createWindow() {
 }
 
 App &createApp() {
-    return *new App();
-}
-
-void quitApp() {
-    App::quit();
+    App::instance = new App();
+    return *App::instance;
 }
 
 void onKeyPress(Key key, const std::function<void(Key)> &fn) {
     Input::addListener(key, fn);
+}
+
+void quitApp() {
+    App::quit();
 }
 
 Object label(const std::string &text) {
@@ -30,7 +30,7 @@ Object label(const std::string &text) {
 }
 
 Object label(const std::string &text, const Vector &position) {
-    auto render = [=] {
+    auto render = [=, &text] {
         mvprintw(position.y, position.x, text.c_str());
     };
 

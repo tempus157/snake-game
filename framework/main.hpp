@@ -19,7 +19,15 @@ WindowData &createWindow();
 App &createApp();
 
 template <typename T>
-State<T> createState();
+State<T> useState() {
+    return State<T>();
+}
+
+template <typename T>
+State<T> useState(const T &value) {
+    return State<T>(value);
+}
+
 void onKeyPress(Key key, const std::function<void(Key)> &fn);
 void quitApp();
 
