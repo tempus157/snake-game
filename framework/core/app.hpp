@@ -9,7 +9,7 @@
 class App final {
 public:
     static void quit();
-    App &addWindow(const Window &window);
+    App &useWindow(const Window &window);
     int run() const;
 
 private:

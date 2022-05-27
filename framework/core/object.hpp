@@ -18,11 +18,11 @@ public:
 
 class ObjectData final {
 public:
-    ObjectData &use(const Object &object);
+    ObjectData &useObject(const Object &object);
     Object done() const;
 
 private:
-    std::vector<const Object> children;
+    std::vector<const Object> objects;
 };
 
 #endif

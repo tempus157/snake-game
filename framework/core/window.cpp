@@ -51,8 +51,8 @@ WindowData &WindowData::setBorder(const Optional<Border> &border) {
     return *this;
 }
 
-WindowData &WindowData::use(const Object &object) {
-    children.push_back(object);
+WindowData &WindowData::useObject(const Object &object) {
+    objects.push_back(object);
     return *this;
 }
 
@@ -66,8 +66,8 @@ Window WindowData::done() const {
     const auto update = [&] {
         clear();
 
-        for (const auto &child : children) {
-            child.update();
+        for (const auto &object : objects) {
+            object.update();
         }
 
         if (border) {
@@ -78,8 +78,8 @@ Window WindowData::done() const {
     };
 
     const auto destroy = [&] {
-        for (const auto &child : children) {
-            child.destroy();
+        for (const auto &object : objects) {
+            object.destroy();
         }
 
         endwin();

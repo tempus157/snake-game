@@ -1,6 +1,26 @@
 #include "main.hpp"
 #include <memory>
 
+ObjectData &createObject() {
+    return *new ObjectData();
+}
+
+WindowData &createWindow() {
+    return *new WindowData();
+}
+
+App &createApp() {
+    return *new App();
+}
+
+void quitApp() {
+    App::quit();
+}
+
+void onKeyPress(Key key, const std::function<void(Key)> &fn) {
+    Input::addListener(key, fn);
+}
+
 Object label(const std::string &text) {
     auto render = [=] {
         printw(text.c_str());
@@ -35,24 +55,4 @@ Object label(const std::string &text, const Vector &position, const ColorPair &c
     };
 
     return Object(render, [] {});
-}
-
-void quitApp() {
-    App::quit();
-}
-
-void onKeyPress(Key key, const std::function<void(Key)> &fn) {
-    Input::addListener(key, fn);
-}
-
-ObjectData &createObject() {
-    return *new ObjectData();
-}
-
-WindowData &createWindow() {
-    return *new WindowData();
-}
-
-App &createApp() {
-    return *new App();
 }

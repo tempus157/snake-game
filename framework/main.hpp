@@ -6,6 +6,7 @@
 #include "./core/input.hpp"
 #include "./core/object.hpp"
 #include "./core/optional.hpp"
+#include "./core/state.hpp"
 #include "./core/vector.hpp"
 #include "./core/window.hpp"
 
@@ -13,16 +14,18 @@
 #include <memory>
 #include <string>
 
+ObjectData &createObject();
+WindowData &createWindow();
+App &createApp();
+
+template <typename T>
+State<T> createState();
+void onKeyPress(Key key, const std::function<void(Key)> &fn);
+void quitApp();
+
 Object label(const std::string &text);
 Object label(const std::string &text, const Vector &position);
 Object label(const std::string &text, const ColorPair &color);
 Object label(const std::string &text, const Vector &position, const ColorPair &color);
-
-void quitApp();
-void onKeyPress(Key key, const std::function<void(Key)> &fn);
-
-ObjectData &createObject();
-WindowData &createWindow();
-App &createApp();
 
 #endif

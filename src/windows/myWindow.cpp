@@ -12,7 +12,7 @@ Window myWindow() {
         .setScale(40, 20)
         .setColor(Color::Blue, Color::Red)
         .setBorder(border)
-        .use(title("Hello, world!", ColorPair(Color::Red, Color::Blue)))
-        .use(label("Welcome to the C++", Vector(2, 2)))
+        .useObject(title("Hello, world!", ColorPair(Color::Red, Color::Blue)))
+        .useObject(label("Welcome to the C++", Vector(2, 2)))
         .done();
 }

@@ -45,14 +45,14 @@ public:
     WindowData &setColor(const ColorPair color);
     WindowData &setColor(const Color &foreground, const Color &background);
     WindowData &setBorder(const Optional<Border> &border);
-    WindowData &use(const Object &object);
+    WindowData &useObject(const Object &object);
     Window done() const;
 
 private:
     Vector scale;
     ColorPair color;
     Optional<Border> border;
-    std::vector<const Object> children;
+    std::vector<const Object> objects;
 };
 
 #endif

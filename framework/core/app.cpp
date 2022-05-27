@@ -10,7 +10,7 @@ void App::quit() {
     progress = false;
 }
 
-App &App::addWindow(const Window &window) {
+App &App::useWindow(const Window &window) {
     windows.push_back(window);
     return *this;
 }
