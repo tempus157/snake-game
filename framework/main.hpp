@@ -28,12 +28,15 @@ State<T> useState(const T &value) {
     return State<T>(value);
 }
 
+State<std::string> useState(const char *value);
+
 void onKeyPress(Key key, const std::function<void(Key)> &fn);
 void quitApp();
 
-Object label(const std::string &text);
-Object label(const std::string &text, const Vector &position);
-Object label(const std::string &text, const ColorPair &color);
-Object label(const std::string &text, const Vector &position, const ColorPair &color);
+// TODO Make it template where T is built-in type
+Object label(const State<std::string> &text);
+Object label(const State<std::string> &text, const State<Vector> &position);
+Object label(const State<std::string> &text, const State<ColorPair> &color);
+Object label(const State<std::string> &text, const State<Vector> &position, const State<ColorPair> &color);
 
 #endif
