@@ -3,11 +3,29 @@
 
 #include "color.hpp"
 #include "object.hpp"
+#include "optional.hpp"
 #include "vector.hpp"
 
 #include <functional>
 #include <ncurses.h>
 #include <vector>
+
+class Border final {
+public:
+    unsigned int left;
+    unsigned int right;
+    unsigned int top;
+    unsigned int bottom;
+    unsigned int topLeft;
+    unsigned int topRight;
+    unsigned int bottomLeft;
+    unsigned int bottomRight;
+    Optional<ColorPair> color;
+
+    Border();
+    Border(unsigned int character);
+    void update() const;
+};
 
 class Window final {
 public:
@@ -26,12 +44,14 @@ public:
     WindowData &setScale(int x, int y);
     WindowData &setColor(const ColorPair color);
     WindowData &setColor(const Color &foreground, const Color &background);
+    WindowData &setBorder(const Optional<Border> &border);
     WindowData &use(const Object &object);
     Window done() const;
 
 private:
     Vector scale;
     ColorPair color;
+    Optional<Border> border;
     std::vector<const Object> children;
 };
 

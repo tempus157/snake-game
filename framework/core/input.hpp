@@ -84,7 +84,7 @@ enum class Key {
     RightArrow,
 };
 
-class Input {
+class Input final {
 public:
     static void addListener(const Key &key, const std::function<void(Key)> &fn);
     void notifyListeners(const Key &key) const;

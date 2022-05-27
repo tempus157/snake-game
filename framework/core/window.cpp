@@ -1,5 +1,24 @@
 #include "window.hpp"
 
+Border::Border() : Border('+') {}
+
+Border::Border(unsigned int character) : left(character), right(character),
+                                         top(character), bottom(character),
+                                         topLeft(character), topRight(character),
+                                         bottomLeft(character), bottomRight(character) {}
+
+void Border::update() const {
+    if (color) {
+        attron(COLOR_PAIR(color->getAttribute()));
+    }
+
+    border(left, right, top, bottom, topLeft, topRight, bottomLeft, bottomRight);
+
+    if (color) {
+        attroff(COLOR_PAIR(color->getAttribute()));
+    }
+}
+
 Window::Window(const std::function<void()> &mount,
                const std::function<void()> &update,
                const std::function<void()> &destroy)
@@ -27,6 +46,11 @@ WindowData &WindowData::setColor(const Color &foreground, const Color &backgroun
     return *this;
 }
 
+WindowData &WindowData::setBorder(const Optional<Border> &border) {
+    this->border = border;
+    return *this;
+}
+
 WindowData &WindowData::use(const Object &object) {
     children.push_back(object);
     return *this;
@@ -44,6 +68,10 @@ Window WindowData::done() const {
 
         for (const auto &child : children) {
             child.update();
+        }
+
+        if (border) {
+            border->update();
         }
 
         refresh();

@@ -5,6 +5,7 @@
 #include "./core/color.hpp"
 #include "./core/input.hpp"
 #include "./core/object.hpp"
+#include "./core/optional.hpp"
 #include "./core/vector.hpp"
 #include "./core/window.hpp"
 
