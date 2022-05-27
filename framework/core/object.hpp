@@ -12,15 +12,18 @@
 class Object final
 {
 public:
-    Object(const std::function<void()> &render);
-    const std::function<void()> render;
+    const std::function<void()> update;
+    const std::function<void()> destroy;
+
+    Object(const std::function<void()> &update,
+           const std::function<void()> &destroy);
 };
 
-class ObjectCreator final
+class ObjectData final
 {
 public:
     // ObjectCreator &onKeyPress(Key key, std::function<void()> callback);
-    ObjectCreator &use(const Object &object);
+    ObjectData &use(const Object &object);
     Object done() const;
 
 private:

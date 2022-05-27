@@ -1,4 +1,5 @@
 #include "main.hpp"
+#include <memory>
 
 Object label(string text, Optional<ColorPair> color)
 {
@@ -17,7 +18,7 @@ Object label(string text, Optional<ColorPair> color)
         }
     };
 
-    return Object(render);
+    return Object(render, [] {});
 }
 
 Object label(string text, Vector position, Optional<ColorPair> color)
@@ -37,17 +38,17 @@ Object label(string text, Vector position, Optional<ColorPair> color)
         }
     };
 
-    return Object(render);
+    return Object(render, [] {});
 }
 
-ObjectCreator &createObject()
+ObjectData &createObject()
 {
-    return *new ObjectCreator();
+    return *new ObjectData();
 }
 
-WindowCreator &createWindow()
+WindowData &createWindow()
 {
-    return *new WindowCreator();
+    return *new WindowData();
 }
 
 App &createApp()

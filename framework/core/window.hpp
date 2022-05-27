@@ -9,22 +9,26 @@
 #include <vector>
 #include <ncurses.h>
 
-class Window
+class Window final
 {
 public:
-    Window(const std::function<void()> &init, const std::function<void()> &render);
-    const std::function<void()> init;
-    const std::function<void()> render;
+    const std::function<void()> mount;
+    const std::function<void()> update;
+    const std::function<void()> destroy;
+
+    Window(const std::function<void()> &mount,
+           const std::function<void()> &update,
+           const std::function<void()> &destroy);
 };
 
-class WindowCreator
+class WindowData final
 {
 public:
-    WindowCreator &setScale(const Vector &scale);
-    WindowCreator &setScale(int x, int y);
-    WindowCreator &setColor(const ColorPair color);
-    WindowCreator &setColor(const Color &foreground, const Color &background);
-    WindowCreator &use(const Object &object);
+    WindowData &setScale(const Vector &scale);
+    WindowData &setScale(int x, int y);
+    WindowData &setColor(const ColorPair color);
+    WindowData &setColor(const Color &foreground, const Color &background);
+    WindowData &use(const Object &object);
     Window done() const;
 
 private:

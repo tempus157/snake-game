@@ -4,7 +4,7 @@
 #include "window.hpp"
 #include <vector>
 
-class App
+class App final
 {
 public:
     App &addWindow(const Window &window);

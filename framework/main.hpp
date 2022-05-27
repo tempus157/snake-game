@@ -9,13 +9,24 @@
 #include "./core/vector.hpp"
 
 #include <string>
+#include <memory>
 
 using string = std::string;
 
+namespace std
+{
+    template <typename T, typename... Args>
+    std::unique_ptr<T> make_unique(Args &&...args)
+    {
+        return std::unique_ptr<T>(new T(std::forward<Args>(args)...));
+    }
+}
+
 Object label(string text, Optional<ColorPair> color = nullptr);
 Object label(string text, Vector position, Optional<ColorPair> color = nullptr);
-ObjectCreator &createObject();
-WindowCreator &createWindow();
+
+ObjectData &createObject();
+WindowData &createWindow();
 App &createApp();
 
 #endif

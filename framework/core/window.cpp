@@ -1,60 +1,73 @@
 #include "window.hpp"
 
-Window::Window(const std::function<void()> &init, const std::function<void()> &render)
-    : init(init), render(render) {}
+Window::Window(const std::function<void()> &mount,
+               const std::function<void()> &update,
+               const std::function<void()> &destroy)
+    : mount(mount), update(update), destroy(destroy) {}
 
-WindowCreator &WindowCreator::setScale(const Vector &scale)
+WindowData &WindowData::setScale(const Vector &scale)
 {
     this->scale = scale;
     return *this;
 }
 
-WindowCreator &WindowCreator::setScale(int x, int y)
+WindowData &WindowData::setScale(int x, int y)
 {
     this->scale.x = x;
     this->scale.y = y;
     return *this;
 }
 
-WindowCreator &WindowCreator::setColor(const ColorPair color)
+WindowData &WindowData::setColor(const ColorPair color)
 {
     this->color = color;
     return *this;
 }
 
-WindowCreator &WindowCreator::setColor(const Color &foreground, const Color &background)
+WindowData &WindowData::setColor(const Color &foreground, const Color &background)
 {
     this->color.foreground = foreground;
     this->color.background = background;
     return *this;
 }
 
-WindowCreator &WindowCreator::use(const Object &object)
+WindowData &WindowData::use(const Object &object)
 {
     children.push_back(object);
     return *this;
 }
 
-Window WindowCreator::done() const
+Window WindowData::done() const
 {
-    const auto init = [=]
+    const auto mount = [&]
     {
         initscr();
         resize_term(scale.y, scale.x);
         bkgd(COLOR_PAIR(color.getAttribute()));
     };
 
-    const auto render = [=]
+    const auto update = [&]
     {
         clear();
 
         for (const auto &child : children)
         {
-            child.render();
+            child.update();
         }
 
         refresh();
     };
 
-    return Window(init, render);
+    const auto destroy = [&]
+    {
+        for (const auto &child : children)
+        {
+            child.destroy();
+        }
+
+        endwin();
+        delete this;
+    };
+
+    return Window(mount, update, destroy);
 }

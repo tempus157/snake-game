@@ -1,22 +1,34 @@
 #include "object.hpp"
 
-Object::Object(const std::function<void()> &render) : render(render) {}
+Object::Object(const std::function<void()> &update,
+               const std::function<void()> &destroy)
+    : update(update), destroy(destroy) {}
 
-ObjectCreator &ObjectCreator::use(const Object &object)
+ObjectData &ObjectData::use(const Object &object)
 {
     children.push_back(object);
     return *this;
 }
 
-Object ObjectCreator::done() const
+Object ObjectData::done() const
 {
-    const auto render = [=]
+    const auto update = [&]
     {
         for (const auto &child : children)
         {
-            child.render();
+            child.update();
         }
     };
 
-    return Object(render);
+    const auto destroy = [&]
+    {
+        for (const auto &child : children)
+        {
+            child.destroy();
+        }
+
+        delete this;
+    };
+
+    return Object(update, destroy);
 }

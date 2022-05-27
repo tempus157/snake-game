@@ -1,4 +1,6 @@
 #include "app.hpp"
+
+#include <clocale>
 #include <ncurses.h>
 
 App &App::addWindow(const Window &window)
@@ -14,19 +16,27 @@ int App::run() const
 
     for (const auto &window : windows)
     {
-        window.render();
+        window.update();
     }
 
     getch();
-    endwin();
+
+    for (const auto &window : windows)
+    {
+        window.destroy();
+    }
+
+    delete this;
     return 0;
 }
 
 void App::initWindows() const
 {
+    setlocale(LC_ALL, "");
+
     for (const auto &window : windows)
     {
-        window.init();
+        window.mount();
     }
 }
 
