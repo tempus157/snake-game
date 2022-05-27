@@ -2,7 +2,5 @@
 
 int main()
 {
-    return App::create()
-        ->useWindow(myWindow())
-        ->execute();
+    return 0;
 }
