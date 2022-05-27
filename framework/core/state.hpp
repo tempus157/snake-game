@@ -12,7 +12,7 @@ public:
     State<T>(const T &value) : value(new T(value)) {}
     State<std::string>(const char *value) : value(new std::string(value)) {}
 
-    T &operator*() const {
+    T operator*() const {
         return *value;
     }
 

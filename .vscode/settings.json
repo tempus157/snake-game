@@ -68,6 +68,7 @@
     "map": "cpp",
     "format": "cpp",
     "__memory": "cpp",
-    "memory_resource": "cpp"
+    "memory_resource": "cpp",
+    "iostream": "cpp"
   }
 }

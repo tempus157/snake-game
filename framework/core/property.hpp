@@ -11,9 +11,9 @@ public:
     Property<T>() : value(new T()) {}
     Property<T>(const T &value) : value(new T(value)) {}
     Property<std::string>(const char *value) : value(new std::string(value)) {}
-    Property<T>(const State<T> &value) : value(&*value) {}
+    Property<T>(const State<T> &value) : value(value.operator->()) {}
 
-    T &operator*() const {
+    T operator*() const {
         return *value;
     }
 

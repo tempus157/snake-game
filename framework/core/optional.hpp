@@ -6,9 +6,6 @@
 template <typename T>
 class Optional {
 public:
-    T value;
-    bool hasValue;
-
     Optional() : hasValue(false) {}
     Optional(const std::nullptr_t &value) : Optional() {}
     Optional(const T &value) : value(value), hasValue(true) {}
@@ -17,7 +14,7 @@ public:
         return hasValue;
     }
 
-    operator T() const {
+    T operator*() const {
         if (!hasValue) {
             throw std::runtime_error("Optional does not have a value");
         }
@@ -43,6 +40,10 @@ public:
         this->hasValue = true;
         return *this;
     }
+
+private:
+    T value;
+    bool hasValue;
 };
 
 #endif
