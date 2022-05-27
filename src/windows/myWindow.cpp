@@ -2,7 +2,7 @@
 
 Window myWindow() {
     auto border = Border('*');
-    border.color = ColorPair(Color::Yellow, Color::Green);
+    border.color = ColorPair(Color::Yellow, Color::Black);
 
     onKeyPress(Key::Escape, [](Key key) {
         quitApp();
@@ -13,6 +13,6 @@ Window myWindow() {
         .setColor(Color::Blue, Color::Red)
         .setBorder(border)
         .useObject(label("Hello, world!", Vector(1, 1), ColorPair(Color::Red, Color::Blue)))
-        .useObject(counter())
+        .useObject(counter("Count: "))
         .done();
 }

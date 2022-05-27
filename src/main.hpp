@@ -2,4 +2,4 @@
 
 Window myWindow();
 
-Object counter();
+Object counter(const Property<std::string> &text);

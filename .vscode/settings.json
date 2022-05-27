@@ -65,6 +65,8 @@
     "iterator": "cpp",
     "utility": "cpp",
     "__tree": "cpp",
-    "map": "cpp"
+    "map": "cpp",
+    "format": "cpp",
+    "__memory": "cpp"
   }
 }

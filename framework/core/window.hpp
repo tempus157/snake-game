@@ -38,6 +38,7 @@ public:
            const std::function<void()> &destroy);
 };
 
+// TODO Make window properties Window<T>
 class WindowData final {
 public:
     WindowData &setScale(const Vector &scale);

@@ -1,12 +1,12 @@
 #include "../main.hpp"
 
-Object counter() {
+Object counter(const Property<std::string> &text) {
     static auto count = 0;
-    static auto countStr = useProperty("0");
+    static auto countStr = useProperty(*text + std::to_string(count));
 
-    onKeyPress(Key::Enter, [&](Key key) {
+    onKeyPress(Key::Enter, [=](Key key) {
         count++;
-        countStr = std::to_string(count);
+        countStr = *text + std::to_string(count);
     });
 
     return createObject()
