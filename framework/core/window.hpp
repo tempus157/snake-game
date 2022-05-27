@@ -12,19 +12,19 @@
 class Window
 {
 public:
-    Window(const std::function<void()> &render);
+    Window(const std::function<void()> &init, const std::function<void()> &render);
+    const std::function<void()> init;
     const std::function<void()> render;
-
-private:
-    const WINDOW *window;
 };
 
-class WindowBuilder
+class WindowCreator
 {
 public:
-    WindowBuilder &setScale(const Vector &scale);
-    WindowBuilder &setColor(const ColorPair color);
-    WindowBuilder &use(const Object &object);
+    WindowCreator &setScale(const Vector &scale);
+    WindowCreator &setScale(int x, int y);
+    WindowCreator &setColor(const ColorPair color);
+    WindowCreator &setColor(const Color &foreground, const Color &background);
+    WindowCreator &use(const Object &object);
     Window done() const;
 
 private:

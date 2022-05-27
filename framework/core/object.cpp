@@ -1,6 +1,6 @@
 #include "object.hpp"
 
-Object::Object(const std::function<void()> &renderer) : render(render) {}
+Object::Object(const std::function<void()> &render) : render(render) {}
 
 ObjectCreator &ObjectCreator::use(const Object &object)
 {
