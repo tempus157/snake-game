@@ -1,8 +1,8 @@
 #include "../main.hpp"
 
 Window myWindow() {
-    onKeyPress(Key::A, [] {
-        printf("Exit");
+    onKeyPress(Key::Any, [](Key key) {
+        printw("%d ", key);
     });
 
     return createWindow()

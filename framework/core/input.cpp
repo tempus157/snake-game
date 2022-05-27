@@ -2,19 +2,19 @@
 
 #include <ncurses.h>
 
-std::map<Key, std::vector<std::function<void()>>> Input::onKeyPress = {};
+std::map<Key, std::vector<std::function<void(Key)>>> Input::onKeyPress = {};
 
-void Input::addListener(const Key &key, const std::function<void()> &fn) {
+void Input::addListener(const Key &key, const std::function<void(Key)> &fn) {
     onKeyPress[key].push_back(fn);
 }
 
 void Input::notifyListeners(const Key &key) const {
     for (const auto &fn : onKeyPress[key]) {
-        fn();
+        fn(key);
     }
 
     for (const auto &fn : onKeyPress[Key::Any]) {
-        fn();
+        fn(key);
     }
 }
 
@@ -196,10 +196,13 @@ Key Input::readKey() const {
     case KEY_F(12):
         return Key::F12;
     case '\t':
+    case KEY_BTAB:
         return Key::Tab;
     case KEY_BACKSPACE:
+    case 127:
         return Key::Backspace;
     case KEY_ENTER:
+    case 10:
         return Key::Enter;
     case KEY_IC:
         return Key::Insert;
@@ -214,12 +217,16 @@ Key Input::readKey() const {
     case KEY_PPAGE:
         return Key::PageDown;
     case KEY_UP:
+    case KEY_SR:
         return Key::UpArrow;
     case KEY_DOWN:
+    case KEY_SF:
         return Key::DownArrow;
     case KEY_LEFT:
+    case KEY_SLEFT:
         return Key::LeftArrow;
     case KEY_RIGHT:
+    case KEY_SRIGHT:
         return Key::RightArrow;
     default:
         return Key::Error;

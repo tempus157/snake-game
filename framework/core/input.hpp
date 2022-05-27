@@ -86,13 +86,13 @@ enum class Key {
 
 class Input {
 public:
-    static void addListener(const Key &key, const std::function<void()> &fn);
+    static void addListener(const Key &key, const std::function<void(Key)> &fn);
     void notifyListeners(const Key &key) const;
     void mount() const;
     Key readKey() const;
 
 private:
-    static std::map<Key, std::vector<std::function<void()>>> onKeyPress;
+    static std::map<Key, std::vector<std::function<void(Key)>>> onKeyPress;
 };
 
 #endif

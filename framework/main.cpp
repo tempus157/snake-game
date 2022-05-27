@@ -37,7 +37,7 @@ Object label(const std::string &text, const Vector &position, const ColorPair &c
     return Object(render, [] {});
 }
 
-void onKeyPress(Key key, const std::function<void()> &fn) {
+void onKeyPress(Key key, const std::function<void(Key)> &fn) {
     Input::addListener(key, fn);
 }
 
