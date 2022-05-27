@@ -40,7 +40,6 @@ public:
     Window *setBorder(const Border *border);
     Window *useObject(const Object *object);
     Window *onStart(const std::function<void()> callback);
-    Window *onUpdate(const std::function<void()> callback);
 
 private:
     Window();
@@ -53,7 +52,6 @@ private:
 
     std::vector<const Object *> objects;
     std::vector<const std::function<void()>> startCallbacks;
-    std::vector<const std::function<void()>> updateCallbacks;
 };
 
 #endif

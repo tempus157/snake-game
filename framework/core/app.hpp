@@ -22,7 +22,6 @@ private:
     void initColors() const;
     void initInput() const;
     void startWindows() const;
-    void updateWindows() const;
     void renderWindows() const;
 };
 

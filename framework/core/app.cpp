@@ -38,7 +38,6 @@ int App::execute()
 
     while (progress)
     {
-        updateWindows();
         renderWindows();
         usleep(20000);
     }
@@ -84,14 +83,6 @@ void App::startWindows() const
     for (auto hooks : windowHooks)
     {
         hooks->start();
-    }
-}
-
-void App::updateWindows() const
-{
-    for (auto hooks : windowHooks)
-    {
-        hooks->update();
     }
 }
 

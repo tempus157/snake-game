@@ -61,12 +61,6 @@ Window *Window::onStart(std::function<void()> callback)
     return this;
 }
 
-Window *Window::onUpdate(std::function<void()> callback)
-{
-    updateCallbacks.push_back(callback);
-    return this;
-}
-
 Window::Hooks::Hooks(Window *window) : window(window) {}
 
 Window::Hooks::~Hooks()
@@ -84,14 +78,6 @@ void Window::Hooks::init()
 void Window::Hooks::start() const
 {
     for (const auto callback : window->startCallbacks)
-    {
-        callback();
-    }
-}
-
-void Window::Hooks::update() const
-{
-    for (const auto callback : window->updateCallbacks)
     {
         callback();
     }
