@@ -6,17 +6,17 @@
 
 // TODO delete value; somewhere
 template <typename T>
-class State {
+class Property {
 public:
-    State<T>() : value(new T()) {}
-    State<T>(const T &value) : value(new T(value)) {}
-    State<std::string>(const char *value) : value(new std::string(value)) {}
+    Property<T>() : value(new T()) {}
+    Property<T>(const T &value) : value(new T(value)) {}
+    Property<std::string>(const char *value) : value(new std::string(value)) {}
 
     T *operator->() const {
         return value;
     }
 
-    State<T> &operator=(const T &value) {
+    Property<T> &operator=(const T &value) {
         *this->value = value;
         App::instance->updateWindows();
         return *this;

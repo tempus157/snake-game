@@ -2,7 +2,7 @@
 
 Object counter() {
     static auto count = 0;
-    static auto countStr = useState("0");
+    static auto countStr = useProperty("0");
 
     onKeyPress(Key::Enter, [&](Key key) {
         count++;

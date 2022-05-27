@@ -6,7 +6,7 @@
 #include "./core/input.hpp"
 #include "./core/object.hpp"
 #include "./core/optional.hpp"
-#include "./core/state.hpp"
+#include "./core/property.hpp"
 #include "./core/vector.hpp"
 #include "./core/window.hpp"
 
@@ -19,24 +19,27 @@ WindowData &createWindow();
 App &createApp();
 
 template <typename T>
-State<T> useState() {
-    return State<T>();
+Property<T> useProperty() {
+    return Property<T>();
 }
 
 template <typename T>
-State<T> useState(const T &value) {
-    return State<T>(value);
+Property<T> useProperty(const T &value) {
+    return Property<T>(value);
 }
 
-State<std::string> useState(const char *value);
+Property<std::string> useProperty(const char *value);
 
 void onKeyPress(Key key, const std::function<void(Key)> &fn);
 void quitApp();
 
-// TODO Make it template where T is built-in type
-Object label(const State<std::string> &text);
-Object label(const State<std::string> &text, const State<Vector> &position);
-Object label(const State<std::string> &text, const State<ColorPair> &color);
-Object label(const State<std::string> &text, const State<Vector> &position, const State<ColorPair> &color);
+// TODO Make Property<std::string> template where T supports std::to_string
+Object label(const Property<std::string> &text);
+Object label(const Property<std::string> &text, const Property<Vector> &position);
+Object label(const Property<std::string> &text, const Property<ColorPair> &color);
+
+Object label(const Property<std::string> &text,
+             const Property<Vector> &position,
+             const Property<ColorPair> &color);
 
 #endif

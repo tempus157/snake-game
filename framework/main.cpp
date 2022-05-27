@@ -13,8 +13,8 @@ App &createApp() {
     return *App::instance;
 }
 
-State<std::string> useState(const char *value) {
-    return State<std::string>(value);
+Property<std::string> useProperty(const char *value) {
+    return Property<std::string>(value);
 }
 
 void onKeyPress(Key key, const std::function<void(Key)> &fn) {
@@ -25,7 +25,7 @@ void quitApp() {
     App::quit();
 }
 
-Object label(const State<std::string> &text) {
+Object label(const Property<std::string> &text) {
     auto render = [=] {
         printw(text->c_str());
     };
@@ -33,7 +33,7 @@ Object label(const State<std::string> &text) {
     return Object(render, [] {});
 }
 
-Object label(const State<std::string> &text, const State<Vector> &position) {
+Object label(const Property<std::string> &text, const Property<Vector> &position) {
     auto render = [=] {
         mvprintw(position->y, position->x, text->c_str());
     };
@@ -41,7 +41,7 @@ Object label(const State<std::string> &text, const State<Vector> &position) {
     return Object(render, [] {});
 }
 
-Object label(const State<std::string> &text, const State<ColorPair> &color) {
+Object label(const Property<std::string> &text, const Property<ColorPair> &color) {
     auto render = [=] {
         attron(COLOR_PAIR(color->getAttribute()));
         printw(text->c_str());
@@ -51,7 +51,9 @@ Object label(const State<std::string> &text, const State<ColorPair> &color) {
     return Object(render, [] {});
 }
 
-Object label(const State<std::string> &text, const State<Vector> &position, const State<ColorPair> &color) {
+Object label(const Property<std::string> &text,
+             const Property<Vector> &position,
+             const Property<ColorPair> &color) {
     auto render = [=] {
         attron(COLOR_PAIR(color->getAttribute()));
         mvprintw(position->y, position->x, text->c_str());
