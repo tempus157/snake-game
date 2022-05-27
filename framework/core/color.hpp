@@ -1,8 +1,7 @@
 #ifndef __FRAMEWORK_COLOR__
 #define __FRAMEWORK_COLOR__
 
-enum class Color
-{
+enum class Color {
     Black = 0,
     Red = 1,
     Green = 2,
@@ -13,8 +12,7 @@ enum class Color
     White = 7,
 };
 
-class ColorPair final
-{
+class ColorPair final {
 public:
     Color foreground = Color::White;
     Color background = Color::Black;

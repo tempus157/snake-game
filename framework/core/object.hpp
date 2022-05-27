@@ -8,18 +8,15 @@
 #include <string>
 #include <vector>
 
-class Object final
-{
+class Object final {
 public:
     const std::function<void()> update;
     const std::function<void()> destroy;
 
-    Object(const std::function<void()> &update,
-           const std::function<void()> &destroy);
+    Object(const std::function<void()> &update, const std::function<void()> &destroy);
 };
 
-class ObjectData final
-{
+class ObjectData final {
 public:
     ObjectData &use(const Object &object);
     Object done() const;

@@ -5,8 +5,7 @@
 #include <map>
 #include <vector>
 
-enum class Key
-{
+enum class Key {
     Any,
     Error,
     A,
@@ -85,8 +84,7 @@ enum class Key
     RightArrow,
 };
 
-class Input
-{
+class Input {
 public:
     static void addListener(const Key &key, const std::function<void()> &fn);
     void notifyListeners(const Key &key) const;

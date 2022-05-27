@@ -1,8 +1,7 @@
 #ifndef __FRAMEWORK_VECTOR__
 #define __FRAMEWORK_VECTOR__
 
-class Vector final
-{
+class Vector final {
 public:
     int x = 0;
     int y = 0;

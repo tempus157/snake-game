@@ -3,10 +3,10 @@
 
 #include "input.hpp"
 #include "window.hpp"
+
 #include <vector>
 
-class App final
-{
+class App final {
 public:
     App &addWindow(const Window &window);
     int run() const;

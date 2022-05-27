@@ -4,31 +4,26 @@
 #include <clocale>
 #include <ncurses.h>
 
-App &App::addWindow(const Window &window)
-{
+App &App::addWindow(const Window &window) {
     windows.push_back(window);
     return *this;
 }
 
-int App::run() const
-{
+int App::run() const {
     mountWindows();
     input.mount();
     ColorPair::mount();
 
-    for (const auto &window : windows)
-    {
+    for (const auto &window : windows) {
         window.update();
     }
 
-    while (true)
-    {
+    while (true) {
         const auto key = input.readKey();
         input.notifyListeners(key);
     }
 
-    for (const auto &window : windows)
-    {
+    for (const auto &window : windows) {
         window.destroy();
     }
 
@@ -36,12 +31,10 @@ int App::run() const
     return 0;
 }
 
-void App::mountWindows() const
-{
+void App::mountWindows() const {
     setlocale(LC_ALL, "");
 
-    for (const auto &window : windows)
-    {
+    for (const auto &window : windows) {
         window.mount();
     }
 }
