@@ -2,4 +2,4 @@
 
 Window myWindow();
 
-Object title(const string &text, const Optional<ColorPair> &color = nullptr);
+Object title(const string &text, const ColorPair &color);

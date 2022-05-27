@@ -2,7 +2,6 @@
 #define __FRAMEWORK_OBJECT__
 
 #include "color.hpp"
-#include "optional.hpp"
 #include "vector.hpp"
 
 #include <functional>
@@ -22,7 +21,6 @@ public:
 class ObjectData final
 {
 public:
-    // ObjectCreator &onKeyPress(Key key, std::function<void()> callback);
     ObjectData &use(const Object &object);
     Object done() const;
 
