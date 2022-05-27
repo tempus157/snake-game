@@ -13,12 +13,12 @@ App &createApp() {
     return *App::instance;
 }
 
-Property<std::string> useProperty(const char *value) {
-    return Property<std::string>(value);
+State<std::string> useState(const char *value) {
+    return State<std::string>(value);
 }
 
-void onKeyPress(Key key, const std::function<void(Key)> &fn) {
-    Input::addListener(key, fn);
+void onKeyPress(const Key &key, const std::function<void(const Key &)> &fn) {
+    Input::onKeyPress(key, fn);
 }
 
 void quitApp() {

@@ -4,7 +4,7 @@ Window myWindow() {
     auto border = Border('*');
     border.color = ColorPair(Color::Yellow, Color::Black);
 
-    onKeyPress(Key::Escape, [](Key key) {
+    onKeyPress(Key::Escape, [](const Key &key) {
         quitApp();
     });
 

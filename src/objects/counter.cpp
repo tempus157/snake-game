@@ -2,9 +2,9 @@
 
 Object counter(const Property<std::string> &text) {
     static auto count = 0;
-    static auto countStr = useProperty(*text + std::to_string(count));
+    static auto countStr = useState(*text + std::to_string(count));
 
-    onKeyPress(Key::Enter, [=](Key key) {
+    onKeyPress(Key::Enter, [=](const Key &key) {
         count++;
         countStr = *text + std::to_string(count);
     });

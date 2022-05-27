@@ -7,6 +7,7 @@
 #include "./core/object.hpp"
 #include "./core/optional.hpp"
 #include "./core/property.hpp"
+#include "./core/state.hpp"
 #include "./core/vector.hpp"
 #include "./core/window.hpp"
 
@@ -19,18 +20,18 @@ WindowData &createWindow();
 App &createApp();
 
 template <typename T>
-Property<T> useProperty() {
-    return Property<T>();
+State<T> useState() {
+    return State<T>();
 }
 
 template <typename T>
-Property<T> useProperty(const T &value) {
-    return Property<T>(value);
+State<T> useState(const T &value) {
+    return State<T>(value);
 }
 
-Property<std::string> useProperty(const char *value);
+State<std::string> useState(const char *value);
 
-void onKeyPress(Key key, const std::function<void(Key)> &fn);
+void onKeyPress(const Key &key, const std::function<void(const Key &)> &fn);
 void quitApp();
 
 // TODO Make Property<std::string> template where T supports std::to_string

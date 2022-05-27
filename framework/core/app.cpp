@@ -25,7 +25,7 @@ int App::run() const {
 
     while (progress) {
         const auto key = input.readKey();
-        input.notifyListeners(key);
+        input.notifyKeyPress(key);
     }
 
     for (const auto &window : windows) {

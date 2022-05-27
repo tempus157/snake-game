@@ -2,18 +2,18 @@
 
 #include <ncurses.h>
 
-std::map<Key, std::vector<std::function<void(Key)>>> Input::onKeyPress = {};
+std::map<const Key, std::vector<const std::function<void(const Key &)>>> Input::keyPress = {};
 
-void Input::addListener(const Key &key, const std::function<void(Key)> &fn) {
-    onKeyPress[key].push_back(fn);
+void Input::onKeyPress(const Key &key, const std::function<void(const Key &)> &fn) {
+    keyPress[key].push_back(fn);
 }
 
-void Input::notifyListeners(const Key &key) const {
-    for (const auto &fn : onKeyPress[key]) {
+void Input::notifyKeyPress(const Key &key) const {
+    for (const auto &fn : keyPress[key]) {
         fn(key);
     }
 
-    for (const auto &fn : onKeyPress[Key::Any]) {
+    for (const auto &fn : keyPress[Key::Any]) {
         fn(key);
     }
 }
