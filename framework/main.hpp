@@ -5,7 +5,6 @@
 #include "./core/color.hpp"
 #include "./core/object.hpp"
 #include "./core/optional.hpp"
-#include "./core/property.hpp"
 #include "./core/state.hpp"
 #include "./core/vector.hpp"
 #include "./core/window.hpp"
@@ -34,17 +33,13 @@ void quitApp();
 void onKeyPress(const Key &key,
                 const std::function<void(const Key &)> &callback);
 
-// TODO Make Property<std::string> template where T supports std::to_string
-Object label(const Property<std::string> &text);
+// TODO Make State<std::string> template where T supports std::to_string
+Object label(const State<std::string> &text);
+Object label(const State<std::string> &text, const State<Vector> &position);
+Object label(const State<std::string> &text, const State<ColorPair> &color);
 
-Object label(const Property<std::string> &text,
-             const Property<Vector> &position);
-
-Object label(const Property<std::string> &text,
-             const Property<ColorPair> &color);
-
-Object label(const Property<std::string> &text,
-             const Property<Vector> &position,
-             const Property<ColorPair> &color);
+Object label(const State<std::string> &text,
+             const State<Vector> &position,
+             const State<ColorPair> &color);
 
 #endif

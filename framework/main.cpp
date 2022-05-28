@@ -24,7 +24,7 @@ void quitApp() {
     App::quit();
 }
 
-Object label(const Property<std::string> &text) {
+Object label(const State<std::string> &text) {
     auto render = [=] {
         printw(text->c_str());
     };
@@ -32,8 +32,7 @@ Object label(const Property<std::string> &text) {
     return Object(render, [] {});
 }
 
-Object label(const Property<std::string> &text,
-             const Property<Vector> &position) {
+Object label(const State<std::string> &text, const State<Vector> &position) {
     auto render = [=] {
         mvprintw(position->y, position->x, text->c_str());
     };
@@ -41,8 +40,7 @@ Object label(const Property<std::string> &text,
     return Object(render, [] {});
 }
 
-Object label(const Property<std::string> &text,
-             const Property<ColorPair> &color) {
+Object label(const State<std::string> &text, const State<ColorPair> &color) {
     auto render = [=] {
         attron(COLOR_PAIR(color->getAttribute()));
         printw(text->c_str());
@@ -52,9 +50,9 @@ Object label(const Property<std::string> &text,
     return Object(render, [] {});
 }
 
-Object label(const Property<std::string> &text,
-             const Property<Vector> &position,
-             const Property<ColorPair> &color) {
+Object label(const State<std::string> &text,
+             const State<Vector> &position,
+             const State<ColorPair> &color) {
     auto render = [=] {
         attron(COLOR_PAIR(color->getAttribute()));
         mvprintw(position->y, position->x, text->c_str());

@@ -1,6 +1,6 @@
 #include "../main.hpp"
 
-Object counter(const Property<std::string> &text) {
+Object counter(const State<std::string> &text) {
     static auto count = useState(0);
     static auto countText = useState("Counter here!");
 
