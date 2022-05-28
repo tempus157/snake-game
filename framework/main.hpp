@@ -30,15 +30,15 @@ State<T> useState(const T &value) {
 State<std::string> useState(const char *value);
 
 template <typename T>
-void useEffect(const std::function<void()> &callback, const State<T> &dep) {
+void onUpdate(const std::function<void()> &callback, const State<T> &dep) {
     State<T>::onUpdate(dep, callback);
 }
 
 template <typename T, typename... TRest>
-void useEffect(const std::function<void()> &callback,
-               const State<T> &dep, const State<TRest> &...deps) {
+void onUpdate(const std::function<void()> &callback,
+              const State<T> &dep, const State<TRest> &...deps) {
     State<T>::onUpdate(dep, callback);
-    useEffect(callback, deps...);
+    onUpdate(callback, deps...);
 }
 
 void quitApp();

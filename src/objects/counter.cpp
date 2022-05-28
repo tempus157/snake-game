@@ -4,7 +4,7 @@ Object counter(const State<std::string> &text) {
     static auto count = useState(0);
     static auto countText = useState("Counter here!");
 
-    useEffect(
+    onUpdate(
         [=] {
             countText = *text + std::to_string(*count);
         },
