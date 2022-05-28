@@ -9,11 +9,11 @@
 #include <vector>
 
 template <typename T>
-class State {
+class Property {
 public:
-    State<T>() : value(std::make_shared<T>()) {}
-    State<T>(const T &value) : value(std::make_shared<T>(value)) {}
-    State<std::string>(const char *value)
+    Property<T>() : value(std::make_shared<T>()) {}
+    Property<T>(const T &value) : value(std::make_shared<T>(value)) {}
+    Property<std::string>(const char *value)
         : value(std::make_shared<std::string>(value)) {}
 
     T operator*() const {
@@ -24,19 +24,19 @@ public:
         return value.get();
     }
 
-    State<T> &operator=(const T &value) {
+    Property<T> &operator=(const T &value) {
         *this->value = value;
         notifyUpdate();
         return *this;
     }
 
-    State<std::string> &operator=(const char *value) {
+    Property<std::string> &operator=(const char *value) {
         *this->value = value;
         notifyUpdate();
         return *this;
     }
 
-    static void onUpdate(const State<T> state,
+    static void onUpdate(const Property<T> state,
         const std::function<void()> &callback) {
         updateCallbacks[state.value.get()].push_back(callback);
     }
@@ -55,6 +55,6 @@ private:
 
 template <typename T>
 std::map<T *, std::vector<std::function<void()>>>
-    State<T>::updateCallbacks = {};
+    Property<T>::updateCallbacks = {};
 
 #endif

@@ -13,7 +13,7 @@ public:
 
     static void update();
     static void quit();
-    App &useWindow(const Window &window);
+    App &loadWindow(const Window &window);
     int run() const;
 
 private:

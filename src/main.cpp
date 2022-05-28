@@ -2,6 +2,6 @@
 
 int main() {
     return createApp()
-        .useWindow(myWindow())
+        .loadWindow(myWindow())
         .run();
 }

@@ -4,7 +4,7 @@ Window myWindow() {
     auto border = Border('*');
     border.color = ColorPair(Color::Yellow, Color::Black);
 
-    static auto counterText = useState("Count: ");
+    static auto counterText = useProperty("Count: ");
 
     onKeyPress(Key::Enter, [] {
         counterText = "You pressed enter: ";

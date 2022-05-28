@@ -31,7 +31,7 @@ void App::quit() {
     instance->progress = false;
 }
 
-App &App::useWindow(const Window &window) {
+App &App::loadWindow(const Window &window) {
     windows.push_back(window);
     return *this;
 }
