@@ -17,7 +17,7 @@
 
 ObjectData &createObject();
 WindowData &createWindow();
-App &createApp();
+AppData &createApp();
 
 template <typename T>
 State<T> useState() {

@@ -8,8 +8,8 @@ WindowData &createWindow() {
     return *new WindowData();
 }
 
-App &createApp() {
-    return *new App();
+AppData &createApp() {
+    return *new AppData();
 }
 
 State<std::string> useState(const char *value) {
@@ -21,7 +21,7 @@ void onKeyPress(const Key &key, const std::function<void(const Key &)> &fn) {
 }
 
 void quitApp() {
-    App::quit();
+    AppData::quit();
 }
 
 Object label(const Property<std::string> &text) {

@@ -7,30 +7,30 @@
 #include <functional>
 #include <vector>
 
-class AppObj final {
+class App final {
 public:
     const std::function<void()> mount;
     const std::function<void()> update;
     const std::function<void()> destroy;
 
-    AppObj(const std::function<void()> &mount,
-           const std::function<void()> &update,
-           const std::function<void()> &destroy)
+    App(const std::function<void()> &mount,
+        const std::function<void()> &update,
+        const std::function<void()> &destroy)
         : mount(mount), update(update), destroy(destroy) {}
 };
 
-class App final {
+class AppData final {
 public:
-    App();
+    AppData();
     static void quit();
-    App &useWindow(const Window &window);
+    AppData &useWindow(const Window &window);
     int run() const;
 
 private:
-    static App *instance;
+    static AppData *instance;
     bool progress = true;
     std::vector<const Window> windows;
-    AppObj build() const;
+    App build() const;
 };
 
 #endif

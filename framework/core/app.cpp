@@ -5,25 +5,25 @@
 #include <ncurses.h>
 #include <stdexcept>
 
-App *App::instance = nullptr;
+AppData *AppData::instance = nullptr;
 
-App::App() {
+AppData::AppData() {
     if (instance) {
         throw std::runtime_error("App already instantiated");
     }
     instance = this;
 }
 
-void App::quit() {
+void AppData::quit() {
     instance->progress = false;
 }
 
-App &App::useWindow(const Window &window) {
+AppData &AppData::useWindow(const Window &window) {
     windows.push_back(window);
     return *this;
 }
 
-int App::run() const {
+int AppData::run() const {
     const auto app = build();
     app.mount();
     app.update();
@@ -38,7 +38,7 @@ int App::run() const {
     return 0;
 }
 
-AppObj App::build() const {
+App AppData::build() const {
     const auto mount = [&]() {
         setlocale(LC_ALL, "");
         for (const auto &window : windows) {
@@ -61,5 +61,5 @@ AppObj App::build() const {
         }
     };
 
-    return AppObj(mount, update, destroy);
+    return App(mount, update, destroy);
 }
