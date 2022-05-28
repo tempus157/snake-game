@@ -1,18 +1,18 @@
 #include "../main.hpp"
 
 Object counter(const Property<std::string> &text) {
-    static auto count = useProperty(0);
-    static auto countText = useProperty("Counter here!");
+    auto count = useProperty(0);
+    auto countText = useProperty("Counter here!");
 
-    onUpdate(text, count, [=] {
+    onUpdate(text, count, [=]() mutable {
         countText = *text + std::to_string(*count);
     });
 
-    onKeyPress(Key::UpArrow, [] {
+    onKeyPress(Key::UpArrow, [=]() mutable {
         count = *count + 1;
     });
 
-    onKeyPress(Key::DownArrow, [] {
+    onKeyPress(Key::DownArrow, [=]() mutable {
         count = *count - 1;
     });
 

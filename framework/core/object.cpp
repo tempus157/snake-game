@@ -1,6 +1,7 @@
 #include "object.hpp"
 
-Object::Object(const std::function<void()> &update, const std::function<void()> &destroy)
+Object::Object(const std::function<void(WINDOW *)> &update,
+    const std::function<void()> &destroy)
     : update(update), destroy(destroy) {}
 
 ObjectData &ObjectData::useObject(const Object &object) {
@@ -9,9 +10,9 @@ ObjectData &ObjectData::useObject(const Object &object) {
 }
 
 Object ObjectData::done() const {
-    const auto update = [&] {
+    const auto update = [&](WINDOW *window) {
         for (const auto &object : objects) {
-            object.update();
+            object.update(window);
         }
     };
 
@@ -19,7 +20,6 @@ Object ObjectData::done() const {
         for (const auto &object : objects) {
             object.destroy();
         }
-
         delete this;
     };
 

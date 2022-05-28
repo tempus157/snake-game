@@ -31,6 +31,17 @@ void App::quit() {
     instance->progress = false;
 }
 
+App &App::setScale(const Vector &scale) {
+    this->scale = scale;
+    return *this;
+}
+
+App &App::setScale(int x, int y) {
+    this->scale.x = x;
+    this->scale.y = y;
+    return *this;
+}
+
 App &App::loadWindow(const Window &window) {
     windows.push_back(window);
     return *this;
@@ -45,12 +56,16 @@ int App::run() const {
 
 void App::mount() const {
     setlocale(LC_ALL, "");
-    for (const auto &window : windows) {
-        window.mount();
-    }
+    initscr();
+    resize_term(scale.y, scale.x);
 
     Input::mount();
     ColorPair::mount();
+    refresh();
+
+    for (const auto &window : windows) {
+        window.mount();
+    }
     update();
 }
 
@@ -65,5 +80,6 @@ void App::destroy() const {
     for (const auto &window : windows) {
         window.destroy();
     }
+    endwin();
     delete this;
 }

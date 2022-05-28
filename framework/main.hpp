@@ -14,7 +14,7 @@
 #include <string>
 
 ObjectData &createObject();
-WindowData &createWindow();
+WindowData &createWindow(const Vector &position, const Vector &scale);
 App &createApp();
 
 void quitApp();

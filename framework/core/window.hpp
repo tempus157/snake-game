@@ -40,16 +40,17 @@ public:
 
 class WindowData final {
 public:
-    WindowData &setScale(const Vector &scale);
-    WindowData &setScale(int x, int y);
+    WindowData(const Vector &position, const Vector &scale);
     WindowData &setColor(const ColorPair color);
     WindowData &setColor(const Color &foreground, const Color &background);
     WindowData &setBorder(const Optional<Border> &border);
     WindowData &useObject(const Object &object);
-    Window done() const;
+    Window done();
 
 private:
-    Vector scale;
+    WINDOW *window;
+    const Vector position;
+    const Vector scale;
     ColorPair color;
     Optional<Border> border;
     std::vector<const Object> objects;

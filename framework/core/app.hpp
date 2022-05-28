@@ -2,6 +2,7 @@
 #define __FRAMEWORK_APP__
 
 #include "input.hpp"
+#include "vector.hpp"
 #include "window.hpp"
 
 #include <functional>
@@ -13,12 +14,15 @@ public:
 
     static void update();
     static void quit();
+    App &setScale(const Vector &scale);
+    App &setScale(int x, int y);
     App &loadWindow(const Window &window);
     int run() const;
 
 private:
     static App *instance;
     bool progress = true;
+    Vector scale;
     std::vector<const Window> windows;
 
     void mount() const;

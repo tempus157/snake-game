@@ -5,8 +5,8 @@ ObjectData &createObject() {
     return *new ObjectData();
 }
 
-WindowData &createWindow() {
-    return *new WindowData();
+WindowData &createWindow(const Vector &position, const Vector &scale) {
+    return *new WindowData(position, scale);
 }
 
 App &createApp() {
@@ -40,26 +40,26 @@ Property<std::string> useProperty(const char *value) {
 }
 
 Object label(const Property<std::string> &text) {
-    auto update = [=] {
-        printw(text->c_str());
+    auto update = [=](WINDOW *window) {
+        wprintw(window, text->c_str());
     };
 
     return Object(update, [] {});
 }
 
 Object label(const Property<std::string> &text, const Property<Vector> &position) {
-    auto update = [=] {
-        mvprintw(position->y, position->x, text->c_str());
+    auto update = [=](WINDOW *window) {
+        mvwprintw(window, position->y, position->x, text->c_str());
     };
 
     return Object(update, [] {});
 }
 
 Object label(const Property<std::string> &text, const Property<ColorPair> &color) {
-    auto update = [=] {
-        attron(COLOR_PAIR(color->getAttribute()));
-        printw(text->c_str());
-        attroff(COLOR_PAIR(color->getAttribute()));
+    auto update = [=](WINDOW *window) {
+        wattron(window, COLOR_PAIR(color->getAttribute()));
+        wprintw(window, text->c_str());
+        wattroff(window, COLOR_PAIR(color->getAttribute()));
     };
 
     return Object(update, [] {});
@@ -67,10 +67,10 @@ Object label(const Property<std::string> &text, const Property<ColorPair> &color
 
 Object label(const Property<std::string> &text, const Property<Vector> &position,
     const Property<ColorPair> &color) {
-    auto update = [=] {
-        attron(COLOR_PAIR(color->getAttribute()));
-        mvprintw(position->y, position->x, text->c_str());
-        attroff(COLOR_PAIR(color->getAttribute()));
+    auto update = [=](WINDOW *window) {
+        wattron(window, COLOR_PAIR(color->getAttribute()));
+        mvwprintw(window, position->y, position->x, text->c_str());
+        wattroff(window, COLOR_PAIR(color->getAttribute()));
     };
 
     return Object(update, [] {});

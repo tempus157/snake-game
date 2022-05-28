@@ -23,16 +23,8 @@ Window::Window(const std::function<void()> &mount,
     const std::function<void()> &destroy)
     : mount(mount), update(update), destroy(destroy) {}
 
-WindowData &WindowData::setScale(const Vector &scale) {
-    this->scale = scale;
-    return *this;
-}
-
-WindowData &WindowData::setScale(int x, int y) {
-    this->scale.x = x;
-    this->scale.y = y;
-    return *this;
-}
+WindowData::WindowData(const Vector &position, const Vector &scale)
+    : position(position), scale(scale) {}
 
 WindowData &WindowData::setColor(const ColorPair color) {
     this->color = color;
@@ -55,32 +47,28 @@ WindowData &WindowData::useObject(const Object &object) {
     return *this;
 }
 
-Window WindowData::done() const {
+Window WindowData::done() {
     const auto mount = [&] {
-        initscr();
-        resize_term(scale.y, scale.x);
-        bkgd(COLOR_PAIR(color.getAttribute()));
+        window = newwin(scale.y, scale.x, position.y, position.x);
+        wbkgd(window, COLOR_PAIR(color.getAttribute()));
     };
 
     const auto update = [&] {
-        clear();
-
+        wclear(window);
         for (const auto &object : objects) {
-            object.update();
+            object.update(window);
         }
 
         if (border) {
             border->update();
         }
-
-        refresh();
+        wrefresh(window);
     };
 
     const auto destroy = [&] {
         for (const auto &object : objects) {
             object.destroy();
         }
-
         endwin();
         delete this;
     };
