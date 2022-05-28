@@ -25,27 +25,27 @@ public:
     State<T> &operator=(const T &value) {
         const auto before = *this->value;
         *this->value = value;
-        notifyChange(before, *this->value);
+        notifyUpdate(before, *this->value);
         return *this;
     }
 
     State<std::string> &operator=(const char *value) {
         const auto before = *this->value;
         *this->value = value;
-        notifyChange(before, *this->value);
+        notifyUpdate(before, *this->value);
         return *this;
     }
 
-    void onChange(const std::function<void(const T &, T &)> &fn) {
-        change.push_back(fn);
+    void onUpdate(const std::function<void(const T &, T &)> &fn) {
+        update.push_back(fn);
     }
 
 private:
     T *value;
-    std::vector<std::function<void(const T &, T &)>> change;
+    std::vector<std::function<void(const T &, T &)>> update;
 
-    void notifyChange(const T &before, T &after) {
-        for (const auto &fn : change) {
+    void notifyUpdate(const T &before, T &after) {
+        for (const auto &fn : update) {
             fn(before, after);
         }
 

@@ -4,7 +4,7 @@ Object counter(const Property<std::string> &text) {
     static auto count = useState(0);
     static auto countText = useState("Counter here!");
 
-    count.onChange([=](const int &before, int &after) {
+    count.onUpdate([=](const int &before, int &after) {
         after += after - before;
         countText = *text + std::to_string(after);
     });
