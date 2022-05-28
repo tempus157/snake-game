@@ -1,4 +1,5 @@
 #include "main.hpp"
+#include <memory>
 
 ObjectData &createObject() {
     return *new ObjectData();
@@ -50,9 +51,8 @@ Object label(const State<std::string> &text, const State<ColorPair> &color) {
     return Object(render, [] {});
 }
 
-Object label(const State<std::string> &text,
-             const State<Vector> &position,
-             const State<ColorPair> &color) {
+Object label(const State<std::string> &text, const State<Vector> &position,
+    const State<ColorPair> &color) {
     auto render = [=] {
         attron(COLOR_PAIR(color->getAttribute()));
         mvprintw(position->y, position->x, text->c_str());

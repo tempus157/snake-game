@@ -115,16 +115,13 @@ void onUpdate(const State<T1> &dep1, const State<T2> &dep2,
 }
 
 void quitApp();
-void onKeyPress(const Key &key,
-    const std::function<void(const Key &)> &callback);
+void onKeyPress(const Key &key, const std::function<void(const Key &)> &callback);
 
-// TODO Make State<std::string> template where T supports std::to_string
 Object label(const State<std::string> &text);
 Object label(const State<std::string> &text, const State<Vector> &position);
 Object label(const State<std::string> &text, const State<ColorPair> &color);
 
-Object label(const State<std::string> &text,
-    const State<Vector> &position,
+Object label(const State<std::string> &text, const State<Vector> &position,
     const State<ColorPair> &color);
 
 #endif

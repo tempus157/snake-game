@@ -8,8 +8,6 @@
 #include <memory>
 #include <vector>
 
-// TODO delete value; somewhere
-// or make it unique_ptr
 template <typename T>
 class State {
 public:

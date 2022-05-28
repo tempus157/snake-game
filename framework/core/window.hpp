@@ -34,11 +34,10 @@ public:
     const std::function<void()> destroy;
 
     Window(const std::function<void()> &mount,
-           const std::function<void()> &update,
-           const std::function<void()> &destroy);
+        const std::function<void()> &update,
+        const std::function<void()> &destroy);
 };
 
-// TODO Make window properties Window<T>
 class WindowData final {
 public:
     WindowData &setScale(const Vector &scale);
