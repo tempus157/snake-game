@@ -30,13 +30,18 @@ State<T> useState(const T &value) {
 
 State<std::string> useState(const char *value);
 
-void onKeyPress(const Key &key, const std::function<void(const Key &)> &fn);
 void quitApp();
+void onKeyPress(const Key &key,
+                const std::function<void(const Key &)> &callback);
 
 // TODO Make Property<std::string> template where T supports std::to_string
 Object label(const Property<std::string> &text);
-Object label(const Property<std::string> &text, const Property<Vector> &position);
-Object label(const Property<std::string> &text, const Property<ColorPair> &color);
+
+Object label(const Property<std::string> &text,
+             const Property<Vector> &position);
+
+Object label(const Property<std::string> &text,
+             const Property<ColorPair> &color);
 
 Object label(const Property<std::string> &text,
              const Property<Vector> &position,

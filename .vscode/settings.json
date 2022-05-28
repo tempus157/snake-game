@@ -69,6 +69,7 @@
     "format": "cpp",
     "__memory": "cpp",
     "memory_resource": "cpp",
-    "iostream": "cpp"
+    "iostream": "cpp",
+    "__availability": "cpp"
   }
 }

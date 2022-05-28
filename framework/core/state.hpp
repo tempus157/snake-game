@@ -36,17 +36,17 @@ public:
         return *this;
     }
 
-    void onUpdate(const std::function<void(const T &, T &)> &fn) {
-        update.push_back(fn);
+    void onUpdate(const std::function<void(const T &, T &)> &callback) {
+        updateCallbacks.push_back(callback);
     }
 
 private:
     T *value;
-    std::vector<std::function<void(const T &, T &)>> update;
+    std::vector<std::function<void(const T &, T &)>> updateCallbacks;
 
     void notifyUpdate(const T &before, T &after) {
-        for (const auto &fn : update) {
-            fn(before, after);
+        for (const auto &callback : updateCallbacks) {
+            callback(before, after);
         }
 
         App::instance->update();
