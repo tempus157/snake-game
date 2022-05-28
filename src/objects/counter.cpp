@@ -4,11 +4,9 @@ Object counter(const State<std::string> &text) {
     static auto count = useState(0);
     static auto countText = useState("Counter here!");
 
-    onUpdate(
-        [=] {
-            countText = *text + std::to_string(*count);
-        },
-        text, count);
+    onUpdate(text, count, [=] {
+        countText = *text + std::to_string(*count);
+    });
 
     onKeyPress(Key::UpArrow, [](const Key &key) {
         count = *count + 1;

@@ -20,8 +20,8 @@ void Border::update() const {
 }
 
 Window::Window(const std::function<void()> &mount,
-               const std::function<void()> &update,
-               const std::function<void()> &destroy)
+    const std::function<void()> &update,
+    const std::function<void()> &destroy)
     : mount(mount), update(update), destroy(destroy) {}
 
 WindowData &WindowData::setScale(const Vector &scale) {
