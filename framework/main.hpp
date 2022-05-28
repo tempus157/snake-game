@@ -29,15 +29,15 @@ State<T> useState(const T &value) {
 
 State<std::string> useState(const char *value);
 
-template <typename TDep>
-void useEffect(const std::function<void()> &callback, State<TDep> dep) {
-    decltype(dep)::onUpdate(dep, callback);
+template <typename T>
+void useEffect(const std::function<void()> &callback, const State<T> &dep) {
+    State<T>::onUpdate(dep, callback);
 }
 
-template <typename TDep, typename... TDeps>
+template <typename T, typename... TRest>
 void useEffect(const std::function<void()> &callback,
-               State<TDep> dep, State<TDeps>... deps) {
-    decltype(dep)::onUpdate(dep, callback);
+               const State<T> &dep, const State<TRest> &...deps) {
+    State<T>::onUpdate(dep, callback);
     useEffect(callback, deps...);
 }
 
