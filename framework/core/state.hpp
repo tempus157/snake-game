@@ -36,15 +36,15 @@ public:
         return *this;
     }
 
-    void onChange(const std::function<void(const T &, const T &)> &fn) {
+    void onChange(const std::function<void(const T &, T &)> &fn) {
         change.push_back(fn);
     }
 
 private:
     T *value;
-    std::vector<std::function<void(const T &, const T &)>> change;
+    std::vector<std::function<void(const T &, T &)>> change;
 
-    void notifyChange(const T &before, const T &after) {
+    void notifyChange(const T &before, T &after) {
         for (const auto &fn : change) {
             fn(before, after);
         }
