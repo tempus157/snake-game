@@ -9,30 +9,21 @@
 
 class App final {
 public:
-    static App *instance;
+    App();
 
-    const std::function<void()> mount;
-    const std::function<void()> update;
-    const std::function<void()> destroy;
-    const std::function<void()> receiveInput;
-
-    App(const std::function<void()> &mount,
-        const std::function<void()> &update,
-        const std::function<void()> &destroy,
-        const std::function<void()> &receiveInput);
-};
-
-class AppData final {
-public:
-    AppData();
+    static void update();
     static void quit();
-    AppData &useWindow(const Window &window);
-    App done() const;
+    App &useWindow(const Window &window);
+    int run() const;
 
 private:
-    static AppData *instance;
+    static App *instance;
     bool progress = true;
     std::vector<const Window> windows;
+
+    void mount() const;
+    void receiveInput() const;
+    void destroy() const;
 };
 
 #endif

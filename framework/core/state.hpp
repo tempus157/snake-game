@@ -10,6 +10,8 @@
 template <typename T>
 class State {
 public:
+    static std::function<void()> updateWindows;
+
     State<T>() : value(new T()) {}
     State<T>(const T &value) : value(new T(value)) {}
     State<std::string>(const char *value) : value(new std::string(value)) {}
@@ -49,7 +51,7 @@ private:
             callback(before, after);
         }
 
-        App::instance->update();
+        App::update();
     }
 };
 

@@ -5,68 +5,65 @@
 #include <ncurses.h>
 #include <stdexcept>
 
-AppData *AppData::instance = nullptr;
-
 App *App::instance = nullptr;
 
-App::App(const std::function<void()> &mount,
-         const std::function<void()> &update,
-         const std::function<void()> &destroy,
-         const std::function<void()> &receiveInput)
-    : mount(mount), update(update), destroy(destroy), receiveInput(receiveInput) {
+App::App() {
     if (instance) {
         throw std::runtime_error("App already exists");
     }
     instance = this;
 }
 
-AppData::AppData() {
-    if (instance) {
-        throw std::runtime_error("AppData already exists");
+void App::update() {
+    if (!instance) {
+        throw std::runtime_error("App does not exist");
     }
-    instance = this;
+
+    for (const auto &window : instance->windows) {
+        window.update();
+    }
 }
 
-void AppData::quit() {
+void App::quit() {
+    if (!instance) {
+        throw std::runtime_error("App does not exist");
+    }
     instance->progress = false;
 }
 
-AppData &AppData::useWindow(const Window &window) {
+App &App::useWindow(const Window &window) {
     windows.push_back(window);
     return *this;
 }
 
-App AppData::done() const {
-    const auto mount = [&]() {
-        setlocale(LC_ALL, "");
-        for (const auto &window : windows) {
-            window.mount();
-        }
+int App::run() const {
+    mount();
+    receiveInput();
+    destroy();
+    return 0;
+}
 
-        Input::mount();
-        ColorPair::mount();
-    };
+void App::mount() const {
+    setlocale(LC_ALL, "");
+    for (const auto &window : windows) {
+        window.mount();
+    }
 
-    const auto update = [&]() {
-        for (const auto &window : windows) {
-            window.update();
-        }
-    };
+    Input::mount();
+    ColorPair::mount();
+    update();
+}
 
-    const auto destroy = [&]() {
-        for (const auto &window : windows) {
-            window.destroy();
-        }
+void App::receiveInput() const {
+    while (progress) {
+        const auto key = Input::readKey();
+        Input::notifyKeyPress(key);
+    }
+}
 
-        delete this;
-    };
-
-    const auto receiveInput = [&]() {
-        while (progress) {
-            const auto key = Input::readKey();
-            Input::notifyKeyPress(key);
-        }
-    };
-
-    return App(mount, update, destroy, receiveInput);
+void App::destroy() const {
+    for (const auto &window : windows) {
+        window.destroy();
+    }
+    delete this;
 }

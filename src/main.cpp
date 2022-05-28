@@ -1,7 +1,7 @@
-#include "../main.hpp"
+#include "main.hpp"
 
-App myApp() {
+int main() {
     return createApp()
         .useWindow(myWindow())
-        .done();
+        .run();
 }

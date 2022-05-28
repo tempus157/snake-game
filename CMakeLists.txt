@@ -7,7 +7,9 @@ include_directories(${CURSES_INCLUDE_DIR})
 
 add_executable (
     main.out
-    main.cpp
+    src/main.cpp
+    src/objects/counter.cpp
+    src/windows/myWindow.cpp
     framework/main.cpp
     framework/core/app.cpp
     framework/core/color.cpp
@@ -15,8 +17,5 @@ add_executable (
     framework/core/object.cpp
     framework/core/vector.cpp
     framework/core/window.cpp
-    src/app/myApp.cpp
-    src/objects/counter.cpp
-    src/windows/myWindow.cpp
 )
 target_link_libraries (main.out ${CURSES_LIBRARIES})
