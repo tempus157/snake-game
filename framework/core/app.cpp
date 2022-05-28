@@ -3,12 +3,19 @@
 
 #include <clocale>
 #include <ncurses.h>
+#include <stdexcept>
 
-bool App::progress = true;
 App *App::instance = nullptr;
 
+App::App() {
+    if (instance) {
+        throw std::runtime_error("App already instantiated");
+    }
+    instance = this;
+}
+
 void App::quit() {
-    progress = false;
+    instance->progress = false;
 }
 
 App &App::useWindow(const Window &window) {
@@ -18,14 +25,14 @@ App &App::useWindow(const Window &window) {
 
 int App::run() const {
     mountWindows();
-    input.mount();
+    Input::mount();
     ColorPair::mount();
 
     updateWindows();
 
     while (progress) {
-        const auto key = input.readKey();
-        input.notifyKeyPress(key);
+        const auto key = Input::readKey();
+        Input::notifyKeyPress(key);
     }
 
     for (const auto &window : windows) {

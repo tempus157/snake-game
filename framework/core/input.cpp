@@ -8,7 +8,7 @@ void Input::onKeyPress(const Key &key, const std::function<void(const Key &)> &f
     keyPress[key].push_back(fn);
 }
 
-void Input::notifyKeyPress(const Key &key) const {
+void Input::notifyKeyPress(const Key &key) {
     for (const auto &fn : keyPress[key]) {
         fn(key);
     }
@@ -18,13 +18,13 @@ void Input::notifyKeyPress(const Key &key) const {
     }
 }
 
-void Input::mount() const {
+void Input::mount() {
     keypad(stdscr, true);
     curs_set(0);
     noecho();
 }
 
-Key Input::readKey() const {
+Key Input::readKey() {
     switch (getch()) {
     case 'a':
     case 'A':

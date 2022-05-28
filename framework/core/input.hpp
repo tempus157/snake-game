@@ -86,10 +86,17 @@ enum class Key {
 
 class Input final {
 public:
+    Input() = delete;
+    Input(const Input &) = delete;
+    Input(Input &&) = delete;
+
+    Input &operator=(const Input &) = delete;
+    Input &operator=(Input &&) = delete;
+
     static void onKeyPress(const Key &key, const std::function<void(const Key &)> &fn);
-    void notifyKeyPress(const Key &key) const;
-    void mount() const;
-    Key readKey() const;
+    static void notifyKeyPress(const Key &key);
+    static void mount();
+    static Key readKey();
 
 private:
     static std::map<const Key, std::vector<const std::function<void(const Key &)>>> keyPress;

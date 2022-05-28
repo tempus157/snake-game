@@ -9,8 +9,7 @@ WindowData &createWindow() {
 }
 
 App &createApp() {
-    App::instance = new App();
-    return *App::instance;
+    return *new App();
 }
 
 State<std::string> useState(const char *value) {

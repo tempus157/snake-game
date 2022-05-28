@@ -7,18 +7,22 @@
 #include <vector>
 
 class App final {
+    template <typename T>
+    friend class State;
+
 public:
-    static App *instance;
+    App();
     static void quit();
     App &useWindow(const Window &window);
     int run() const;
-    void updateWindows() const;
 
 private:
-    static bool progress;
-    const Input input = Input();
+    static App *instance;
+    bool progress = true;
     std::vector<const Window> windows;
+
     void mountWindows() const;
+    void updateWindows() const;
 };
 
 #endif
