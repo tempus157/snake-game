@@ -38,6 +38,14 @@ public:
         return *this;
     }
 
+    bool operator==(const State<T> &state) const {
+        return value == state.value;
+    }
+
+    bool operator!=(const State<T> &state) const {
+        return value != state.value;
+    }
+
     void onUpdate(const std::function<void(const T &, T &)> &callback) {
         updateCallbacks.push_back(callback);
     }
