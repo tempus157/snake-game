@@ -6,10 +6,8 @@ find_package (Curses REQUIRED)
 include_directories(${CURSES_INCLUDE_DIR})
 
 add_executable (
-    game.out
-    src/main.cpp
-    src/objects/counter.cpp
-    src/windows/myWindow.cpp
+    main.out
+    main.cpp
     framework/main.cpp
     framework/core/app.cpp
     framework/core/color.cpp
@@ -17,5 +15,8 @@ add_executable (
     framework/core/object.cpp
     framework/core/vector.cpp
     framework/core/window.cpp
+    src/app/myApp.cpp
+    src/objects/counter.cpp
+    src/windows/myWindow.cpp
 )
-target_link_libraries (game.out ${CURSES_LIBRARIES})
+target_link_libraries (main.out ${CURSES_LIBRARIES})

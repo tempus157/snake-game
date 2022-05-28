@@ -23,22 +23,7 @@ AppData &AppData::useWindow(const Window &window) {
     return *this;
 }
 
-int AppData::run() const {
-    const auto app = build();
-    app.mount();
-    app.update();
-
-    while (progress) {
-        const auto key = Input::readKey();
-        Input::notifyKeyPress(key);
-    }
-
-    app.destroy();
-    delete this;
-    return 0;
-}
-
-App AppData::build() const {
+App AppData::done() const {
     const auto mount = [&]() {
         setlocale(LC_ALL, "");
         for (const auto &window : windows) {
@@ -59,7 +44,16 @@ App AppData::build() const {
         for (const auto &window : windows) {
             window.destroy();
         }
+
+        delete this;
     };
 
-    return App(mount, update, destroy);
+    const auto receiveInput = [&]() {
+        while (progress) {
+            const auto key = Input::readKey();
+            Input::notifyKeyPress(key);
+        }
+    };
+
+    return App(mount, update, destroy, receiveInput);
 }

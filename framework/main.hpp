@@ -3,7 +3,6 @@
 
 #include "./core/app.hpp"
 #include "./core/color.hpp"
-#include "./core/input.hpp"
 #include "./core/object.hpp"
 #include "./core/optional.hpp"
 #include "./core/property.hpp"
