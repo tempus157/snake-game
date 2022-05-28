@@ -17,6 +17,18 @@ ObjectData &createObject();
 WindowData &createWindow();
 App &createApp();
 
+Object label(const State<std::string> &text);
+Object label(const State<std::string> &text, const State<Vector> &position);
+Object label(const State<std::string> &text, const State<ColorPair> &color);
+
+Object label(const State<std::string> &text, const State<Vector> &position,
+    const State<ColorPair> &color);
+
+Object input(const State<std::string> &text);
+
+void quitApp();
+void onKeyPress(const Key &key, const std::function<void(const Key &)> &callback);
+
 template <typename T>
 State<T> useState() {
     return State<T>();
@@ -113,15 +125,5 @@ void onUpdate(const State<T1> &dep1, const State<T2> &dep2,
     State<T7>::onUpdate(dep7, callback);
     State<T8>::onUpdate(dep8, callback);
 }
-
-void quitApp();
-void onKeyPress(const Key &key, const std::function<void(const Key &)> &callback);
-
-Object label(const State<std::string> &text);
-Object label(const State<std::string> &text, const State<Vector> &position);
-Object label(const State<std::string> &text, const State<ColorPair> &color);
-
-Object label(const State<std::string> &text, const State<Vector> &position,
-    const State<ColorPair> &color);
 
 #endif
