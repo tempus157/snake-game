@@ -22,13 +22,13 @@ public:
 
     State<T> &operator=(const T &value) {
         *this->value = value;
-        App::instance->updateWindows();
+        // App::instance->updateWindows();
         return *this;
     }
 
     State<std::string> &operator=(const char *value) {
         *this->value = value;
-        App::instance->updateWindows();
+        // App::instance->updateWindows();
         return *this;
     }
 

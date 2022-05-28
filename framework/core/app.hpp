@@ -4,12 +4,22 @@
 #include "input.hpp"
 #include "window.hpp"
 
+#include <functional>
 #include <vector>
 
-class App final {
-    template <typename T>
-    friend class State;
+class AppObj final {
+public:
+    const std::function<void()> mount;
+    const std::function<void()> update;
+    const std::function<void()> destroy;
 
+    AppObj(const std::function<void()> &mount,
+           const std::function<void()> &update,
+           const std::function<void()> &destroy)
+        : mount(mount), update(update), destroy(destroy) {}
+};
+
+class App final {
 public:
     App();
     static void quit();
@@ -20,9 +30,7 @@ private:
     static App *instance;
     bool progress = true;
     std::vector<const Window> windows;
-
-    void mountWindows() const;
-    void updateWindows() const;
+    AppObj build() const;
 };
 
 #endif

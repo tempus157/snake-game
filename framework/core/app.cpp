@@ -24,35 +24,42 @@ App &App::useWindow(const Window &window) {
 }
 
 int App::run() const {
-    mountWindows();
-    Input::mount();
-    ColorPair::mount();
-
-    updateWindows();
+    const auto app = build();
+    app.mount();
+    app.update();
 
     while (progress) {
         const auto key = Input::readKey();
         Input::notifyKeyPress(key);
     }
 
-    for (const auto &window : windows) {
-        window.destroy();
-    }
-
+    app.destroy();
     delete this;
     return 0;
 }
 
-void App::mountWindows() const {
-    setlocale(LC_ALL, "");
+AppObj App::build() const {
+    const auto mount = [&]() {
+        setlocale(LC_ALL, "");
+        for (const auto &window : windows) {
+            window.mount();
+        }
 
-    for (const auto &window : windows) {
-        window.mount();
-    }
-}
+        Input::mount();
+        ColorPair::mount();
+    };
 
-void App::updateWindows() const {
-    for (const auto &window : windows) {
-        window.update();
-    }
+    const auto update = [&]() {
+        for (const auto &window : windows) {
+            window.update();
+        }
+    };
+
+    const auto destroy = [&]() {
+        for (const auto &window : windows) {
+            window.destroy();
+        }
+    };
+
+    return AppObj(mount, update, destroy);
 }
