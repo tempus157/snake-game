@@ -1,21 +1,18 @@
 #include "../main.hpp"
 
 Object counter(const Property<std::string> &text) {
-    static auto count = 0;
-    static auto countStr = useState(*text + std::to_string(count));
-    static auto log = useState("Log here!");
+    static auto count = useState(0);
+    static auto countText = useState("Counter here!");
 
-    countStr.onChange([](const std::string &before, const std::string &after) {
-        log = before + ", " + after;
+    count.onChange([=](const int &before, const int &after) {
+        countText = *text + std::to_string(*count);
     });
 
-    onKeyPress(Key::Enter, [=](const Key &key) {
-        count++;
-        countStr = *text + std::to_string(count);
+    onKeyPress(Key::Enter, [](const Key &key) {
+        count = *count + 1;
     });
 
     return createObject()
-        .useObject(label(countStr, Vector(1, 2)))
-        .useObject(label(log, Vector(1, 3)))
+        .useObject(label(countText, Vector(1, 2)))
         .done();
 }
