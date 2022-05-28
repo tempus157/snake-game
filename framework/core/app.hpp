@@ -9,6 +9,8 @@
 
 class App final {
 public:
+    static App *instance;
+
     const std::function<void()> mount;
     const std::function<void()> update;
     const std::function<void()> destroy;
@@ -17,8 +19,7 @@ public:
     App(const std::function<void()> &mount,
         const std::function<void()> &update,
         const std::function<void()> &destroy,
-        const std::function<void()> &receiveInput)
-        : mount(mount), update(update), destroy(destroy), receiveInput(receiveInput) {}
+        const std::function<void()> &receiveInput);
 };
 
 class AppData final {

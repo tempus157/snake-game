@@ -7,9 +7,22 @@
 
 AppData *AppData::instance = nullptr;
 
+App *App::instance = nullptr;
+
+App::App(const std::function<void()> &mount,
+         const std::function<void()> &update,
+         const std::function<void()> &destroy,
+         const std::function<void()> &receiveInput)
+    : mount(mount), update(update), destroy(destroy), receiveInput(receiveInput) {
+    if (instance) {
+        throw std::runtime_error("App already exists");
+    }
+    instance = this;
+}
+
 AppData::AppData() {
     if (instance) {
-        throw std::runtime_error("App already instantiated");
+        throw std::runtime_error("AppData already exists");
     }
     instance = this;
 }
