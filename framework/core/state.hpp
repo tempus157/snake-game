@@ -2,7 +2,9 @@
 #define __FRAMEWORK_STATE__
 
 #include "app.hpp"
+
 #include <functional>
+#include <map>
 #include <vector>
 
 // TODO delete value; somewhere
@@ -10,8 +12,6 @@
 template <typename T>
 class State {
 public:
-    static std::function<void()> updateWindows;
-
     State<T>() : value(new T()) {}
     State<T>(const T &value) : value(new T(value)) {}
     State<std::string>(const char *value) : value(new std::string(value)) {}
@@ -25,42 +25,36 @@ public:
     }
 
     State<T> &operator=(const T &value) {
-        const auto before = *this->value;
         *this->value = value;
-        notifyUpdate(before, *this->value);
+        notifyUpdate();
         return *this;
     }
 
     State<std::string> &operator=(const char *value) {
-        const auto before = *this->value;
         *this->value = value;
-        notifyUpdate(before, *this->value);
+        notifyUpdate();
         return *this;
     }
 
-    bool operator==(const State<T> &state) const {
-        return value == state.value;
-    }
-
-    bool operator!=(const State<T> &state) const {
-        return value != state.value;
-    }
-
-    void onUpdate(const std::function<void(const T &, T &)> &callback) {
-        updateCallbacks.push_back(callback);
+    static void onUpdate(const State<T> state,
+                         const std::function<void()> &callback) {
+        updateCallbacks[state.value].push_back(callback);
     }
 
 private:
     T *value;
-    std::vector<std::function<void(const T &, T &)>> updateCallbacks;
+    static std::map<T *, std::vector<std::function<void()>>> updateCallbacks;
 
-    void notifyUpdate(const T &before, T &after) {
-        for (const auto &callback : updateCallbacks) {
-            callback(before, after);
+    void notifyUpdate() {
+        for (const auto &callback : updateCallbacks[value]) {
+            callback();
         }
-
         App::update();
     }
 };
+
+template <typename T>
+std::map<T *, std::vector<std::function<void()>>>
+    State<T>::updateCallbacks = {};
 
 #endif

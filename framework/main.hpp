@@ -29,6 +29,18 @@ State<T> useState(const T &value) {
 
 State<std::string> useState(const char *value);
 
+template <typename TDep>
+void useEffect(const std::function<void()> &callback, State<TDep> dep) {
+    decltype(dep)::onUpdate(dep, callback);
+}
+
+template <typename TDep, typename... TDeps>
+void useEffect(const std::function<void()> &callback,
+               State<TDep> dep, State<TDeps>... deps) {
+    decltype(dep)::onUpdate(dep, callback);
+    useEffect(callback, deps...);
+}
+
 void quitApp();
 void onKeyPress(const Key &key,
                 const std::function<void(const Key &)> &callback);

@@ -4,10 +4,11 @@ Object counter(const State<std::string> &text) {
     static auto count = useState(0);
     static auto countText = useState("Counter here!");
 
-    count.onUpdate([=](const int &before, int &after) {
-        after += after - before;
-        countText = *text + std::to_string(after);
-    });
+    useEffect(
+        [=] {
+            countText = *text + std::to_string(*count);
+        },
+        text, count);
 
     onKeyPress(Key::UpArrow, [](const Key &key) {
         count = *count + 1;
