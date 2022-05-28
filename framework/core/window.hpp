@@ -23,7 +23,7 @@ public:
     Optional<ColorPair> color;
 
     Border();
-    Border(unsigned int character);
+    Border(unsigned int ch);
     void update() const;
 };
 

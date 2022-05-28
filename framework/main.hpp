@@ -18,6 +18,7 @@ WindowData &createWindow();
 App &createApp();
 
 void quitApp();
+std::string readLine();
 void onKeyPress(const Key &key, const std::function<void()> &callback);
 
 #pragma region useProperty

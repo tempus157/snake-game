@@ -2,10 +2,9 @@
 
 Border::Border() : Border('+') {}
 
-Border::Border(unsigned int character) : left(character), right(character),
-                                         top(character), bottom(character),
-                                         topLeft(character), topRight(character),
-                                         bottomLeft(character), bottomRight(character) {}
+Border::Border(unsigned int ch)
+    : left(ch), right(ch), top(ch), bottom(ch),
+      topLeft(ch), topRight(ch), bottomLeft(ch), bottomRight(ch) {}
 
 void Border::update() const {
     if (color) {

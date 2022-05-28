@@ -5,6 +5,7 @@ Window myWindow() {
     border.color = ColorPair(Color::Yellow, Color::Black);
 
     static auto counterText = useProperty("Count: ");
+    static auto titleText = useProperty("Hello, World!");
 
     onKeyPress(Key::Enter, [] {
         counterText = "You pressed enter: ";
@@ -18,11 +19,16 @@ Window myWindow() {
         quitApp();
     });
 
+    onKeyPress(Key::Space, [] {
+        const auto text = readLine();
+        titleText = text;
+    });
+
     return createWindow()
         .setScale(40, 20)
         .setColor(Color::Blue, Color::Red)
         .setBorder(border)
-        .useObject(label("Hello, world!", Vector(1, 1), ColorPair(Color::Red, Color::Blue)))
+        .useObject(label(titleText, Vector(1, 1), ColorPair(Color::Red, Color::Blue)))
         .useObject(counter(counterText))
         .done();
 }

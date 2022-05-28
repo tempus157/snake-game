@@ -17,6 +17,20 @@ void quitApp() {
     App::quit();
 }
 
+std::string readLine() {
+    nocbreak();
+    int ch;
+    std::string input;
+
+    do {
+        ch = getch();
+        input.push_back(ch);
+    } while (ch != '\n');
+
+    cbreak();
+    return input;
+}
+
 void onKeyPress(const Key &key, const std::function<void()> &callback) {
     Input::onKeyPress(key, callback);
 }
