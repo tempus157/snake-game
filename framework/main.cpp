@@ -13,6 +13,18 @@ App &createApp() {
     return *new App();
 }
 
+void quitApp() {
+    App::quit();
+}
+
+void onKeyPress(const Key &key, const std::function<void()> &callback) {
+    Input::onKeyPress(key, callback);
+}
+
+Property<std::string> useProperty(const char *value) {
+    return Property<std::string>(value);
+}
+
 Object label(const Property<std::string> &text) {
     auto update = [=] {
         printw(text->c_str());
@@ -48,16 +60,4 @@ Object label(const Property<std::string> &text, const Property<Vector> &position
     };
 
     return Object(update, [] {});
-}
-
-void onKeyPress(const Key &key, const std::function<void()> &callback) {
-    Input::onKeyPress(key, callback);
-}
-
-void quitApp() {
-    App::quit();
-}
-
-Property<std::string> useProperty(const char *value) {
-    return Property<std::string>(value);
 }

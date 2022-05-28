@@ -133,8 +133,6 @@ Object label(const Property<std::string> &text, const Property<ColorPair> &color
 Object label(const Property<std::string> &text, const Property<Vector> &position,
     const Property<ColorPair> &color);
 
-Object input(const Property<std::string> &text);
-
 #pragma endregion
 
 #endif
