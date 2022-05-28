@@ -2,21 +2,20 @@
 
 #include <ncurses.h>
 
-std::map<const Key, std::vector<const std::function<void(const Key &)>>>
+std::map<const Key, std::vector<const std::function<void()>>>
     Input::keyPressCallbacks = {};
 
-void Input::onKeyPress(const Key &key,
-                       const std::function<void(const Key &)> &callback) {
+void Input::onKeyPress(const Key &key, const std::function<void()> &callback) {
     keyPressCallbacks[key].push_back(callback);
 }
 
 void Input::notifyKeyPress(const Key &key) {
     for (const auto &callback : keyPressCallbacks[key]) {
-        callback(key);
+        callback();
     }
 
     for (const auto &callback : keyPressCallbacks[Key::Any]) {
-        callback(key);
+        callback();
     }
 }
 

@@ -50,7 +50,7 @@ Object label(const State<std::string> &text, const State<Vector> &position,
     return Object(update, [] {});
 }
 
-void onKeyPress(const Key &key, const std::function<void(const Key &)> &callback) {
+void onKeyPress(const Key &key, const std::function<void()> &callback) {
     Input::onKeyPress(key, callback);
 }
 

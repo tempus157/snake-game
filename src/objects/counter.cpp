@@ -8,11 +8,11 @@ Object counter(const State<std::string> &text) {
         countText = *text + std::to_string(*count);
     });
 
-    onKeyPress(Key::UpArrow, [](const Key &key) {
+    onKeyPress(Key::UpArrow, [] {
         count = *count + 1;
     });
 
-    onKeyPress(Key::DownArrow, [](const Key &key) {
+    onKeyPress(Key::DownArrow, [] {
         count = *count - 1;
     });
 

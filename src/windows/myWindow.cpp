@@ -6,15 +6,15 @@ Window myWindow() {
 
     static auto counterText = useState("Count: ");
 
-    onKeyPress(Key::Enter, [](const Key &key) {
+    onKeyPress(Key::Enter, [] {
         counterText = "You pressed enter: ";
     });
 
-    onKeyPress(Key::Tab, [](const Key &key) {
+    onKeyPress(Key::Tab, [] {
         counterText = "You pressed tab: ";
     });
 
-    onKeyPress(Key::Escape, [](const Key &key) {
+    onKeyPress(Key::Escape, [] {
         quitApp();
     });
 

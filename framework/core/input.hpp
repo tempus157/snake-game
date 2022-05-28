@@ -93,13 +93,13 @@ public:
     Input &operator=(const Input &) = delete;
     Input &operator=(Input &&) = delete;
 
-    static void onKeyPress(const Key &key, const std::function<void(const Key &)> &callback);
+    static void onKeyPress(const Key &key, const std::function<void()> &callback);
     static void notifyKeyPress(const Key &key);
     static void mount();
     static Key readKey();
 
 private:
-    static std::map<const Key, std::vector<const std::function<void(const Key &)>>> keyPressCallbacks;
+    static std::map<const Key, std::vector<const std::function<void()>>> keyPressCallbacks;
 };
 
 #endif
