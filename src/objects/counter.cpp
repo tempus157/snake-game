@@ -24,6 +24,7 @@ Object counter(const Property<std::string> &text) {
 
     onKeyPress(Key::Enter, [=]() mutable {
         countList->push_back(*count);
+        countList = countList;
     });
 
     return createObject()
@@ -31,5 +32,8 @@ Object counter(const Property<std::string> &text) {
         .useObject($if(isCountEven,
             label("Even", Vector(1, 3)),
             label("Odd", Vector(1, 3))))
+        .useObject($for(countList, [](const int &item) {
+            return label(std::to_string(item));
+        }))
         .done();
 }

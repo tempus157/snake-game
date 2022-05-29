@@ -139,27 +139,15 @@ Object label(const Property<std::string> &text, const Property<Vector> &position
 Object $if(const Property<bool> &condition, const Object &ifTrue);
 Object $if(const Property<bool> &condition, const Object &ifTrue, const Object &ifFalse);
 
-// template <typename T, typename TCollection>
-// Object $for(const TCollection &collection,
-//     const std::function<Object(const T &)> &object) {
-//     auto update = [=](WINDOW *window) {
-//         for (const auto &item : collection) {
-//             object(item).update(window);
-//         }
-//     };
+template <typename TCollection, typename TCallback>
+Object $for(const Property<TCollection> &collection, const TCallback &callback) {
+    auto update = [=](WINDOW *window) {
+        for (const auto &item : *collection) {
+            callback(item).update(window);
+        }
+    };
 
-//     return Object(update, [] {});
-// }
-
-// template <class TCollection, class TObject>
-// Object $for(const TCollection &collection, const TObject &object) {
-//     auto update = [=](WINDOW *window) {
-//         for (const auto &item : *collection) {
-//             object(item).update(window);
-//         }
-//     };
-
-//     return Object(update, [] {});
-// }
+    return Object(update, [] {});
+}
 
 #endif
