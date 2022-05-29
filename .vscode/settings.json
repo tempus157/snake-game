@@ -70,6 +70,7 @@
     "__memory": "cpp",
     "memory_resource": "cpp",
     "iostream": "cpp",
-    "__availability": "cpp"
+    "__availability": "cpp",
+    "__functional_03": "cpp"
   }
 }

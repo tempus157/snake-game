@@ -75,3 +75,25 @@ Object label(const Property<std::string> &text, const Property<Vector> &position
 
     return Object(update, [] {});
 }
+
+Object $if(const Property<bool> &condition, const Object &ifTrue) {
+    auto update = [=](WINDOW *window) {
+        if (*condition) {
+            ifTrue.update(window);
+        }
+    };
+
+    return Object(update, [] {});
+}
+
+Object $if(const Property<bool> &condition, const Object &ifTrue, const Object &ifFalse) {
+    auto update = [=](WINDOW *window) {
+        if (*condition) {
+            ifTrue.update(window);
+        } else {
+            ifFalse.update(window);
+        }
+    };
+
+    return Object(update, [] {});
+}

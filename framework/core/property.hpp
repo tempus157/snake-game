@@ -1,5 +1,5 @@
-#ifndef __FRAMEWORK_STATE__
-#define __FRAMEWORK_STATE__
+#ifndef __FRAMEWORK_PROPERTY__
+#define __FRAMEWORK_PROPERTY__
 
 #include "app.hpp"
 
@@ -45,7 +45,7 @@ private:
     std::shared_ptr<T> value;
     static std::map<T *, std::vector<std::function<void()>>> updateCallbacks;
 
-    void notifyUpdate() {
+    void notifyUpdate() const {
         for (const auto &callback : updateCallbacks[value.get()]) {
             callback();
         }

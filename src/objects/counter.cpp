@@ -3,9 +3,15 @@
 Object counter(const Property<std::string> &text) {
     auto count = useProperty(0);
     auto countText = useProperty("Counter here!");
+    auto isCountEven = useProperty(*count % 2 == 0);
+    auto countList = useProperty<std::vector<int>>();
 
     onUpdate(text, count, [=]() mutable {
         countText = *text + std::to_string(*count);
+    });
+
+    onUpdate(count, [=]() mutable {
+        isCountEven = *count % 2 == 0;
     });
 
     onKeyPress(Key::UpArrow, [=]() mutable {
@@ -16,7 +22,14 @@ Object counter(const Property<std::string> &text) {
         count = *count - 1;
     });
 
+    onKeyPress(Key::Enter, [=]() mutable {
+        countList->push_back(*count);
+    });
+
     return createObject()
         .useObject(label(countText, Vector(1, 2)))
+        .useObject($if(isCountEven,
+            label("Even", Vector(1, 3)),
+            label("Odd", Vector(1, 3))))
         .done();
 }
