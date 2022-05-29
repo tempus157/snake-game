@@ -76,6 +76,22 @@ Object label(const Property<std::string> &text, const Property<Vector> &position
     return Object(update, [] {});
 }
 
+Object $goto(const Property<Vector> &position) {
+    auto update = [=](WINDOW *window) {
+        wmove(window, position->y, position->x);
+    };
+
+    return Object(update, [] {});
+}
+
+Object $goto(const Property<int> &x, const Property<int> &y) {
+    auto update = [=](WINDOW *window) {
+        wmove(window, *y, *x);
+    };
+
+    return Object(update, [] {});
+}
+
 Object $if(const Property<bool> &condition, const Object &ifTrue) {
     auto update = [=](WINDOW *window) {
         if (*condition) {
