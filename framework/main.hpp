@@ -16,12 +16,29 @@
 ObjectData &createObject();
 WindowData &createWindow(const Vector &position, const Vector &scale);
 App &createApp();
+Object label(const Property<std::string> &text);
+Object label(const Property<std::string> &text, const Property<Vector> &position);
+Object label(const Property<std::string> &text, const Property<ColorPair> &color);
 
-void quitApp();
-std::string readLine();
-void onKeyPress(const Key &key, const std::function<void()> &callback);
+Object label(const Property<std::string> &text, const Property<Vector> &position,
+    const Property<ColorPair> &color);
 
-#pragma region useProperty
+Object $goto(const Property<Vector> &position);
+Object $goto(const Property<int> &x, const Property<int> &y);
+
+Object $if(const Property<bool> &condition, const Object &ifTrue);
+Object $if(const Property<bool> &condition, const Object &ifTrue, const Object &ifFalse);
+
+template <typename TCollection, typename TCallback>
+Object $for(const Property<TCollection> &collection, const TCallback &callback) {
+    auto update = [=](WINDOW *window) {
+        for (const auto &item : *collection) {
+            callback(item).update(window);
+        }
+    };
+
+    return Object(update, [] {});
+}
 
 template <typename T>
 Property<T> useProperty() {
@@ -35,7 +52,9 @@ Property<T> useProperty(const T &value) {
 
 Property<std::string> useProperty(const char *value);
 
-#pragma endregion
+void quitApp();
+std::string readLine();
+void onKeyPress(const Key &key, const std::function<void()> &callback);
 
 #pragma region onUpdate
 
@@ -124,33 +143,5 @@ void onUpdate(const Property<T1> &dep1, const Property<T2> &dep2,
 }
 
 #pragma endregion
-
-#pragma region label
-
-Object label(const Property<std::string> &text);
-Object label(const Property<std::string> &text, const Property<Vector> &position);
-Object label(const Property<std::string> &text, const Property<ColorPair> &color);
-
-Object label(const Property<std::string> &text, const Property<Vector> &position,
-    const Property<ColorPair> &color);
-
-#pragma endregion
-
-Object $goto(const Property<Vector> &position);
-Object $goto(const Property<int> &x, const Property<int> &y);
-
-Object $if(const Property<bool> &condition, const Object &ifTrue);
-Object $if(const Property<bool> &condition, const Object &ifTrue, const Object &ifFalse);
-
-template <typename TCollection, typename TCallback>
-Object $for(const Property<TCollection> &collection, const TCallback &callback) {
-    auto update = [=](WINDOW *window) {
-        for (const auto &item : *collection) {
-            callback(item).update(window);
-        }
-    };
-
-    return Object(update, [] {});
-}
 
 #endif

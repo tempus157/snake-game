@@ -13,32 +13,6 @@ App &createApp() {
     return *new App();
 }
 
-void quitApp() {
-    App::quit();
-}
-
-std::string readLine() {
-    nocbreak();
-    int ch;
-    std::string input;
-
-    do {
-        ch = getch();
-        input.push_back(ch);
-    } while (ch != '\n');
-
-    cbreak();
-    return input;
-}
-
-void onKeyPress(const Key &key, const std::function<void()> &callback) {
-    Input::onKeyPress(key, callback);
-}
-
-Property<std::string> useProperty(const char *value) {
-    return Property<std::string>(value);
-}
-
 Object label(const Property<std::string> &text) {
     auto update = [=](WINDOW *window) {
         wprintw(window, text->c_str());
@@ -112,4 +86,30 @@ Object $if(const Property<bool> &condition, const Object &ifTrue, const Object &
     };
 
     return Object(update, [] {});
+}
+
+Property<std::string> useProperty(const char *value) {
+    return Property<std::string>(value);
+}
+
+void quitApp() {
+    App::quit();
+}
+
+std::string readLine() {
+    nocbreak();
+    int ch;
+    std::string input;
+
+    do {
+        ch = getch();
+        input.push_back(ch);
+    } while (ch != '\n');
+
+    cbreak();
+    return input;
+}
+
+void onKeyPress(const Key &key, const std::function<void()> &callback) {
+    Input::onKeyPress(key, callback);
 }
