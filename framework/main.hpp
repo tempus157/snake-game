@@ -5,7 +5,6 @@
 #include "./core/Object.hpp"
 #include "./core/Property.hpp"
 #include "./lib/Color.hpp"
-#include "./lib/ColorPair.hpp"
 #include "./lib/Key.hpp"
 #include "./lib/Vector.hpp"
 
@@ -14,11 +13,7 @@
 #include <string>
 
 Object label(const Property<std::string> &text);
-Object label(const Property<std::string> &text, const Property<Vector2> &position);
-Object label(const Property<std::string> &text, const Property<ColorPair> &color);
-
-Object label(const Property<std::string> &text, const Property<Vector2> &position,
-    const Property<ColorPair> &color);
+Object label(const Property<std::string> &text, const Property<Color> &color);
 
 Object $goto(const Property<Vector2> &position);
 Object $if(const Property<bool> &condition, const Object &ifTrue);

@@ -1,6 +1,6 @@
 #include "AppData.hpp"
 
-#include "../lib/ColorPair.hpp"
+#include "ColorUtility.hpp"
 #include "Input.hpp"
 
 #include <clocale>
@@ -41,7 +41,7 @@ void AppData::mount() {
 
     resize_term(scale.y, scale.x);
     Input::mount();
-    ColorPair::mount();
+    ColorUtility::mount();
 }
 
 void AppData::update() const {

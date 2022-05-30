@@ -1,6 +1,7 @@
 #include "main.hpp"
 
 #include "./internal/AppData.hpp"
+#include "./internal/ColorUtility.hpp"
 #include "./internal/Input.hpp"
 
 #include <memory>
@@ -14,30 +15,11 @@ Object label(const Property<std::string> &text) {
     return Object(update);
 }
 
-Object label(const Property<std::string> &text, const Property<Vector2> &position) {
+Object label(const Property<std::string> &text, const Property<Color> &color) {
     auto update = [=](const Vector2 &origin) {
-        mvprintw(position->y, position->x, text->c_str());
-    };
-
-    return Object(update);
-}
-
-Object label(const Property<std::string> &text, const Property<ColorPair> &color) {
-    auto update = [=](const Vector2 &origin) {
-        attron(COLOR_PAIR(color->getAttribute()));
+        attron(COLOR_PAIR(ColorUtility::getAttribute(*color, Color::Black)));
         printw(text->c_str());
-        attroff(COLOR_PAIR(color->getAttribute()));
-    };
-
-    return Object(update);
-}
-
-Object label(const Property<std::string> &text, const Property<Vector2> &position,
-    const Property<ColorPair> &color) {
-    auto update = [=](const Vector2 &origin) {
-        attron(COLOR_PAIR(color->getAttribute()));
-        mvprintw(position->y, position->x, text->c_str());
-        attroff(COLOR_PAIR(color->getAttribute()));
+        attroff(COLOR_PAIR(ColorUtility::getAttribute(*color, Color::Black)));
     };
 
     return Object(update);
