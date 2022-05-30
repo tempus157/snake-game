@@ -1,9 +1,6 @@
 #include "../main.hpp"
 
 Window myWindow(const Vector &position, const Vector &scale) {
-    auto border = Border('*');
-    border.color = ColorPair(Color::Yellow, Color::Black);
-
     auto titleText = useProperty("Hello, World!");
 
     onKeyPress(Key::Escape, [] {
@@ -15,9 +12,10 @@ Window myWindow(const Vector &position, const Vector &scale) {
         titleText = text;
     });
 
-    return createWindow(position, scale)
-        .setColor(Color::Blue, Color::Red)
-        .useObject(label(titleText, Vector(1, 1), ColorPair(Color::Red, Color::Blue)))
-        .useObject(counter("Count: "))
-        .done();
+    return Window(
+        position, scale,
+        {
+            label(titleText, Vector(1, 1), ColorPair(Color::Red, Color::Blue)),
+            counter("Count: "),
+        });
 }

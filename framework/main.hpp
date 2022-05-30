@@ -14,7 +14,6 @@
 #include <memory>
 #include <string>
 
-WindowData &createWindow(const Vector &position, const Vector &scale);
 Object createObject(std::vector<const Object> objects);
 
 Object label(const Property<std::string> &text);

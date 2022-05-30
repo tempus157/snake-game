@@ -4,10 +4,6 @@
 #include "./internal/Input.hpp"
 #include <memory>
 
-WindowData &createWindow(const Vector &position, const Vector &scale) {
-    return *new WindowData(position, scale);
-}
-
 Object createObject(std::vector<const Object> objects) {
     const auto update = [=](WINDOW *window) {
         for (auto object : objects) {
