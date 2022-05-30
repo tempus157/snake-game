@@ -13,9 +13,10 @@
 #include <memory>
 #include <string>
 
-ObjectData &createObject();
-WindowData &createWindow(const Vector &position, const Vector &scale);
 App &createApp();
+WindowData &createWindow(const Vector &position, const Vector &scale);
+Object createObject(std::vector<const Object> objects);
+
 Object label(const Property<std::string> &text);
 Object label(const Property<std::string> &text, const Property<Vector> &position);
 Object label(const Property<std::string> &text, const Property<ColorPair> &color);
@@ -45,7 +46,7 @@ Property<T> useProperty() {
     return Property<T>();
 }
 
-template <typename T>
+template <typename T, T... Is>
 Property<T> useProperty(const T &value) {
     return Property<T>(value);
 }

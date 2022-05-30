@@ -1,16 +1,28 @@
 #include "main.hpp"
 #include <memory>
 
-ObjectData &createObject() {
-    return *new ObjectData();
+App &createApp() {
+    return *new App();
 }
 
 WindowData &createWindow(const Vector &position, const Vector &scale) {
     return *new WindowData(position, scale);
 }
 
-App &createApp() {
-    return *new App();
+Object createObject(std::vector<const Object> objects) {
+    const auto update = [=](WINDOW *window) {
+        for (auto object : objects) {
+            object.update(window);
+        }
+    };
+
+    const auto destroy = [=] {
+        for (auto object : objects) {
+            object.destroy();
+        }
+    };
+
+    return Object(update, destroy);
 }
 
 Object label(const Property<std::string> &text) {
