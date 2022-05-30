@@ -6,13 +6,17 @@ Object counter(const Property<string> &text) {
     auto isCountEven = Property<bool>(*count % 2 == 0);
     auto countList = Property<std::vector<int>>();
 
-    onUpdate(text, count, [=]() mutable {
-        countText = *text + std::to_string(*count);
-    });
+    onUpdate(
+        [=]() mutable {
+            countText = *text + std::to_string(*count);
+        },
+        text, count);
 
-    onUpdate(count, [=]() mutable {
-        isCountEven = *count % 2 == 0;
-    });
+    onUpdate(
+        [=]() mutable {
+            isCountEven = *count % 2 == 0;
+        },
+        count);
 
     onKeyPress(Key::UpArrow, [=]() mutable {
         count = *count + 1;

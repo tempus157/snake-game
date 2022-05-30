@@ -46,96 +46,16 @@ void quitApp();
 std::string readLine();
 void onKeyPress(const Key &key, const std::function<void()> &callback);
 
-#pragma region onUpdate
-
-template <typename T1>
-void onUpdate(const Property<T1> &dep1, const std::function<void()> &callback) {
-    PropertyEvent::onUpdate(dep1, callback);
+template <typename T>
+void onUpdate(const std::function<void()> &callback, const Property<T> &dep) {
+    PropertyEvent::onUpdate(dep, callback);
 }
 
-template <typename T1, typename T2>
-void onUpdate(const Property<T1> &dep1, const Property<T2> &dep2,
-    const std::function<void()> &callback) {
-    PropertyEvent::onUpdate(dep1, callback);
-    PropertyEvent::onUpdate(dep1, callback);
-    PropertyEvent::onUpdate(dep2, callback);
+template <typename TDep, typename... TDeps>
+void onUpdate(const std::function<void()> &callback,
+    const Property<TDep> &dep, const Property<TDeps> &...deps) {
+    PropertyEvent::onUpdate(dep, callback);
+    onUpdate(callback, deps...);
 }
-
-template <typename T1, typename T2, typename T3>
-void onUpdate(const Property<T1> &dep1, const Property<T2> &dep2,
-    const Property<T3> &dep3, const std::function<void()> &callback) {
-    PropertyEvent::onUpdate(dep1, callback);
-    PropertyEvent::onUpdate(dep2, callback);
-    PropertyEvent::onUpdate(dep3, callback);
-}
-
-template <typename T1, typename T2, typename T3, typename T4>
-void onUpdate(const Property<T1> &dep1, const Property<T2> &dep2,
-    const Property<T3> &dep3, const Property<T4> &dep4,
-    const std::function<void()> &callback) {
-    PropertyEvent::onUpdate(dep1, callback);
-    PropertyEvent::onUpdate(dep2, callback);
-    PropertyEvent::onUpdate(dep3, callback);
-    PropertyEvent::onUpdate(dep4, callback);
-}
-
-template <typename T1, typename T2, typename T3, typename T4, typename T5>
-void onUpdate(const Property<T1> &dep1, const Property<T2> &dep2,
-    const Property<T3> &dep3, const Property<T4> &dep4,
-    const Property<T5> &dep5, const std::function<void()> &callback) {
-    PropertyEvent::onUpdate(dep1, callback);
-    PropertyEvent::onUpdate(dep2, callback);
-    PropertyEvent::onUpdate(dep3, callback);
-    PropertyEvent::onUpdate(dep4, callback);
-    PropertyEvent::onUpdate(dep5, callback);
-}
-
-template <typename T1, typename T2, typename T3,
-    typename T4, typename T5, typename T6>
-void onUpdate(const Property<T1> &dep1, const Property<T2> &dep2,
-    const Property<T3> &dep3, const Property<T4> &dep4,
-    const Property<T5> &dep5, const Property<T6> &dep6,
-    const std::function<void()> &callback) {
-    PropertyEvent::onUpdate(dep1, callback);
-    PropertyEvent::onUpdate(dep2, callback);
-    PropertyEvent::onUpdate(dep3, callback);
-    PropertyEvent::onUpdate(dep4, callback);
-    PropertyEvent::onUpdate(dep5, callback);
-    PropertyEvent::onUpdate(dep6, callback);
-}
-
-template <typename T1, typename T2, typename T3,
-    typename T4, typename T5, typename T6, typename T7>
-void onUpdate(const Property<T1> &dep1, const Property<T2> &dep2,
-    const Property<T3> &dep3, const Property<T4> &dep4,
-    const Property<T5> &dep5, const Property<T6> &dep6,
-    const Property<T7> &dep7, const std::function<void()> &callback) {
-    PropertyEvent::onUpdate(dep1, callback);
-    PropertyEvent::onUpdate(dep2, callback);
-    PropertyEvent::onUpdate(dep3, callback);
-    PropertyEvent::onUpdate(dep4, callback);
-    PropertyEvent::onUpdate(dep5, callback);
-    PropertyEvent::onUpdate(dep6, callback);
-    PropertyEvent::onUpdate(dep7, callback);
-}
-
-template <typename T1, typename T2, typename T3, typename T4,
-    typename T5, typename T6, typename T7, typename T8>
-void onUpdate(const Property<T1> &dep1, const Property<T2> &dep2,
-    const Property<T3> &dep3, const Property<T4> &dep4,
-    const Property<T5> &dep5, const Property<T6> &dep6,
-    const Property<T7> &dep7, const Property<T8> &dep8,
-    const std::function<void()> &callback) {
-    PropertyEvent::onUpdate(dep1, callback);
-    PropertyEvent::onUpdate(dep2, callback);
-    PropertyEvent::onUpdate(dep3, callback);
-    PropertyEvent::onUpdate(dep4, callback);
-    PropertyEvent::onUpdate(dep5, callback);
-    PropertyEvent::onUpdate(dep6, callback);
-    PropertyEvent::onUpdate(dep7, callback);
-    PropertyEvent::onUpdate(dep8, callback);
-}
-
-#pragma endregion
 
 #endif
