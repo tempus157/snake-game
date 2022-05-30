@@ -1,14 +1,57 @@
 #ifndef __FRAMEWORK_WINDOW__
 #define __FRAMEWORK_WINDOW__
 
-#include "color.hpp"
-#include "object.hpp"
-#include "optional.hpp"
-#include "vector.hpp"
+#include "../library/Color.hpp"
+#include "../library/ColorPair.hpp"
+#include "../library/Vector.hpp"
+#include "Object.hpp"
 
 #include <functional>
 #include <ncurses.h>
 #include <vector>
+
+template <typename T>
+class Optional {
+public:
+    Optional() : hasValue(false) {}
+    Optional(const std::nullptr_t &value) : Optional() {}
+    Optional(const T &value) : value(value), hasValue(true) {}
+
+    operator bool() const {
+        return hasValue;
+    }
+
+    T operator*() const {
+        if (!hasValue) {
+            throw std::runtime_error("Optional does not have a value");
+        }
+
+        return value;
+    }
+
+    const T *operator->() const {
+        if (!hasValue) {
+            throw std::runtime_error("Optional does not have a value");
+        }
+
+        return &value;
+    }
+
+    Optional<T> &operator=(const std::nullptr_t &value) {
+        hasValue = false;
+        return *this;
+    }
+
+    Optional<T> &operator=(const T &value) {
+        this->value = value;
+        this->hasValue = true;
+        return *this;
+    }
+
+private:
+    T value;
+    bool hasValue;
+};
 
 class Border final {
 public:

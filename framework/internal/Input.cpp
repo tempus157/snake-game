@@ -1,4 +1,4 @@
-#include "input.hpp"
+#include "Input.hpp"
 
 #include <ncurses.h>
 

@@ -1,4 +1,4 @@
-#include "vector.hpp"
+#include "Vector.hpp"
 
 const Vector Vector::Zero = Vector(0, 0);
 const Vector Vector::One = Vector(1, 1);

@@ -1,13 +1,14 @@
 #ifndef __FRAMEWORK__
 #define __FRAMEWORK__
 
-#include "./core/app.hpp"
-#include "./core/color.hpp"
-#include "./core/object.hpp"
-#include "./core/optional.hpp"
-#include "./core/property.hpp"
-#include "./core/vector.hpp"
-#include "./core/window.hpp"
+#include "./library/Color.hpp"
+#include "./library/ColorPair.hpp"
+#include "./library/Key.hpp"
+#include "./library/Vector.hpp"
+#include "./scripts/App.hpp"
+#include "./scripts/Object.hpp"
+#include "./scripts/Property.hpp"
+#include "./scripts/Window.hpp"
 
 #include <functional>
 #include <memory>

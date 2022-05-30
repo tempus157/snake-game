@@ -1,8 +1,8 @@
 #ifndef __FRAMEWORK_OBJECT__
 #define __FRAMEWORK_OBJECT__
 
-#include "color.hpp"
-#include "vector.hpp"
+#include "../library/Color.hpp"
+#include "../library/Vector.hpp"
 
 #include <functional>
 #include <ncurses.h>

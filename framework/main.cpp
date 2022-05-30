@@ -1,4 +1,7 @@
 #include "main.hpp"
+
+#include "./internal/AppData.hpp"
+#include "./internal/Input.hpp"
 #include <memory>
 
 App &createApp() {
@@ -105,7 +108,7 @@ Property<std::string> useProperty(const char *value) {
 }
 
 void quitApp() {
-    App::quit();
+    AppData::getInstance().quit();
 }
 
 std::string readLine() {
