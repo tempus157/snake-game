@@ -8,13 +8,14 @@ App &App::setScale(const Vector2 &scale) {
     return *this;
 }
 
-App &App::useWindow(const Window &window) {
-    AppData::getInstance().useWindow(window);
+App &App::useObject(const Object &object) {
+    AppData::getInstance().useObject(object);
     return *this;
 }
 
 int App::run() const {
     AppData::getInstance().mount();
+    AppData::getInstance().update();
     AppData::getInstance().receiveInput();
     AppData::getInstance().destroy();
     return 0;

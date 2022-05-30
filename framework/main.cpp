@@ -2,89 +2,75 @@
 
 #include "./internal/AppData.hpp"
 #include "./internal/Input.hpp"
+
 #include <memory>
-
-Object createObject(std::vector<const Object> objects) {
-    const auto update = [=](WINDOW *window) {
-        for (auto object : objects) {
-            object.update(window);
-        }
-    };
-
-    const auto destroy = [=] {
-        for (auto object : objects) {
-            object.destroy();
-        }
-    };
-
-    return Object(update, destroy);
-}
+#include <ncurses.h>
 
 Object label(const Property<std::string> &text) {
-    auto update = [=](WINDOW *window) {
-        wprintw(window, text->c_str());
+    auto update = [=](const Vector2 &origin) {
+        printw(text->c_str());
     };
 
-    return Object(update, [] {});
+    return Object(update);
 }
 
 Object label(const Property<std::string> &text, const Property<Vector2> &position) {
-    auto update = [=](WINDOW *window) {
-        mvwprintw(window, position->y, position->x, text->c_str());
+    auto update = [=](const Vector2 &origin) {
+        mvprintw(position->y, position->x, text->c_str());
     };
 
-    return Object(update, [] {});
+    return Object(update);
 }
 
 Object label(const Property<std::string> &text, const Property<ColorPair> &color) {
-    auto update = [=](WINDOW *window) {
-        wattron(window, COLOR_PAIR(color->getAttribute()));
-        wprintw(window, text->c_str());
-        wattroff(window, COLOR_PAIR(color->getAttribute()));
+    auto update = [=](const Vector2 &origin) {
+        attron(COLOR_PAIR(color->getAttribute()));
+        printw(text->c_str());
+        attroff(COLOR_PAIR(color->getAttribute()));
     };
 
-    return Object(update, [] {});
+    return Object(update);
 }
 
 Object label(const Property<std::string> &text, const Property<Vector2> &position,
     const Property<ColorPair> &color) {
-    auto update = [=](WINDOW *window) {
-        wattron(window, COLOR_PAIR(color->getAttribute()));
-        mvwprintw(window, position->y, position->x, text->c_str());
-        wattroff(window, COLOR_PAIR(color->getAttribute()));
+    auto update = [=](const Vector2 &origin) {
+        attron(COLOR_PAIR(color->getAttribute()));
+        mvprintw(position->y, position->x, text->c_str());
+        attroff(COLOR_PAIR(color->getAttribute()));
     };
 
-    return Object(update, [] {});
+    return Object(update);
 }
 
 Object $goto(const Property<Vector2> &position) {
-    auto update = [=](WINDOW *window) {
-        wmove(window, position->y, position->x);
+    auto update = [=](const Vector2 &origin) {
+        move(origin.y + position->y, origin.x + position->x);
     };
 
-    return Object(update, [] {});
+    return Object(update);
 }
 
 Object $if(const Property<bool> &condition, const Object &ifTrue) {
-    auto update = [=](WINDOW *window) {
+    auto update = [=](const Vector2 &origin) {
         if (*condition) {
-            ifTrue.update(window);
+            ifTrue.update(origin);
         }
     };
 
-    return Object(update, [] {});
+    return Object(update);
 }
 
 Object $if(const Property<bool> &condition, const Object &ifTrue, const Object &ifFalse) {
-    auto update = [=](WINDOW *window) {
+    auto update = [=](const Vector2 &origin) {
         if (*condition) {
-            ifTrue.update(window);
+            ifTrue.update(origin);
         } else {
-            ifFalse.update(window);
+            ifFalse.update(origin);
         }
     };
 
-    return Object(update, [] {});
+    return Object(update);
 }
 
 Property<std::string> useProperty(const char *value) {

@@ -27,10 +27,11 @@ Object counter(const Property<std::string> &text) {
         countList = *countList;
     });
 
-    return createObject({
-        label(countText, Vector2(1, 2)),
-        $if(isCountEven, label("Even", Vector2(1, 3)), label("Odd", Vector2(1, 3))),
-        $goto(Vector2(1, 4)),
+    return Object({
+        label(countText),
+        $goto(Vector2(2, 1)),
+        $if(isCountEven, label("Even"), label("Odd")),
+        $goto(Vector2(2, 2)),
         $for(countList, [](const int &item) {
             return label(std::to_string(item));
         }),

@@ -1,6 +1,6 @@
 #include "../main.hpp"
 
-Window myWindow() {
+Object myObject() {
     auto titleText = useProperty("Hello, World!");
 
     onKeyPress(Key::Escape, [] {
@@ -12,8 +12,9 @@ Window myWindow() {
         titleText = text;
     });
 
-    return Window({
-        label(titleText, Vector2(1, 1), ColorPair(Color::Red, Color::Blue)),
+    return Object({
+        label(titleText, ColorPair(Color::Red, Color::Blue)),
+        $goto(Vector2(2, 1)),
         counter("Count: "),
     });
 }

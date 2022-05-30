@@ -4,7 +4,6 @@
 #include "./core/App.hpp"
 #include "./core/Object.hpp"
 #include "./core/Property.hpp"
-#include "./core/Window.hpp"
 #include "./lib/Color.hpp"
 #include "./lib/ColorPair.hpp"
 #include "./lib/Key.hpp"
@@ -13,8 +12,6 @@
 #include <functional>
 #include <memory>
 #include <string>
-
-Object createObject(std::vector<const Object> objects);
 
 Object label(const Property<std::string> &text);
 Object label(const Property<std::string> &text, const Property<Vector2> &position);
@@ -29,13 +26,13 @@ Object $if(const Property<bool> &condition, const Object &ifTrue, const Object &
 
 template <typename TCollection, typename TCallback>
 Object $for(const Property<TCollection> &collection, const TCallback &callback) {
-    auto update = [=](WINDOW *window) {
+    auto update = [=](const Vector2 &origin) {
         for (const auto &item : *collection) {
-            callback(item).update(window);
+            callback(item).update(origin);
         }
     };
 
-    return Object(update, [] {});
+    return Object(update);
 }
 
 template <typename T>

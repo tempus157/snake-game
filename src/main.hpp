@@ -1,4 +1,4 @@
 #include "../framework/main.hpp"
 
-Window myWindow();
+Object myObject();
 Object counter(const Property<std::string> &text);

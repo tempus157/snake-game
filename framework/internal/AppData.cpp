@@ -1,9 +1,7 @@
 #include "AppData.hpp"
 
-#include "../core/Window.hpp"
 #include "../lib/ColorPair.hpp"
 #include "Input.hpp"
-#include "WindowData.hpp"
 
 #include <clocale>
 #include <ncurses.h>
@@ -22,36 +20,36 @@ void AppData::setScale(const Vector2 &scale) {
     this->scale.y = scale.y;
 }
 
-void AppData::useWindow(const Window &window) {
-    windows.push_back(window);
+void AppData::useObject(const Object &object) {
+    objects.push_back(object);
 }
 
 void AppData::quit() {
     progress = false;
 }
 
-void AppData::mount() const {
+void AppData::mount() {
     setlocale(LC_ALL, "");
     initscr();
 
-    const auto x = scale.x > 0 ? scale.x : getmaxx(stdscr);
-    const auto y = scale.y > 0 ? scale.y : getmaxy(stdscr);
-    resize_term(y, x);
+    if (scale.x < 1) {
+        scale.x = getmaxx(stdscr);
+    }
+    if (scale.y < 1) {
+        scale.y = getmaxy(stdscr);
+    }
 
+    resize_term(scale.y, scale.x);
     Input::mount();
     ColorPair::mount();
-    refresh();
-
-    for (const auto &window : windows) {
-        window.data->mount();
-    }
-    update();
 }
 
 void AppData::update() const {
-    for (const auto &window : windows) {
-        window.data->update();
+    clear();
+    for (const auto &object : objects) {
+        object.update(Vector2::Zero);
     }
+    refresh();
 }
 
 void AppData::receiveInput() const {
@@ -62,8 +60,5 @@ void AppData::receiveInput() const {
 }
 
 void AppData::destroy() const {
-    for (const auto &window : windows) {
-        window.data->destroy();
-    }
     endwin();
 }

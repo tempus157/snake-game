@@ -2,15 +2,12 @@
 #define __FRAMEWORK_APP__
 
 #include "../lib/Vector.hpp"
-#include "Window.hpp"
-
-#include <functional>
-#include <vector>
+#include "Object.hpp"
 
 class App final {
 public:
     App &setScale(const Vector2 &scale);
-    App &useWindow(const Window &window);
+    App &useObject(const Object &object);
     int run() const;
 
     // TEMP
