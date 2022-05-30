@@ -12,6 +12,10 @@ public:
     ColorUtility &operator=(ColorUtility &&) = delete;
 
     static void mount();
+    static void enableColor(const Color &foreground, const Color &background);
+    static void disableColor(const Color &foreground, const Color &background);
+
+private:
     static short getAttribute(const Color &foreground, const Color &background);
 };
 

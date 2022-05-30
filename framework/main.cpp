@@ -7,18 +7,32 @@
 #include <memory>
 #include <ncurses.h>
 
-Object panel(const Property<Vector2> &scale, const Property<Color> &color) {
+Object panel(const Property<char> &ch, const Property<Vector2> &scale) {
     auto update = [=](const Vector2 &origin) {
         const auto current = Vector2(getcurx(stdscr), getcury(stdscr));
-        attron(COLOR_PAIR(ColorUtility::getAttribute(*color, *color)));
+        for (auto y = 0; y < scale->y; ++y) {
+            for (auto x = 0; x < scale->x; ++x) {
+                mvaddch(current.y + y, current.x + x, *ch);
+            }
+        }
+    };
+
+    return Object(update);
+}
+
+Object panel(const Property<char> &ch, const Property<Vector2> &scale,
+    const Property<Color> &foreground, const Property<Color> &background) {
+    auto update = [=](const Vector2 &origin) {
+        const auto current = Vector2(getcurx(stdscr), getcury(stdscr));
+        ColorUtility::enableColor(*foreground, *background);
 
         for (auto y = 0; y < scale->y; ++y) {
             for (auto x = 0; x < scale->x; ++x) {
-                mvaddch(current.y + y, current.x + x, ' ');
+                mvaddch(current.y + y, current.x + x, *ch);
             }
         }
 
-        attroff(COLOR_PAIR(ColorUtility::getAttribute(*color, *color)));
+        ColorUtility::disableColor(*foreground, *background);
     };
 
     return Object(update);
@@ -35,9 +49,9 @@ Object label(const Property<std::string> &text) {
 Object label(const Property<std::string> &text,
     const Property<Color> &foreground, const Property<Color> &background) {
     auto update = [=](const Vector2 &origin) {
-        attron(COLOR_PAIR(ColorUtility::getAttribute(*foreground, *background)));
+        ColorUtility::enableColor(*foreground, *background);
         printw(text->c_str());
-        attroff(COLOR_PAIR(ColorUtility::getAttribute(*foreground, *background)));
+        ColorUtility::disableColor(*foreground, *background);
     };
 
     return Object(update);

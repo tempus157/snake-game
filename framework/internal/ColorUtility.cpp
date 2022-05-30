@@ -2,12 +2,6 @@
 
 #include <ncurses.h>
 
-short ColorUtility::getAttribute(const Color &foreground, const Color &background) {
-    auto const lhs = static_cast<int>(foreground) * 10;
-    auto const rhs = static_cast<int>(background);
-    return lhs + rhs;
-}
-
 void ColorUtility::mount() {
     start_color();
 
@@ -18,4 +12,18 @@ void ColorUtility::mount() {
             init_pair(attribute, foreground, background);
         }
     }
+}
+
+void ColorUtility::enableColor(const Color &foreground, const Color &background) {
+    attron(COLOR_PAIR(getAttribute(foreground, background)));
+}
+
+void ColorUtility::disableColor(const Color &foreground, const Color &background) {
+    attroff(COLOR_PAIR(getAttribute(foreground, background)));
+}
+
+short ColorUtility::getAttribute(const Color &foreground, const Color &background) {
+    auto const lhs = static_cast<int>(foreground) * 10;
+    auto const rhs = static_cast<int>(background);
+    return lhs + rhs;
 }
