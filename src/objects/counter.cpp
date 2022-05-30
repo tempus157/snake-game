@@ -1,10 +1,10 @@
 #include "../main.hpp"
 
-Object counter(const Property<std::string> &text) {
-    auto count = useProperty(0);
-    auto countText = useProperty("Counter here!");
-    auto isCountEven = useProperty(*count % 2 == 0);
-    auto countList = useProperty<std::vector<int>>();
+Object counter(const Property<string> &text) {
+    auto count = Property<int>(0);
+    auto countText = Property<string>("Counter here!");
+    auto isCountEven = Property<bool>(*count % 2 == 0);
+    auto countList = Property<std::vector<int>>();
 
     onUpdate(text, count, [=]() mutable {
         countText = *text + std::to_string(*count);

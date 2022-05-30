@@ -30,12 +30,6 @@ public:
         return *this;
     }
 
-    Property<std::string> &operator=(const char *value) {
-        *this->value = value;
-        notifyUpdate();
-        return *this;
-    }
-
     static void onUpdate(const Property<T> state,
         const std::function<void()> &callback) {
         updateCallbacks[state.value.get()].push_back(callback);

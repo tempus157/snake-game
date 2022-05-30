@@ -12,8 +12,10 @@
 #include <memory>
 #include <string>
 
-Object label(const Property<std::string> &text);
-Object label(const Property<std::string> &text,
+using std::string;
+
+Object label(const Property<string> &text);
+Object label(const Property<string> &text,
     const Property<Color> &foreground, const Property<Color> &background);
 
 Object box(const Property<char> &ch, const Property<Vector2> &scale);
@@ -38,18 +40,6 @@ Object $for(const Property<TCollection> &collection, const TCallback &callback) 
 
     return Object(update);
 }
-
-template <typename T>
-Property<T> useProperty() {
-    return Property<T>();
-}
-
-template <typename T, T... Is>
-Property<T> useProperty(const T &value) {
-    return Property<T>(value);
-}
-
-Property<std::string> useProperty(const char *value);
 
 void quitApp();
 std::string readLine();

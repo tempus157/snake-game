@@ -1,7 +1,7 @@
 #include "../main.hpp"
 
 Object myObject() {
-    auto titleText = useProperty("Hello, world!");
+    auto titleText = Property<string>("Hello, world!");
 
     onKeyPress(Key::Escape, [] {
         quitApp();

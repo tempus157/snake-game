@@ -9,7 +9,7 @@
 
 #undef border
 
-Object label(const Property<std::string> &text) {
+Object label(const Property<string> &text) {
     auto update = [=](const Vector2 &origin) {
         printw(text->c_str());
     };
@@ -17,7 +17,7 @@ Object label(const Property<std::string> &text) {
     return Object(update);
 }
 
-Object label(const Property<std::string> &text,
+Object label(const Property<string> &text,
     const Property<Color> &foreground, const Property<Color> &background) {
     auto update = [=](const Vector2 &origin) {
         ColorUtility::enableColor(*foreground, *background);
@@ -122,18 +122,14 @@ Object $if(const Property<bool> &condition, const Object &ifTrue, const Object &
     return Object(update);
 }
 
-Property<std::string> useProperty(const char *value) {
-    return Property<std::string>(value);
-}
-
 void quitApp() {
     AppData::getInstance().quit();
 }
 
-std::string readLine() {
+string readLine() {
     nocbreak();
     int ch;
-    std::string input;
+    string input;
 
     do {
         ch = getch();
