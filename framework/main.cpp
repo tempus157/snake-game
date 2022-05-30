@@ -7,7 +7,28 @@
 #include <memory>
 #include <ncurses.h>
 
-Object panel(const Property<char> &ch, const Property<Vector2> &scale) {
+#undef border
+
+Object label(const Property<std::string> &text) {
+    auto update = [=](const Vector2 &origin) {
+        printw(text->c_str());
+    };
+
+    return Object(update);
+}
+
+Object label(const Property<std::string> &text,
+    const Property<Color> &foreground, const Property<Color> &background) {
+    auto update = [=](const Vector2 &origin) {
+        ColorUtility::enableColor(*foreground, *background);
+        printw(text->c_str());
+        ColorUtility::disableColor(*foreground, *background);
+    };
+
+    return Object(update);
+}
+
+Object box(const Property<char> &ch, const Property<Vector2> &scale) {
     auto update = [=](const Vector2 &origin) {
         const auto current = Vector2(getcurx(stdscr), getcury(stdscr));
         for (auto y = 0; y < scale->y; ++y) {
@@ -20,7 +41,7 @@ Object panel(const Property<char> &ch, const Property<Vector2> &scale) {
     return Object(update);
 }
 
-Object panel(const Property<char> &ch, const Property<Vector2> &scale,
+Object box(const Property<char> &ch, const Property<Vector2> &scale,
     const Property<Color> &foreground, const Property<Color> &background) {
     auto update = [=](const Vector2 &origin) {
         const auto current = Vector2(getcurx(stdscr), getcury(stdscr));
@@ -38,19 +59,33 @@ Object panel(const Property<char> &ch, const Property<Vector2> &scale,
     return Object(update);
 }
 
-Object label(const Property<std::string> &text) {
+Object border(const Property<char> &ch, const Property<Vector2> &scale) {
     auto update = [=](const Vector2 &origin) {
-        printw(text->c_str());
+        const auto current = Vector2(getcurx(stdscr), getcury(stdscr));
+        for (auto y = 0; y < scale->y; ++y) {
+            for (auto x = 0; x < scale->x; ++x) {
+                if (x == 0 || y == 0 || x == scale->x - 1 || y == scale->y - 1) {
+                    mvaddch(current.y + y, current.x + x, *ch);
+                }
+            }
+        }
     };
 
     return Object(update);
 }
 
-Object label(const Property<std::string> &text,
+Object border(const Property<char> &ch, const Property<Vector2> &scale,
     const Property<Color> &foreground, const Property<Color> &background) {
     auto update = [=](const Vector2 &origin) {
+        const auto current = Vector2(getcurx(stdscr), getcury(stdscr));
         ColorUtility::enableColor(*foreground, *background);
-        printw(text->c_str());
+
+        for (auto y = 0; y < scale->y; ++y) {
+            for (auto x = 0; x < scale->x; ++x) {
+                mvaddch(current.y + y, current.x + x, *ch);
+            }
+        }
+
         ColorUtility::disableColor(*foreground, *background);
     };
 

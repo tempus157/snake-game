@@ -12,15 +12,16 @@
 #include <memory>
 #include <string>
 
-// 1. 글자만 있는 패널
-// 2. 글자, 색깔 있는 패널
-
-Object panel(const Property<char> &ch, const Property<Vector2> &scale);
-Object panel(const Property<char> &ch, const Property<Vector2> &scale,
-    const Property<Color> &foreground, const Property<Color> &background);
-
 Object label(const Property<std::string> &text);
 Object label(const Property<std::string> &text,
+    const Property<Color> &foreground, const Property<Color> &background);
+
+Object box(const Property<char> &ch, const Property<Vector2> &scale);
+Object box(const Property<char> &ch, const Property<Vector2> &scale,
+    const Property<Color> &foreground, const Property<Color> &background);
+
+Object border(const Property<char> &ch, const Property<Vector2> &scale);
+Object border(const Property<char> &ch, const Property<Vector2> &scale,
     const Property<Color> &foreground, const Property<Color> &background);
 
 Object $goto(const Property<Vector2> &position);
