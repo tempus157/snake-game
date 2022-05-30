@@ -11,7 +11,7 @@
 template <typename T>
 class Property;
 
-class PropertyEvent {
+class PropertyEvent final {
 public:
     template <typename T>
     static void onUpdate(const Property<T> property,
