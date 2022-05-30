@@ -4,6 +4,7 @@ Object myObject() {
     auto titleText = Property<string>("Hello, world!");
 
     onKeyPress(Key::Q, [] {
+        soundBeep();
         quitApp();
     });
 

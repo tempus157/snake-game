@@ -43,6 +43,7 @@ Object $for(const Property<TCollection> &collection, const TCallback &callback) 
 }
 
 void quitApp();
+void soundBeep();
 std::string readLine();
 void onKeyPress(const Key &key, const std::function<void()> &callback);
 

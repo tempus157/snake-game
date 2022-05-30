@@ -126,6 +126,10 @@ void quitApp() {
     AppData::getInstance().quit();
 }
 
+void soundBeep() {
+    beep();
+}
+
 string readLine() {
     nocbreak();
     int ch;
