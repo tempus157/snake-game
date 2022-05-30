@@ -4,10 +4,6 @@
 #include "./internal/Input.hpp"
 #include <memory>
 
-App &createApp() {
-    return *new App();
-}
-
 WindowData &createWindow(const Vector &position, const Vector &scale) {
     return *new WindowData(position, scale);
 }
