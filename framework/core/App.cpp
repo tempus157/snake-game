@@ -20,8 +20,3 @@ int App::run() const {
     AppData::getInstance().destroy();
     return 0;
 }
-
-// TEMP
-void App::update() {
-    AppData::getInstance().update();
-}

@@ -2,6 +2,7 @@
 #define __FRAMEWORK_PROPERTY__
 
 #include "App.hpp"
+#include "PropertyEvent.hpp"
 
 #include <functional>
 #include <map>
@@ -9,7 +10,7 @@
 #include <vector>
 
 template <typename T>
-class Property {
+class Property final {
 public:
     Property<T>() : value(std::make_shared<T>()) {}
     Property<T>(const T &value) : value(std::make_shared<T>(value)) {}
@@ -26,29 +27,12 @@ public:
 
     Property<T> &operator=(const T &value) {
         *this->value = value;
-        notifyUpdate();
+        PropertyEvent::notifyUpdate(this->value.get());
         return *this;
-    }
-
-    static void onUpdate(const Property<T> state,
-        const std::function<void()> &callback) {
-        updateCallbacks[state.value.get()].push_back(callback);
     }
 
 private:
     std::shared_ptr<T> value;
-    static std::map<T *, std::vector<std::function<void()>>> updateCallbacks;
-
-    void notifyUpdate() const {
-        for (const auto &callback : updateCallbacks[value.get()]) {
-            callback();
-        }
-        App::update();
-    }
 };
-
-template <typename T>
-std::map<T *, std::vector<std::function<void()>>>
-    Property<T>::updateCallbacks = {};
 
 #endif

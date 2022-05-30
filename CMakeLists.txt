@@ -13,6 +13,7 @@ add_executable (
     framework/main.cpp
     framework/core/App.cpp
     framework/core/Object.cpp
+    framework/core/PropertyEvent.cpp
     framework/internal/AppData.cpp
     framework/internal/ColorUtility.cpp
     framework/internal/Input.cpp

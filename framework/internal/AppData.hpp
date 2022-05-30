@@ -25,6 +25,7 @@ private:
     bool progress = true;
     Vector2 scale = Vector2(-1, -1);
     std::vector<const Object> objects;
+    AppData();
 };
 
 #endif

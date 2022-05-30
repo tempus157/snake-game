@@ -9,9 +9,6 @@ public:
     App &setScale(const Vector2 &scale);
     App &useObject(const Object &object);
     int run() const;
-
-    // TEMP
-    static void update();
 };
 
 #endif

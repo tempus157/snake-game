@@ -1,10 +1,15 @@
 #include "AppData.hpp"
 
+#include "../core/PropertyEvent.hpp"
 #include "ColorUtility.hpp"
 #include "Input.hpp"
 
 #include <clocale>
 #include <ncurses.h>
+
+AppData::AppData() {
+    PropertyEvent::onEveryUpdate(std::bind(&AppData::update, this));
+}
 
 AppData &AppData::getInstance() {
     static auto instance = std::unique_ptr<AppData>(new AppData());
