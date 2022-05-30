@@ -18,13 +18,4 @@ public:
         const std::function<void()> &destroy);
 };
 
-class ObjectData final {
-public:
-    ObjectData &useObject(const Object &object);
-    Object done() const;
-
-private:
-    std::vector<const Object> objects;
-};
-
 #endif
