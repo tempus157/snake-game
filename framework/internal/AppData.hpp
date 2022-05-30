@@ -2,6 +2,8 @@
 #define __FRAMEWORK_APP_DATA__
 
 #include "../lib/Vector.hpp"
+
+#include <memory>
 #include <vector>
 
 class Window;
@@ -20,8 +22,6 @@ public:
     void destroy() const;
 
 private:
-    static AppData *instance;
-
     bool progress = true;
     Vector scale;
     std::vector<const Window> windows;

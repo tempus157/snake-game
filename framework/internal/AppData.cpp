@@ -7,12 +7,8 @@
 #include <clocale>
 #include <ncurses.h>
 
-AppData *AppData::instance = nullptr;
-
 AppData &AppData::getInstance() {
-    if (!instance) {
-        instance = new AppData();
-    }
+    static auto instance = std::unique_ptr<AppData>(new AppData());
     return *instance;
 }
 
@@ -61,5 +57,4 @@ void AppData::destroy() const {
         window.destroy();
     }
     endwin();
-    delete this;
 }
