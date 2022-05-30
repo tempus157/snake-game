@@ -28,7 +28,7 @@ Object label(const Property<std::string> &text) {
     return Object(update, [] {});
 }
 
-Object label(const Property<std::string> &text, const Property<Vector> &position) {
+Object label(const Property<std::string> &text, const Property<Vector2> &position) {
     auto update = [=](WINDOW *window) {
         mvwprintw(window, position->y, position->x, text->c_str());
     };
@@ -46,7 +46,7 @@ Object label(const Property<std::string> &text, const Property<ColorPair> &color
     return Object(update, [] {});
 }
 
-Object label(const Property<std::string> &text, const Property<Vector> &position,
+Object label(const Property<std::string> &text, const Property<Vector2> &position,
     const Property<ColorPair> &color) {
     auto update = [=](WINDOW *window) {
         wattron(window, COLOR_PAIR(color->getAttribute()));
@@ -57,7 +57,7 @@ Object label(const Property<std::string> &text, const Property<Vector> &position
     return Object(update, [] {});
 }
 
-Object $goto(const Property<Vector> &position) {
+Object $goto(const Property<Vector2> &position) {
     auto update = [=](WINDOW *window) {
         wmove(window, position->y, position->x);
     };

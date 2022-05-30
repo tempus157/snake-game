@@ -17,13 +17,13 @@
 Object createObject(std::vector<const Object> objects);
 
 Object label(const Property<std::string> &text);
-Object label(const Property<std::string> &text, const Property<Vector> &position);
+Object label(const Property<std::string> &text, const Property<Vector2> &position);
 Object label(const Property<std::string> &text, const Property<ColorPair> &color);
 
-Object label(const Property<std::string> &text, const Property<Vector> &position,
+Object label(const Property<std::string> &text, const Property<Vector2> &position,
     const Property<ColorPair> &color);
 
-Object $goto(const Property<Vector> &position);
+Object $goto(const Property<Vector2> &position);
 Object $goto(const Property<int> &x, const Property<int> &y);
 
 Object $if(const Property<bool> &condition, const Object &ifTrue);

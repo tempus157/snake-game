@@ -4,12 +4,12 @@
 
 Window::Window() : data(std::make_shared<WindowData>()) {}
 
-Window &Window::setPosition(const Vector &position) {
+Window &Window::setPosition(const Vector22 &position) {
     data->setPosition(position);
     return *this;
 }
 
-Window &Window::setScale(const Vector &scale) {
+Window &Window::setScale(const Vector22 &scale) {
     data->setScale(scale);
     return *this;
 }

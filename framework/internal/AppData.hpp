@@ -12,7 +12,7 @@ class AppData final {
 public:
     static AppData &getInstance();
 
-    void setScale(const Vector &scale);
+    void setScale(const Vector2 &scale);
     void useWindow(const Window &window);
     void quit();
 
@@ -23,7 +23,7 @@ public:
 
 private:
     bool progress = true;
-    Vector scale;
+    Vector2 scale;
     std::vector<const Window> windows;
 };
 

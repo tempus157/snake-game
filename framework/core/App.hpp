@@ -9,7 +9,7 @@
 
 class App final {
 public:
-    App &setScale(const Vector &scale);
+    App &setScale(const Vector2 &scale);
     App &useWindow(const Window &window);
     int run() const;
 

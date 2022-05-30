@@ -1,6 +1,6 @@
 #include "../main.hpp"
 
-Window myWindow(const Vector &position, const Vector &scale) {
+Window myWindow(const Vector2 &position, const Vector2 &scale) {
     auto titleText = useProperty("Hello, World!");
 
     onKeyPress(Key::Escape, [] {
@@ -16,7 +16,7 @@ Window myWindow(const Vector &position, const Vector &scale) {
         .setPosition(position)
         .setScale(scale)
         .useObjects({
-            label(titleText, Vector(1, 1), ColorPair(Color::Red, Color::Blue)),
+            label(titleText, Vector2(1, 1), ColorPair(Color::Red, Color::Blue)),
             counter("Count: "),
         });
 }

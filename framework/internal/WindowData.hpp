@@ -11,8 +11,8 @@ class Object;
 
 class WindowData final {
 public:
-    void setPosition(const Vector &position);
-    void setScale(const Vector &scale);
+    void setPosition(const Vector2 &position);
+    void setScale(const Vector2 &scale);
     void setColor(const ColorPair &color);
     void setBorderCh(char ch);
     void setBorderColor(const ColorPair &color);
@@ -23,8 +23,8 @@ public:
     void destroy();
 
 private:
-    Vector position;
-    Vector scale;
+    Vector2 position;
+    Vector2 scale;
     ColorPair color;
     char borderCh;
     ColorPair borderColor;

@@ -28,9 +28,9 @@ Object counter(const Property<std::string> &text) {
     });
 
     return createObject({
-        label(countText, Vector(1, 2)),
-        $if(isCountEven, label("Even", Vector(1, 3)), label("Odd", Vector(1, 3))),
-        $goto(Vector(1, 4)),
+        label(countText, Vector2(1, 2)),
+        $if(isCountEven, label("Even", Vector2(1, 3)), label("Odd", Vector2(1, 3))),
+        $goto(Vector2(1, 4)),
         $for(countList, [](const int &item) {
             return label(std::to_string(item));
         }),

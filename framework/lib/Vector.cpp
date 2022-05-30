@@ -1,11 +1,11 @@
 #include "Vector.hpp"
 
-const Vector Vector::Zero = Vector(0, 0);
-const Vector Vector::One = Vector(1, 1);
-const Vector Vector::Up = Vector(0, 1);
-const Vector Vector::Down = Vector(0, -1);
-const Vector Vector::Left = Vector(-1, 0);
-const Vector Vector::Right = Vector(1, 0);
+const Vector2 Vector2::Zero = Vector2(0, 0);
+const Vector2 Vector2::One = Vector2(1, 1);
+const Vector2 Vector2::Up = Vector2(0, 1);
+const Vector2 Vector2::Down = Vector2(0, -1);
+const Vector2 Vector2::Left = Vector2(-1, 0);
+const Vector2 Vector2::Right = Vector2(1, 0);
 
-Vector::Vector() {}
-Vector::Vector(int x, int y) : x(x), y(y) {}
+Vector2::Vector2() {}
+Vector2::Vector2(int x, int y) : x(x), y(y) {}

@@ -17,8 +17,8 @@ public:
     const std::shared_ptr<WindowData> data;
     Window();
 
-    Window &setPosition(const Vector &position);
-    Window &setScale(const Vector &scale);
+    Window &setPosition(const Vector22 &position);
+    Window &setScale(const Vector22 &scale);
     Window &setColor(const ColorPair &color);
     Window &setBorderCh(char ch);
     Window &setBorderColor(const ColorPair &color);

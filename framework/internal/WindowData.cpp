@@ -2,11 +2,11 @@
 
 #include "../core/Object.hpp"
 
-void WindowData::setPosition(const Vector &position) {
+void WindowData::setPosition(const Vector2 &position) {
     this->position = position;
 }
 
-void WindowData::setScale(const Vector &scale) {
+void WindowData::setScale(const Vector2 &scale) {
     this->scale = scale;
 }
 

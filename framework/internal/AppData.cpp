@@ -13,7 +13,7 @@ AppData &AppData::getInstance() {
     return *instance;
 }
 
-void AppData::setScale(const Vector &scale) {
+void AppData::setScale(const Vector2 &scale) {
     this->scale = scale;
 }
 

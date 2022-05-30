@@ -1,20 +1,20 @@
 #ifndef __FRAMEWORK_VECTOR__
 #define __FRAMEWORK_VECTOR__
 
-class Vector final {
+class Vector2 final {
 public:
     int x = 0;
     int y = 0;
 
-    static const Vector Zero;
-    static const Vector One;
-    static const Vector Up;
-    static const Vector Down;
-    static const Vector Left;
-    static const Vector Right;
+    static const Vector2 Zero;
+    static const Vector2 One;
+    static const Vector2 Up;
+    static const Vector2 Down;
+    static const Vector2 Left;
+    static const Vector2 Right;
 
-    Vector();
-    Vector(int x, int y);
+    Vector2();
+    Vector2(int x, int y);
 };
 
 #endif
