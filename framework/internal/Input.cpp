@@ -170,8 +170,6 @@ Key Input::readKey() {
         return Key::Slash;
     case ' ':
         return Key::Space;
-    case 27:
-        return Key::Escape;
     case KEY_F(1):
         return Key::F1;
     case KEY_F(2):

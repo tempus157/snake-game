@@ -3,7 +3,7 @@
 Object myObject() {
     auto titleText = Property<string>("Hello, world!");
 
-    onKeyPress(Key::Escape, [] {
+    onKeyPress(Key::Q, [] {
         quitApp();
     });
 

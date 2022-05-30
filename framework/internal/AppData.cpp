@@ -2,6 +2,7 @@
 
 #include "../core/PropertyEvent.hpp"
 #include "ColorUtility.hpp"
+#include "ExitException.hpp"
 #include "Input.hpp"
 
 #include <clocale>
@@ -16,10 +17,6 @@ AppData &AppData::getInstance() {
     return *instance;
 }
 
-Vector2 AppData::getScale() const {
-    return scale;
-}
-
 void AppData::setScale(const Vector2 &scale) {
     this->scale.x = scale.x;
     this->scale.y = scale.y;
@@ -30,7 +27,8 @@ void AppData::useObject(const Object &object) {
 }
 
 void AppData::quit() {
-    progress = false;
+    endwin();
+    throw ExitException(1);
 }
 
 void AppData::mount() {
@@ -58,12 +56,8 @@ void AppData::update() const {
 }
 
 void AppData::receiveInput() const {
-    while (progress) {
+    while (true) {
         const auto key = Input::readKey();
         Input::notifyKeyPress(key);
     }
-}
-
-void AppData::destroy() const {
-    endwin();
 }
