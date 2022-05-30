@@ -1,6 +1,6 @@
 #include "AppData.hpp"
 
-#include "../core/PropertyEvent.hpp"
+#include "../public/PropertyEvent.hpp"
 #include "ColorUtility.hpp"
 #include "ExitException.hpp"
 #include "Input.hpp"

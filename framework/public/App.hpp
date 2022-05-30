@@ -1,7 +1,7 @@
 #ifndef __FRAMEWORK_APP__
 #define __FRAMEWORK_APP__
 
-#include "../lib/Vector.hpp"
+#include "../public/Vector.hpp"
 #include "Object.hpp"
 
 class App final {

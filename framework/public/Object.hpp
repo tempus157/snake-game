@@ -1,7 +1,7 @@
 #ifndef __FRAMEWORK_OBJECT__
 #define __FRAMEWORK_OBJECT__
 
-#include "../lib/Vector.hpp"
+#include "../public/Vector.hpp"
 
 #include <functional>
 #include <vector>

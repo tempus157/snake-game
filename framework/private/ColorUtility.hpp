@@ -1,7 +1,7 @@
 #ifndef __FRAMEWORK_COLOR_PAIR__
 #define __FRAMEWORK_COLOR_PAIR__
 
-#include "../lib/Color.hpp"
+#include "../public/Color.hpp"
 
 class ColorUtility final {
 public:

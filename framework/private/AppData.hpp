@@ -1,8 +1,8 @@
 #ifndef __FRAMEWORK_APP_DATA__
 #define __FRAMEWORK_APP_DATA__
 
-#include "../core/Object.hpp"
-#include "../lib/Vector.hpp"
+#include "../public/Object.hpp"
+#include "../public/Vector.hpp"
 
 #include <memory>
 #include <vector>

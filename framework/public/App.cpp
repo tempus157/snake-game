@@ -1,8 +1,8 @@
 #include "App.hpp"
 
-#include "../internal/AppData.hpp"
-#include "../internal/ExitException.hpp"
-#include "../internal/Input.hpp"
+#include "../private/AppData.hpp"
+#include "../private/ExitException.hpp"
+#include "../private/Input.hpp"
 
 #include <ncurses.h>
 

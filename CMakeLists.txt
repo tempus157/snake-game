@@ -11,12 +11,12 @@ add_executable (
     src/objects/myObject.cpp
     src/objects/counter.cpp
     framework/main.cpp
-    framework/core/App.cpp
-    framework/core/Object.cpp
-    framework/core/PropertyEvent.cpp
-    framework/internal/AppData.cpp
-    framework/internal/ColorUtility.cpp
-    framework/internal/Input.cpp
-    framework/lib/Vector.cpp
+    framework/public/App.cpp
+    framework/public/Object.cpp
+    framework/public/PropertyEvent.cpp
+    framework/public/Vector.cpp
+    framework/private/AppData.cpp
+    framework/private/ColorUtility.cpp
+    framework/private/Input.cpp
 )
 target_link_libraries (main.out ${CURSES_LIBRARIES})

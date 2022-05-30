@@ -1,8 +1,8 @@
 #include "main.hpp"
 
-#include "./internal/AppData.hpp"
-#include "./internal/ColorUtility.hpp"
-#include "./internal/Input.hpp"
+#include "./private/AppData.hpp"
+#include "./private/ColorUtility.hpp"
+#include "./private/Input.hpp"
 
 #include <memory>
 #include <ncurses.h>
