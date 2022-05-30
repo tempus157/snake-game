@@ -7,6 +7,23 @@
 #include <memory>
 #include <ncurses.h>
 
+Object panel(const Property<Vector2> &scale, const Property<Color> &color) {
+    auto update = [=](const Vector2 &origin) {
+        const auto current = Vector2(getcurx(stdscr), getcury(stdscr));
+        attron(COLOR_PAIR(ColorUtility::getAttribute(*color, *color)));
+
+        for (auto y = 0; y < scale->y; ++y) {
+            for (auto x = 0; x < scale->x; ++x) {
+                mvaddch(current.y + y, current.x + x, ' ');
+            }
+        }
+
+        attroff(COLOR_PAIR(ColorUtility::getAttribute(*color, *color)));
+    };
+
+    return Object(update);
+}
+
 Object label(const Property<std::string> &text) {
     auto update = [=](const Vector2 &origin) {
         printw(text->c_str());
