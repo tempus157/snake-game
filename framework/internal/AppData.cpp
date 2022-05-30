@@ -1,7 +1,7 @@
 #include "AppData.hpp"
 
-#include "../library/ColorPair.hpp"
-#include "../scripts/Window.hpp"
+#include "../core/Window.hpp"
+#include "../lib/ColorPair.hpp"
 #include "Input.hpp"
 
 #include <clocale>

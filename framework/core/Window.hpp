@@ -1,9 +1,9 @@
 #ifndef __FRAMEWORK_WINDOW__
 #define __FRAMEWORK_WINDOW__
 
-#include "../library/Color.hpp"
-#include "../library/ColorPair.hpp"
-#include "../library/Vector.hpp"
+#include "../lib/Color.hpp"
+#include "../lib/ColorPair.hpp"
+#include "../lib/Vector.hpp"
 #include "Object.hpp"
 
 #include <functional>

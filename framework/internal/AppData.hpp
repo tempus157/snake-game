@@ -1,7 +1,7 @@
 #ifndef __FRAMEWORK_APP_DATA__
 #define __FRAMEWORK_APP_DATA__
 
-#include "../library/Vector.hpp"
+#include "../lib/Vector.hpp"
 #include <vector>
 
 class Window;

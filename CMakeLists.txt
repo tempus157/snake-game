@@ -13,10 +13,10 @@ add_executable (
     framework/main.cpp
     framework/internal/AppData.cpp
     framework/internal/Input.cpp
-    framework/library/ColorPair.cpp
-    framework/library/Vector.cpp
-    framework/scripts/App.cpp
-    framework/scripts/Object.cpp
-    framework/scripts/Window.cpp
+    framework/lib/ColorPair.cpp
+    framework/lib/Vector.cpp
+    framework/core/App.cpp
+    framework/core/Object.cpp
+    framework/core/Window.cpp
 )
 target_link_libraries (main.out ${CURSES_LIBRARIES})

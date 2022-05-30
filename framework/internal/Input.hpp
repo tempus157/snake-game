@@ -1,7 +1,7 @@
 #ifndef __FRAMEWORK_INPUT__
 #define __FRAMEWORK_INPUT__
 
-#include "../library/Key.hpp"
+#include "../lib/Key.hpp"
 
 #include <functional>
 #include <map>
