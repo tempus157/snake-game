@@ -13,8 +13,10 @@
 #include <string>
 
 Object panel(const Property<Vector2> &scale, const Property<Color> &color);
+
 Object label(const Property<std::string> &text);
-Object label(const Property<std::string> &text, const Property<Color> &color);
+Object label(const Property<std::string> &text,
+    const Property<Color> &foreground, const Property<Color> &background);
 
 Object $goto(const Property<Vector2> &position);
 Object $if(const Property<bool> &condition, const Object &ifTrue);

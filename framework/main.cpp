@@ -32,11 +32,12 @@ Object label(const Property<std::string> &text) {
     return Object(update);
 }
 
-Object label(const Property<std::string> &text, const Property<Color> &color) {
+Object label(const Property<std::string> &text,
+    const Property<Color> &foreground, const Property<Color> &background) {
     auto update = [=](const Vector2 &origin) {
-        attron(COLOR_PAIR(ColorUtility::getAttribute(*color, Color::Black)));
+        attron(COLOR_PAIR(ColorUtility::getAttribute(*foreground, *background)));
         printw(text->c_str());
-        attroff(COLOR_PAIR(ColorUtility::getAttribute(*color, Color::Black)));
+        attroff(COLOR_PAIR(ColorUtility::getAttribute(*foreground, *background)));
     };
 
     return Object(update);
