@@ -13,8 +13,13 @@ AppData &AppData::getInstance() {
     return *instance;
 }
 
+Vector2 AppData::getScale() const {
+    return scale;
+}
+
 void AppData::setScale(const Vector2 &scale) {
-    this->scale = scale;
+    this->scale.x = scale.x;
+    this->scale.y = scale.y;
 }
 
 void AppData::useWindow(const Window &window) {
@@ -28,7 +33,10 @@ void AppData::quit() {
 void AppData::mount() const {
     setlocale(LC_ALL, "");
     initscr();
-    resize_term(scale.y, scale.x);
+
+    const auto x = scale.x > 0 ? scale.x : getmaxx(stdscr);
+    const auto y = scale.y > 0 ? scale.y : getmaxy(stdscr);
+    resize_term(y, x);
 
     Input::mount();
     ColorPair::mount();

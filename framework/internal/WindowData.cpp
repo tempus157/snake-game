@@ -1,26 +1,7 @@
 #include "WindowData.hpp"
 
 #include "../core/Object.hpp"
-
-void WindowData::setPosition(const Vector2 &position) {
-    this->position = position;
-}
-
-void WindowData::setScale(const Vector2 &scale) {
-    this->scale = scale;
-}
-
-void WindowData::setColor(const ColorPair &color) {
-    this->color = color;
-}
-
-void WindowData::setBorderCh(char ch) {
-    this->borderCh = ch;
-}
-
-void WindowData::setBorderColor(const ColorPair &color) {
-    this->borderColor = color;
-}
+#include "AppData.hpp"
 
 void WindowData::useObjects(const std::vector<const Object> &objects) {
     for (auto &object : objects) {
@@ -29,7 +10,8 @@ void WindowData::useObjects(const std::vector<const Object> &objects) {
 }
 
 void WindowData::mount() {
-    window = newwin(scale.y, scale.x, position.y, position.x);
+    const auto scale = AppData::getInstance().getScale();
+    window = newwin(scale.y, scale.x, 0, 0);
 }
 
 void WindowData::update() {

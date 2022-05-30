@@ -24,8 +24,6 @@ Object label(const Property<std::string> &text, const Property<Vector2> &positio
     const Property<ColorPair> &color);
 
 Object $goto(const Property<Vector2> &position);
-Object $goto(const Property<int> &x, const Property<int> &y);
-
 Object $if(const Property<bool> &condition, const Object &ifTrue);
 Object $if(const Property<bool> &condition, const Object &ifTrue, const Object &ifFalse);
 

@@ -65,14 +65,6 @@ Object $goto(const Property<Vector2> &position) {
     return Object(update, [] {});
 }
 
-Object $goto(const Property<int> &x, const Property<int> &y) {
-    auto update = [=](WINDOW *window) {
-        wmove(window, *y, *x);
-    };
-
-    return Object(update, [] {});
-}
-
 Object $if(const Property<bool> &condition, const Object &ifTrue) {
     auto update = [=](WINDOW *window) {
         if (*condition) {
