@@ -9,7 +9,7 @@ Object myObject() {
 
     onKeyPress(Key::Space, [=]() mutable {
         const auto text = readLine();
-        titleText = text;
+        titleText.set(text);
     });
 
     return Object({

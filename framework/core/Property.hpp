@@ -25,10 +25,12 @@ public:
         return value.get();
     }
 
-    Property<T> &operator=(const T &value) {
+    Property<T> &operator=(const T &value) = delete;
+    Property<std::string> &operator=(const char *value) = delete;
+
+    void set(const T &value) {
         *this->value = value;
         PropertyEvent::notifyUpdate(this->value.get());
-        return *this;
     }
 
 private:
