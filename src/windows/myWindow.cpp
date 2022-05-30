@@ -12,9 +12,10 @@ Window myWindow(const Vector &position, const Vector &scale) {
         titleText = text;
     });
 
-    return Window(
-        position, scale,
-        {
+    return Window()
+        .setPosition(position)
+        .setScale(scale)
+        .useObjects({
             label(titleText, Vector(1, 1), ColorPair(Color::Red, Color::Blue)),
             counter("Count: "),
         });

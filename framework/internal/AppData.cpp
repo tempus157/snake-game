@@ -3,6 +3,7 @@
 #include "../core/Window.hpp"
 #include "../lib/ColorPair.hpp"
 #include "Input.hpp"
+#include "WindowData.hpp"
 
 #include <clocale>
 #include <ncurses.h>
@@ -34,14 +35,14 @@ void AppData::mount() const {
     refresh();
 
     for (const auto &window : windows) {
-        window.mount();
+        window.data->mount();
     }
     update();
 }
 
 void AppData::update() const {
     for (const auto &window : windows) {
-        window.update();
+        window.data->update();
     }
 }
 
@@ -54,7 +55,7 @@ void AppData::receiveInput() const {
 
 void AppData::destroy() const {
     for (const auto &window : windows) {
-        window.destroy();
+        window.data->destroy();
     }
     endwin();
 }

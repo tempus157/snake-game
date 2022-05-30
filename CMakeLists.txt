@@ -13,6 +13,7 @@ add_executable (
     framework/main.cpp
     framework/internal/AppData.cpp
     framework/internal/Input.cpp
+    framework/internal/WindowData.cpp
     framework/lib/ColorPair.cpp
     framework/lib/Vector.cpp
     framework/core/App.cpp
