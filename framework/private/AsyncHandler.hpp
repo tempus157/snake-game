@@ -13,13 +13,15 @@ public:
     AsyncHandler &operator=(const AsyncHandler &) = delete;
     AsyncHandler &operator=(AsyncHandler &&) = delete;
 
-    static unsigned int setInterval(const std::function<void()> &callback, unsigned int delay);
-    static void clearInterval(unsigned int id);
-    static void clearAllIntervals();
+    static int setCall(const std::function<void()> &callback, int delay);
+    static int setLoop(const std::function<void()> &callback, int delay);
+    static void clear(int id);
+    static void clearAll();
 
 private:
-    static std::map<unsigned int, std::atomic<bool>> cancelTokens;
-    static unsigned int newID;
+    static std::map<int, std::atomic<bool>> states;
+    static std::atomic<int> newID;
+    static int generateID();
 };
 
 #endif

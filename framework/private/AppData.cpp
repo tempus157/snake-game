@@ -35,7 +35,7 @@ void AppData::changeScene(const std::string &name) {
 
 void AppData::quit() {
     endwin();
-    AsyncHandler::clearAllIntervals();
+    AsyncHandler::clearAll();
     throw ExitException(1);
 }
 

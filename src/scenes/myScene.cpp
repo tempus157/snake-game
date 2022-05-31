@@ -1,14 +1,16 @@
 #include "../main.hpp"
 
 Scene myScene() {
-    auto titleText = Property<string>("Hello, world!");
-    auto intervalID = Property<int>(-1);
+    auto titleText = Property<string>("Do you see this?");
+    auto asyncID = Property<int>();
 
-    intervalID.set(setInterval(
-        [=]() mutable {
-            soundBeep();
-        },
-        1000));
+    asyncCall(1000, [=]() mutable {
+        titleText.set("Hello, world!");
+    });
+
+    asyncID.set(asyncLoop(1000, [=]() mutable {
+        soundBeep();
+    }));
 
     onKeyPress(Key::Q, [] {
         changeScene("sub");
@@ -20,7 +22,7 @@ Scene myScene() {
     });
 
     onDestroy([=] {
-        clearInterval(*intervalID);
+        clearAsync(*asyncID);
     });
 
     return Object({

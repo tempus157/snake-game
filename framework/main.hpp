@@ -49,8 +49,9 @@ void quitApp();
 void soundBeep();
 string readLine();
 
-unsigned int setInterval(const Callback &callback, unsigned int delay);
-void clearInterval(unsigned int id);
+int asyncCall(int delay, const Callback &callback);
+int asyncLoop(int delay, const Callback &callback);
+void clearAsync(int id);
 
 void onKeyPress(const Key &key, const Callback &callback);
 void onDestroy(const Callback &callback);

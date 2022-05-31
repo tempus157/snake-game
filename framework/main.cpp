@@ -149,12 +149,16 @@ string readLine() {
     return input;
 }
 
-unsigned int setInterval(const Callback &callback, unsigned int interval) {
-    return AsyncHandler::setInterval(callback, interval);
+int asyncCall(int delay, const Callback &callback) {
+    return AsyncHandler::setCall(callback, delay);
 }
 
-void clearInterval(unsigned int id) {
-    AsyncHandler::clearInterval(id);
+int asyncLoop(int delay, const Callback &callback) {
+    return AsyncHandler::setLoop(callback, delay);
+}
+
+void clearAsync(int id) {
+    AsyncHandler::clear(id);
 }
 
 void onKeyPress(const Key &key, const Callback &callback) {
