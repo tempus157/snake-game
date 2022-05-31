@@ -5,14 +5,21 @@ set (CMAKE_CXX_STANDARD 11)
 find_package (Curses REQUIRED)
 include_directories(${CURSES_INCLUDE_DIR})
 
-add_executable (game.out
+add_executable (
+    main.out
     src/main.cpp
-    src/windows/mainWindow.cpp
-    framework/core/app.cpp
-    framework/core/input.cpp
-    framework/core/window.cpp
-    framework/core/object.cpp
-    framework/utils/color.cpp
-    framework/utils/vector.cpp
+    src/objects/counter.cpp
+    src/scenes/myScene.cpp
+    src/scenes/quitScene.cpp
+    framework/main.cpp
+    framework/public/App.cpp
+    framework/public/LifeCycle.cpp
+    framework/public/Object.cpp
+    framework/public/Scene.cpp
+    framework/public/Vector.cpp
+    framework/private/AppData.cpp
+    framework/private/AsyncHandler.cpp
+    framework/private/ColorUtility.cpp
+    framework/private/Input.cpp
 )
-target_link_libraries (game.out ${CURSES_LIBRARIES})
+target_link_libraries (main.out ${CURSES_LIBRARIES})

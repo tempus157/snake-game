@@ -1,9 +1,9 @@
-#include "../framework/core/app.hpp"
-#include "./windows/mainWindow.hpp"
+#include "main.hpp"
 
-int main()
-{
-    return App::create()
-        ->useWindow(new MainWindow())
-        ->execute();
+int main() {
+    return App()
+        .setScale(Vector2(80, 25))
+        .useScene("main", myScene)
+        .useScene("sub", quitScene)
+        .run("main");
 }
