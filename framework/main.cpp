@@ -150,9 +150,7 @@ string readLine() {
 }
 
 unsigned int setInterval(const Callback &callback, unsigned int interval) {
-    static unsigned int id = 0;
-    AsyncHandler::setInterval(id, callback, interval);
-    return id++;
+    return AsyncHandler::setInterval(callback, interval);
 }
 
 void clearInterval(unsigned int id) {
