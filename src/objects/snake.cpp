@@ -5,15 +5,15 @@
 Object snake() {
     auto direction = Property<Vector2>(Vector2::Right * 2);
     auto position = Property<std::deque<Vector2>>({
-        Vector2(0, 0),
-        Vector2(2, 0),
         Vector2(4, 0),
+        Vector2(2, 0),
+        Vector2(0, 0),
     });
 
     asyncLoop(100, [=]() mutable {
-        auto head = position->back();
-        position->pop_front();
-        position->push_back(head + *direction);
+        auto head = position->front();
+        position->pop_back();
+        position->push_front(head + *direction);
         position.set(*position);
     });
 
@@ -49,7 +49,7 @@ Object snake() {
         $for(position, [](const Vector2 &pos, int i) {
             return $union({
                 $goto(pos),
-                label("ㅇ"),
+                label(i == 0 ? "ㅎ" : "ㅇ"),
             });
         }),
     });
