@@ -75,6 +75,11 @@
     "thread": "cpp",
     "future": "cpp",
     "queue": "cpp",
-    "deque": "cpp"
+    "deque": "cpp",
+    "fstream": "cpp",
+    "iomanip": "cpp",
+    "set": "cpp",
+    "stack": "cpp",
+    "unordered_set": "cpp"
   }
 }
