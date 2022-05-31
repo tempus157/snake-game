@@ -83,7 +83,9 @@ Object border(const Property<char> &ch, const Property<Vector2> &scale,
 
         for (auto y = 0; y < scale->y; ++y) {
             for (auto x = 0; x < scale->x; ++x) {
-                mvaddch(current.y + y, current.x + x, *ch);
+                if (x == 0 || y == 0 || x == scale->x - 1 || y == scale->y - 1) {
+                    mvaddch(current.y + y, current.x + x, *ch);
+                }
             }
         }
 

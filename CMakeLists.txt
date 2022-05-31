@@ -8,9 +8,8 @@ include_directories(${CURSES_INCLUDE_DIR})
 add_executable (
     main.out
     src/main.cpp
-    src/objects/counter.cpp
-    src/scenes/myScene.cpp
-    src/scenes/quitScene.cpp
+    src/objects/field.cpp
+    src/scenes/gameScene.cpp
     framework/main.cpp
     framework/public/App.cpp
     framework/public/LifeCycle.cpp
