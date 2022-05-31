@@ -11,14 +11,15 @@ App &App::setScale(const Vector2 &scale) {
     return *this;
 }
 
-App &App::useObject(const Object &object) {
-    AppData::getInstance().useObject(object);
+App &App::useScene(const std::string &name, const SceneFunction &scene) {
+    AppData::getInstance().useScene(name, scene);
     return *this;
 }
 
-int App::run() const {
+int App::run(const std::string &sceneName) const {
     try {
         AppData::getInstance().mount();
+        AppData::getInstance().changeScene(sceneName);
         AppData::getInstance().update();
         AppData::getInstance().receiveInput();
     } catch (const ExitException &exit) {

@@ -23,8 +23,15 @@ void AppData::setScale(const Vector2 &scale) {
     this->scale.y = scale.y;
 }
 
-void AppData::useObject(const Object &object) {
-    objects.push_back(object);
+void AppData::useScene(const std::string &name, const SceneFunction &scene) {
+    scenes[name] = scene;
+}
+
+void AppData::changeScene(const std::string &name) {
+    activeScene.destroy();
+    activeScene = scenes[name]();
+    activeScene.mount();
+    update();
 }
 
 void AppData::quit() {
@@ -37,23 +44,17 @@ void AppData::mount() {
     setlocale(LC_ALL, "");
     initscr();
 
-    if (scale.x < 1) {
-        scale.x = getmaxx(stdscr);
-    }
-    if (scale.y < 1) {
-        scale.y = getmaxy(stdscr);
-    }
-
+    scale.x = scale.x < 1 ? getmaxx(stdscr) : scale.x;
+    scale.y = scale.y < 1 ? getmaxy(stdscr) : scale.y;
     resize_term(scale.y, scale.x);
+
     Input::mount();
     ColorUtility::mount();
 }
 
 void AppData::update() const {
     clear();
-    for (const auto &object : objects) {
-        object.update(Vector2::Zero);
-    }
+    activeScene.update();
     refresh();
 }
 

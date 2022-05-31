@@ -2,17 +2,18 @@
 #define __FRAMEWORK_APP_DATA__
 
 #include "../public/Object.hpp"
+#include "../public/Scene.hpp"
 #include "../public/Vector.hpp"
 
-#include <memory>
-#include <vector>
+#include <map>
 
 class AppData final {
 public:
     static AppData &getInstance();
 
     void setScale(const Vector2 &scale);
-    void useObject(const Object &object);
+    void useScene(const std::string &name, const SceneFunction &scene);
+    void changeScene(const std::string &name);
     void quit();
 
     void mount();
@@ -21,7 +22,8 @@ public:
 
 private:
     Vector2 scale = Vector2(-1, -1);
-    std::vector<const Object> objects;
+    std::map<const std::string, SceneFunction> scenes;
+    Scene activeScene;
     AppData();
 };
 

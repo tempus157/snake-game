@@ -7,6 +7,7 @@
 #include "./public/Object.hpp"
 #include "./public/Property.hpp"
 #include "./public/PropertyEvent.hpp"
+#include "./public/Scene.hpp"
 #include "./public/Vector.hpp"
 
 #include <functional>
@@ -14,6 +15,7 @@
 #include <string>
 
 using std::string;
+using Callback = std::function<void()>;
 
 Object label(const Property<string> &text);
 Object label(const Property<string> &text,
@@ -42,21 +44,26 @@ Object $for(const Property<TCollection> &collection, const TCallback &callback) 
     return Object(update);
 }
 
-unsigned int setInterval(const std::function<void()> &callback, unsigned int delay);
-void clearInterval(unsigned int id);
-
+void changeScene(const string &name);
 void quitApp();
 void soundBeep();
-std::string readLine();
-void onKeyPress(const Key &key, const std::function<void()> &callback);
+string readLine();
+
+unsigned int setInterval(const Callback &callback, unsigned int delay);
+void clearInterval(unsigned int id);
+
+void mountObject(const string &name);
+void destroyObject(const string &name);
+
+void onKeyPress(const Key &key, const Callback &callback);
 
 template <typename T>
-void onUpdate(const std::function<void()> &callback, const Property<T> &dep) {
+void onUpdate(const Callback &callback, const Property<T> &dep) {
     PropertyEvent::onUpdate(dep, callback);
 }
 
 template <typename TDep, typename... TDeps>
-void onUpdate(const std::function<void()> &callback,
+void onUpdate(const Callback &callback,
     const Property<TDep> &dep, const Property<TDeps> &...deps) {
     PropertyEvent::onUpdate(dep, callback);
     onUpdate(callback, deps...);

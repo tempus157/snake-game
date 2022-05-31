@@ -1,4 +1,5 @@
 #include "../framework/main.hpp"
 
-Object myObject();
+Scene myScene();
+Scene quitScene();
 Object counter(const Property<string> &text);

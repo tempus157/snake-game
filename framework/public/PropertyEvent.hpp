@@ -33,6 +33,10 @@ public:
         }
     }
 
+    static void clearUpdate() {
+        updateCallbacks.clear();
+    }
+
 private:
     static std::map<void *, std::vector<std::function<void()>>> updateCallbacks;
     static std::vector<std::function<void()>> everyUpdateCallbacks;

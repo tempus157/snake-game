@@ -17,6 +17,8 @@ public:
 
     static void onKeyPress(const Key &key, const std::function<void()> &callback);
     static void notifyKeyPress(const Key &key);
+    static void clearKeyPress();
+
     static void mount();
     static Key readKey();
 

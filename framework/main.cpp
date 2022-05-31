@@ -123,14 +123,8 @@ Object $if(const Property<bool> &condition, const Object &ifTrue, const Object &
     return Object(update);
 }
 
-unsigned int setInterval(const std::function<void()> &callback, unsigned int interval) {
-    static unsigned int id = 0;
-    AsyncHandler::setInterval(id, callback, interval);
-    return id++;
-}
-
-void clearInterval(unsigned int id) {
-    AsyncHandler::clearInterval(id);
+void changeScene(const string &name) {
+    AppData::getInstance().changeScene(name);
 }
 
 void quitApp() {
@@ -155,6 +149,22 @@ string readLine() {
     return input;
 }
 
-void onKeyPress(const Key &key, const std::function<void()> &callback) {
+unsigned int setInterval(const Callback &callback, unsigned int interval) {
+    static unsigned int id = 0;
+    AsyncHandler::setInterval(id, callback, interval);
+    return id++;
+}
+
+void clearInterval(unsigned int id) {
+    AsyncHandler::clearInterval(id);
+}
+
+void mountObjects(const string &name) {
+}
+
+void destroyObjects(const string &name) {
+}
+
+void onKeyPress(const Key &key, const Callback &callback) {
     Input::onKeyPress(key, callback);
 }

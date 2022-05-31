@@ -8,12 +8,14 @@ include_directories(${CURSES_INCLUDE_DIR})
 add_executable (
     main.out
     src/main.cpp
-    src/objects/myObject.cpp
     src/objects/counter.cpp
+    src/scenes/myScene.cpp
+    src/scenes/quitScene.cpp
     framework/main.cpp
     framework/public/App.cpp
     framework/public/Object.cpp
     framework/public/PropertyEvent.cpp
+    framework/public/Scene.cpp
     framework/public/Vector.cpp
     framework/private/AppData.cpp
     framework/private/AsyncHandler.cpp

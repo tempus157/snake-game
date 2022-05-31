@@ -1,15 +1,18 @@
 #include "../main.hpp"
 
-Object myObject() {
+Scene myScene() {
     auto titleText = Property<string>("Hello, world!");
-    auto intervalID = Property<int>();
+    auto intervalID = Property<int>(-1);
 
     onKeyPress(Key::Q, [] {
-        soundBeep();
-        quitApp();
+        changeScene("sub");
     });
 
     onKeyPress(Key::Space, [=]() mutable {
+        if (*intervalID != -1) {
+            return;
+        }
+
         const auto id = setInterval([=]() mutable {
             soundBeep();
         },

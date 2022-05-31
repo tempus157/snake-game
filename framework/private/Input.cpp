@@ -19,6 +19,10 @@ void Input::notifyKeyPress(const Key &key) {
     }
 }
 
+void Input::clearKeyPress() {
+    keyPressCallbacks.clear();
+}
+
 void Input::mount() {
     keypad(stdscr, true);
     curs_set(0);
