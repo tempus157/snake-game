@@ -50,7 +50,7 @@ Object snake(Property<std::deque<Vector2>> &position,
         $for(position, [](const Vector2 &pos, int i) {
             return $union({
                 $goto(pos),
-                label(i == 0 ? "ㅎ" : "ㅇ"),
+                label(i == 0 ? "ㅎ" : "ㅇ", Color::Yellow, Color::Black),
             });
         }),
     });

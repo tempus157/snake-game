@@ -6,13 +6,13 @@ Object wall(const Property<std::set<std::pair<int, int>>> &position,
         $for(position, [=](const std::pair<int, int> &item, int i) {
             return $union({
                 $goto(Vector2(item.first, item.second)),
-                label("ㅁ"),
+                label("ㅁ", Color::Blue, Color::Black),
             });
         }),
         $for(immunePosition, [=](const std::pair<int, int> &item, int i) {
             return $union({
                 $goto(Vector2(item.first, item.second)),
-                label("+"),
+                label("ㅍ", Color::Blue, Color::Black),
             });
         }),
     });
