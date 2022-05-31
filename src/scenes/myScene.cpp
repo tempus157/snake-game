@@ -4,11 +4,11 @@ Scene myScene() {
     auto titleText = Property<string>("Hello, world!");
     auto intervalID = Property<int>(-1);
 
-    const auto id = setInterval([=]() mutable {
-        soundBeep();
-    },
-        1000);
-    intervalID.set(id);
+    intervalID.set(setInterval(
+        [=]() mutable {
+            soundBeep();
+        },
+        1000));
 
     onKeyPress(Key::Q, [] {
         changeScene("sub");
