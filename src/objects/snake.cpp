@@ -2,13 +2,8 @@
 
 #include <queue>
 
-Object snake() {
+Object snake(Property<std::deque<Vector2>> &position) {
     auto direction = Property<Vector2>(Vector2::Right * 2);
-    auto position = Property<std::deque<Vector2>>({
-        Vector2(4, 0),
-        Vector2(2, 0),
-        Vector2(0, 0),
-    });
 
     asyncLoop(100, [=]() mutable {
         auto head = position->front();

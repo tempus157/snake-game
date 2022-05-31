@@ -1,6 +1,7 @@
 #include "../framework/main.hpp"
+#include <deque>
 
 Scene gameScene();
 
-Object field();
-Object snake();
+Object wall();
+Object snake(Property<std::deque<Vector2>> &position);
