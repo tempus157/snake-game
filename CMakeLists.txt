@@ -16,6 +16,7 @@ add_executable (
     framework/public/PropertyEvent.cpp
     framework/public/Vector.cpp
     framework/private/AppData.cpp
+    framework/private/AsyncHandler.cpp
     framework/private/ColorUtility.cpp
     framework/private/Input.cpp
 )

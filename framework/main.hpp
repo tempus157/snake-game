@@ -42,6 +42,9 @@ Object $for(const Property<TCollection> &collection, const TCallback &callback) 
     return Object(update);
 }
 
+unsigned int setInterval(const std::function<void()> &callback, unsigned int delay);
+void clearInterval(unsigned int id);
+
 void quitApp();
 void soundBeep();
 std::string readLine();

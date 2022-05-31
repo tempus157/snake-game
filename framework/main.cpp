@@ -1,6 +1,7 @@
 #include "main.hpp"
 
 #include "./private/AppData.hpp"
+#include "./private/AsyncHandler.hpp"
 #include "./private/ColorUtility.hpp"
 #include "./private/Input.hpp"
 
@@ -120,6 +121,16 @@ Object $if(const Property<bool> &condition, const Object &ifTrue, const Object &
     };
 
     return Object(update);
+}
+
+unsigned int setInterval(const std::function<void()> &callback, unsigned int interval) {
+    static unsigned int id = 0;
+    AsyncHandler::setInterval(id, callback, interval);
+    return id++;
+}
+
+void clearInterval(unsigned int id) {
+    AsyncHandler::clearInterval(id);
 }
 
 void quitApp() {
