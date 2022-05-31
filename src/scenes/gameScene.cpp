@@ -5,6 +5,7 @@
 #include <set>
 
 Scene gameScene() {
+    auto immuneWallPosition = Property<std::set<std::pair<int, int>>>();
     auto wallPosition = Property<std::set<std::pair<int, int>>>();
     auto snakePosition = Property<std::deque<Vector2>>();
 
@@ -19,6 +20,11 @@ Scene gameScene() {
 
             if (cell == Cell::Wall) {
                 wallPosition->insert({x * 2, y});
+                continue;
+            }
+
+            if (cell == Cell::ImmuneWall) {
+                immuneWallPosition->insert({x * 2, y});
                 continue;
             }
 
@@ -39,13 +45,13 @@ Scene gameScene() {
     }
 
     return Object({
-        wall(wallPosition),
+        wall(wallPosition, immuneWallPosition),
         snake(snakePosition),
 
         // Snake position log
         $for(snakePosition, [](const Vector2 &pos, int i) {
             return $union({
-                $goto(Vector2(2, i + 1)),
+                $goto(Vector2(50, i)),
                 label(std::to_string(pos.x) + "," + std::to_string(pos.y)),
             });
         }),
