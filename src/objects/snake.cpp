@@ -7,8 +7,7 @@ Object snake(Property<std::deque<Vector2>> &position,
     auto direction = Property<Vector2>(Vector2::Right * 2);
 
     asyncLoop(100, [=]() mutable {
-        const auto head = position->front();
-        const auto newPosition = head + *direction;
+        const auto newPosition = position->front() + *direction;
         if (wallPosition->count({newPosition.x, newPosition.y})) {
             changeScene("result");
         }
