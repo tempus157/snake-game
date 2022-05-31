@@ -159,12 +159,10 @@ void clearInterval(unsigned int id) {
     AsyncHandler::clearInterval(id);
 }
 
-void mountObjects(const string &name) {
-}
-
-void destroyObjects(const string &name) {
-}
-
 void onKeyPress(const Key &key, const Callback &callback) {
     Input::onKeyPress(key, callback);
+}
+
+void onDestroy(const Callback &callback) {
+    LifeCycle::onDestroy(callback);
 }

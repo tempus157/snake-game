@@ -11,7 +11,6 @@ using SceneFunction = std::function<Scene()>;
 
 class Scene final {
 public:
-    std::function<void()> mount;
     std::function<void()> update;
     std::function<void()> destroy;
 

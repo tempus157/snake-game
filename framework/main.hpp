@@ -52,10 +52,8 @@ string readLine();
 unsigned int setInterval(const Callback &callback, unsigned int delay);
 void clearInterval(unsigned int id);
 
-void mountObject(const string &name);
-void destroyObject(const string &name);
-
 void onKeyPress(const Key &key, const Callback &callback);
+void onDestroy(const Callback &callback);
 
 template <typename T>
 void onUpdate(const Callback &callback, const Property<T> &dep) {

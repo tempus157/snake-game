@@ -3,14 +3,15 @@
 #include "../private/Input.hpp"
 #include "LifeCycle.hpp"
 
-Scene::Scene() : mount([] {}), update([] {}), destroy([] {}) {}
+Scene::Scene() : update([] {}), destroy([] {}) {}
 
 Scene::Scene(const Object &object)
-    : mount([] {}),
-      update([=] {
+    : update([=] {
           object.update(Vector2::Zero);
       }),
       destroy([] {
-          Input::clearKeyPress();
+          LifeCycle::notifyDestroy();
           LifeCycle::clearUpdate();
+          LifeCycle::clearDestroy();
+          Input::clearKeyPress();
       }) {}

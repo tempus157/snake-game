@@ -4,23 +4,22 @@ Scene myScene() {
     auto titleText = Property<string>("Hello, world!");
     auto intervalID = Property<int>(-1);
 
+    const auto id = setInterval([=]() mutable {
+        soundBeep();
+    },
+        1000);
+    intervalID.set(id);
+
     onKeyPress(Key::Q, [] {
         changeScene("sub");
     });
 
     onKeyPress(Key::Space, [=]() mutable {
-        if (*intervalID != -1) {
-            return;
-        }
-
-        const auto id = setInterval([=]() mutable {
-            soundBeep();
-        },
-            1000);
-        intervalID.set(id);
+        const auto text = readLine();
+        titleText.set(text);
     });
 
-    onKeyPress(Key::Backspace, [=]() {
+    onDestroy([=] {
         clearInterval(*intervalID);
     });
 

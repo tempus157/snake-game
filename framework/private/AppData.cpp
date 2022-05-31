@@ -30,7 +30,6 @@ void AppData::useScene(const std::string &name, const SceneFunction &scene) {
 void AppData::changeScene(const std::string &name) {
     activeScene.destroy();
     activeScene = scenes[name]();
-    activeScene.mount();
     update();
 }
 
