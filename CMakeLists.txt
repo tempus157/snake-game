@@ -9,6 +9,7 @@ add_executable (
     main.out
     src/main.cpp
     src/objects/field.cpp
+    src/objects/snake.cpp
     src/scenes/gameScene.cpp
     framework/main.cpp
     framework/public/App.cpp

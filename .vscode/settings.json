@@ -73,6 +73,8 @@
     "__availability": "cpp",
     "__functional_03": "cpp",
     "thread": "cpp",
-    "future": "cpp"
+    "future": "cpp",
+    "queue": "cpp",
+    "deque": "cpp"
   }
 }

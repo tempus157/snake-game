@@ -5,6 +5,7 @@
 #include "LifeCycle.hpp"
 
 #include <functional>
+#include <initializer_list>
 #include <map>
 #include <memory>
 #include <vector>
@@ -14,6 +15,11 @@ class Property final {
 public:
     Property<T>() : value(std::make_shared<T>()) {}
     Property<T>(const T &value) : value(std::make_shared<T>(value)) {}
+
+    template <typename T2>
+    Property<T>(const std::initializer_list<T2> &list)
+        : value(std::make_shared<T>(list)) {}
+
     Property<std::string>(const char *value)
         : value(std::make_shared<std::string>(value)) {}
 

@@ -3,3 +3,4 @@
 Scene gameScene();
 
 Object field();
+Object snake();
