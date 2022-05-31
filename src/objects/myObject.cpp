@@ -2,11 +2,7 @@
 
 Object myObject() {
     auto titleText = Property<string>("Hello, world!");
-
-    setInterval([=]() mutable {
-        soundBeep();
-    },
-        1000);
+    auto intervalID = Property<int>();
 
     onKeyPress(Key::Q, [] {
         soundBeep();
@@ -14,8 +10,15 @@ Object myObject() {
     });
 
     onKeyPress(Key::Space, [=]() mutable {
-        const auto text = readLine();
-        titleText.set(text);
+        const auto id = setInterval([=]() mutable {
+            soundBeep();
+        },
+            1000);
+        intervalID.set(id);
+    });
+
+    onKeyPress(Key::Backspace, [=]() {
+        clearInterval(*intervalID);
     });
 
     return Object({
