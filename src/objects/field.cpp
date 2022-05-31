@@ -1,7 +1,6 @@
 #include "../main.hpp"
 
-#include "../libs/map.hpp"
-#include <map>
+#include <array>
 
 Object field() {
     auto data = Property<std::array<std::array<int, 25>, 25>>({{
