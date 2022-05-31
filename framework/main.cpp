@@ -125,6 +125,16 @@ Object $if(const Property<bool> &condition, const Object &ifTrue, const Object &
     return Object(update);
 }
 
+Object $union(const std::vector<const Object> &objects) {
+    auto update = [=](const Vector2 &origin) {
+        for (auto object : objects) {
+            object.update(origin);
+        }
+    };
+
+    return Object(update);
+}
+
 void changeScene(const string &name) {
     AppData::getInstance().changeScene(name);
 }

@@ -36,13 +36,30 @@ Object $if(const Property<bool> &condition, const Object &ifTrue, const Object &
 template <typename TCollection, typename TCallback>
 Object $for(const Property<TCollection> &collection, const TCallback &callback) {
     auto update = [=](const Vector2 &origin) {
+        auto i = 0;
         for (const auto &item : *collection) {
-            callback(item).update(origin);
+            callback(item, i).update(origin);
+            i++;
         }
     };
 
     return Object(update);
 }
+
+template <typename TCollection, typename TCallback>
+Object $for(const TCollection &collection, const TCallback &callback) {
+    auto update = [=](const Vector2 &origin) {
+        auto i = 0;
+        for (const auto &item : collection) {
+            callback(item, i).update(origin);
+            i++;
+        }
+    };
+
+    return Object(update);
+}
+
+Object $union(const std::vector<const Object> &objects);
 
 void changeScene(const string &name);
 void quitApp();
