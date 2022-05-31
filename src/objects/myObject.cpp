@@ -4,9 +4,7 @@ Object myObject() {
     auto titleText = Property<string>("Hello, world!");
 
     setInterval([=]() mutable {
-        static int i = 0;
-        titleText.set(std::to_string(i));
-        i++;
+        soundBeep();
     },
         1000);
 

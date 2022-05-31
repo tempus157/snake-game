@@ -18,3 +18,9 @@ void AsyncHandler::setInterval(unsigned int id,
 void AsyncHandler::clearInterval(unsigned int id) {
     cancelTokens[id] = false;
 }
+
+void AsyncHandler::clearAllIntervals() {
+    for (auto &token : cancelTokens) {
+        token.second = false;
+    }
+}

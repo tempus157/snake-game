@@ -16,6 +16,7 @@ public:
     static void setInterval(unsigned int id,
         const std::function<void()> &callback, unsigned int delay);
     static void clearInterval(unsigned int id);
+    static void clearAllIntervals();
 
 private:
     static std::map<unsigned int, std::future<void>> intervals;

@@ -1,6 +1,7 @@
 #include "AppData.hpp"
 
 #include "../public/PropertyEvent.hpp"
+#include "AsyncHandler.hpp"
 #include "ColorUtility.hpp"
 #include "ExitException.hpp"
 #include "Input.hpp"
@@ -28,6 +29,7 @@ void AppData::useObject(const Object &object) {
 
 void AppData::quit() {
     endwin();
+    AsyncHandler::clearAllIntervals();
     throw ExitException(1);
 }
 
