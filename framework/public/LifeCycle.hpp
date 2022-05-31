@@ -32,14 +32,9 @@ public:
     static void onEveryUpdate(const std::function<void()> &callback);
     static void clearUpdate();
 
-    static void onDestroy(const std::function<void()> &callback);
-    static void notifyDestroy();
-    static void clearDestroy();
-
 private:
     static std::map<void *, std::vector<std::function<void()>>> updateCallbacks;
     static std::vector<std::function<void()>> everyUpdateCallbacks;
-    static std::vector<std::function<void()>> destroyCallbacks;
 };
 
 #endif

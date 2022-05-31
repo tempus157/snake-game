@@ -176,7 +176,3 @@ void clearAsync(int id) {
 void onKeyPress(const Key &key, const Callback &callback) {
     Input::onKeyPress(key, callback);
 }
-
-void onDestroy(const Callback &callback) {
-    LifeCycle::onDestroy(callback);
-}

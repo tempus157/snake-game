@@ -11,9 +11,7 @@ Scene::Scene(const Object &object)
           object.update(Vector2::Zero);
       }),
       destroy([] {
-          LifeCycle::notifyDestroy();
-          LifeCycle::clearUpdate();
-          LifeCycle::clearDestroy();
           AsyncHandler::clearAll();
+          LifeCycle::clearUpdate();
           Input::clearKeyPress();
       }) {}

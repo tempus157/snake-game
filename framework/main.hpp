@@ -71,7 +71,6 @@ int asyncLoop(int delay, const Callback &callback);
 void clearAsync(int id);
 
 void onKeyPress(const Key &key, const Callback &callback);
-void onDestroy(const Callback &callback);
 
 template <typename T>
 void onUpdate(const Callback &callback, const Property<T> &dep) {
