@@ -1,5 +1,6 @@
 #include "Scene.hpp"
 
+#include "../private/AsyncHandler.hpp"
 #include "../private/Input.hpp"
 #include "LifeCycle.hpp"
 
@@ -13,5 +14,6 @@ Scene::Scene(const Object &object)
           LifeCycle::notifyDestroy();
           LifeCycle::clearUpdate();
           LifeCycle::clearDestroy();
+          AsyncHandler::clearAll();
           Input::clearKeyPress();
       }) {}
