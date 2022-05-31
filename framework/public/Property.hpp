@@ -2,7 +2,7 @@
 #define __FRAMEWORK_PROPERTY__
 
 #include "App.hpp"
-#include "PropertyEvent.hpp"
+#include "LifeCycle.hpp"
 
 #include <functional>
 #include <map>
@@ -30,7 +30,7 @@ public:
 
     void set(const T &value) {
         *this->value = value;
-        PropertyEvent::notifyUpdate(this->value.get());
+        LifeCycle::notifyUpdate(this->value.get());
     }
 
 private:

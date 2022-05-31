@@ -13,8 +13,8 @@ add_executable (
     src/scenes/quitScene.cpp
     framework/main.cpp
     framework/public/App.cpp
+    framework/public/LifeCycle.cpp
     framework/public/Object.cpp
-    framework/public/PropertyEvent.cpp
     framework/public/Scene.cpp
     framework/public/Vector.cpp
     framework/private/AppData.cpp

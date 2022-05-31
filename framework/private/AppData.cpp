@@ -1,6 +1,6 @@
 #include "AppData.hpp"
 
-#include "../public/PropertyEvent.hpp"
+#include "../public/LifeCycle.hpp"
 #include "AsyncHandler.hpp"
 #include "ColorUtility.hpp"
 #include "ExitException.hpp"
@@ -10,7 +10,7 @@
 #include <ncurses.h>
 
 AppData::AppData() {
-    PropertyEvent::onEveryUpdate(std::bind(&AppData::update, this));
+    LifeCycle::onEveryUpdate(std::bind(&AppData::update, this));
 }
 
 AppData &AppData::getInstance() {

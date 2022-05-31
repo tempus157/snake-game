@@ -11,16 +11,12 @@
 template <typename T>
 class Property;
 
-class PropertyEvent final {
+class LifeCycle final {
 public:
     template <typename T>
     static void onUpdate(const Property<T> property,
         const std::function<void()> &callback) {
         updateCallbacks[(void *)property.operator->()].push_back(callback);
-    }
-
-    static void onEveryUpdate(const std::function<void()> &callback) {
-        everyUpdateCallbacks.push_back(callback);
     }
 
     template <typename T>
@@ -33,9 +29,8 @@ public:
         }
     }
 
-    static void clearUpdate() {
-        updateCallbacks.clear();
-    }
+    static void onEveryUpdate(const std::function<void()> &callback);
+    static void clearUpdate();
 
 private:
     static std::map<void *, std::vector<std::function<void()>>> updateCallbacks;

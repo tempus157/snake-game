@@ -4,9 +4,9 @@
 #include "./public/App.hpp"
 #include "./public/Color.hpp"
 #include "./public/Key.hpp"
+#include "./public/LifeCycle.hpp"
 #include "./public/Object.hpp"
 #include "./public/Property.hpp"
-#include "./public/PropertyEvent.hpp"
 #include "./public/Scene.hpp"
 #include "./public/Vector.hpp"
 
@@ -59,13 +59,13 @@ void onKeyPress(const Key &key, const Callback &callback);
 
 template <typename T>
 void onUpdate(const Callback &callback, const Property<T> &dep) {
-    PropertyEvent::onUpdate(dep, callback);
+    LifeCycle::onUpdate(dep, callback);
 }
 
 template <typename TDep, typename... TDeps>
 void onUpdate(const Callback &callback,
     const Property<TDep> &dep, const Property<TDeps> &...deps) {
-    PropertyEvent::onUpdate(dep, callback);
+    LifeCycle::onUpdate(dep, callback);
     onUpdate(callback, deps...);
 }
 
