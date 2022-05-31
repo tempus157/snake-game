@@ -6,8 +6,8 @@ Object snake() {
     auto direction = Property<Vector2>(Vector2::Right * 2);
     auto position = Property<std::deque<Vector2>>({
         Vector2(0, 0),
-        Vector2(1, 0),
         Vector2(2, 0),
+        Vector2(4, 0),
     });
 
     asyncLoop(100, [=]() mutable {
@@ -18,18 +18,30 @@ Object snake() {
     });
 
     onKeyPress(Key::UpArrow, [=]() mutable {
-        direction.set(Vector2::Down);
-    });
-
-    onKeyPress(Key::DownArrow, [=]() mutable {
+        if (*direction == Vector2::Down) {
+            quitApp();
+        }
         direction.set(Vector2::Up);
     });
 
+    onKeyPress(Key::DownArrow, [=]() mutable {
+        if (*direction == Vector2::Up) {
+            quitApp();
+        }
+        direction.set(Vector2::Down);
+    });
+
     onKeyPress(Key::LeftArrow, [=]() mutable {
+        if (*direction == Vector2::Right * 2) {
+            quitApp();
+        }
         direction.set(Vector2::Left * 2);
     });
 
     onKeyPress(Key::RightArrow, [=]() mutable {
+        if (*direction == Vector2::Left * 2) {
+            quitApp();
+        }
         direction.set(Vector2::Right * 2);
     });
 
