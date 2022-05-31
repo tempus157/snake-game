@@ -2,40 +2,46 @@
 
 #include <queue>
 
-Object snake(Property<std::deque<Vector2>> &position) {
+Object snake(Property<std::deque<Vector2>> &position,
+    const Property<std::set<std::pair<int, int>>> &wallPosition) {
     auto direction = Property<Vector2>(Vector2::Right * 2);
 
     asyncLoop(100, [=]() mutable {
-        auto head = position->front();
+        const auto head = position->front();
+        const auto newPosition = head + *direction;
+        if (wallPosition->count({newPosition.x, newPosition.y})) {
+            changeScene("result");
+        }
+
         position->pop_back();
-        position->push_front(head + *direction);
+        position->push_front(newPosition);
         position.set(*position);
     });
 
     onKeyPress(Key::UpArrow, [=]() mutable {
         if (*direction == Vector2::Down) {
-            quitApp();
+            changeScene("result");
         }
         direction.set(Vector2::Up);
     });
 
     onKeyPress(Key::DownArrow, [=]() mutable {
         if (*direction == Vector2::Up) {
-            quitApp();
+            changeScene("result");
         }
         direction.set(Vector2::Down);
     });
 
     onKeyPress(Key::LeftArrow, [=]() mutable {
         if (*direction == Vector2::Right * 2) {
-            quitApp();
+            changeScene("result");
         }
         direction.set(Vector2::Left * 2);
     });
 
     onKeyPress(Key::RightArrow, [=]() mutable {
         if (*direction == Vector2::Left * 2) {
-            quitApp();
+            changeScene("result");
         }
         direction.set(Vector2::Right * 2);
     });

@@ -46,7 +46,7 @@ Scene gameScene() {
 
     return Object({
         wall(wallPosition, immuneWallPosition),
-        snake(snakePosition),
+        snake(snakePosition, wallPosition),
 
         // Snake position log
         $for(snakePosition, [](const Vector2 &pos, int i) {
