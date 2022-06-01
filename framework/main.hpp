@@ -30,6 +30,7 @@ Object border(const Property<char> &ch, const Property<Vector2> &scale,
     const Property<Color> &foreground, const Property<Color> &background);
 
 Object $goto(const Property<Vector2> &position);
+Object $union(const std::vector<const Object> &objects);
 Object $if(const Property<bool> &condition, const Object &ifTrue);
 Object $if(const Property<bool> &condition, const Object &ifTrue, const Object &ifFalse);
 
@@ -58,8 +59,6 @@ Object $for(const TCollection &collection, const TCallback &callback) {
 
     return Object(update);
 }
-
-Object $union(const std::vector<const Object> &objects);
 
 void changeScene(const string &name);
 void quitApp();

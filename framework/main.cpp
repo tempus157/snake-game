@@ -103,6 +103,16 @@ Object $goto(const Property<Vector2> &position) {
     return Object(update);
 }
 
+Object $union(const std::vector<const Object> &objects) {
+    auto update = [=](const Vector2 &origin) {
+        for (const auto &object : objects) {
+            object.update(origin);
+        }
+    };
+
+    return Object(update);
+}
+
 Object $if(const Property<bool> &condition, const Object &ifTrue) {
     auto update = [=](const Vector2 &origin) {
         if (*condition) {
@@ -119,16 +129,6 @@ Object $if(const Property<bool> &condition, const Object &ifTrue, const Object &
             ifTrue.update(origin);
         } else {
             ifFalse.update(origin);
-        }
-    };
-
-    return Object(update);
-}
-
-Object $union(const std::vector<const Object> &objects) {
-    auto update = [=](const Vector2 &origin) {
-        for (const auto &object : objects) {
-            object.update(origin);
         }
     };
 

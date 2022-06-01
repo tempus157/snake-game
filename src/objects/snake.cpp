@@ -38,6 +38,7 @@ Object snake(Property<std::deque<Vector2>> &position,
     });
 
     return Object({
+        $goto(Vector2(0, 0)),
         $for(position, [](const Vector2 &pos, int i) {
             return $union({
                 $goto(pos),
