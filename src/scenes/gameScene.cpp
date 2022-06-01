@@ -45,15 +45,11 @@ Scene gameScene() {
     }
 
     return Object({
+        $goto(Vector2(30, 0)),
         wall(wallPosition, immuneWallPosition),
+        $goto(Vector2(30, 0)),
         snake(snakePosition, wallPosition),
-
-        // Snake position log
-        $for(snakePosition, [](const Vector2 &pos, int i) {
-            return $union({
-                $goto(Vector2(50, i)),
-                label(std::to_string(pos.x) + "," + std::to_string(pos.y)),
-            });
-        }),
+        $goto(Vector2(30, 0)),
+        logger(snakePosition),
     });
 }

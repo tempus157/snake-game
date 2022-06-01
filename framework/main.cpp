@@ -127,7 +127,7 @@ Object $if(const Property<bool> &condition, const Object &ifTrue, const Object &
 
 Object $union(const std::vector<const Object> &objects) {
     auto update = [=](const Vector2 &origin) {
-        for (auto object : objects) {
+        for (const auto &object : objects) {
             object.update(origin);
         }
     };
