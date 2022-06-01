@@ -1,5 +1,6 @@
 #include "../main.hpp"
 
+#include <algorithm>
 #include <queue>
 
 Object snake(Property<std::deque<Vector2>> &position,
@@ -8,7 +9,10 @@ Object snake(Property<std::deque<Vector2>> &position,
 
     asyncLoop(100, [=]() mutable {
         const auto newPosition = position->front() + *direction;
-        if (wallPosition->count({newPosition.x, newPosition.y})) {
+        if (std::count(position->begin(), position->end(), newPosition) >= 1) {
+            changeScene("result");
+        }
+        if (wallPosition->count({newPosition.x, newPosition.y}) >= 1) {
             changeScene("result");
         }
 
@@ -18,30 +22,18 @@ Object snake(Property<std::deque<Vector2>> &position,
     });
 
     onKeyPress(Key::UpArrow, [=]() mutable {
-        if (*direction == Vector2::Down) {
-            changeScene("result");
-        }
         direction.set(Vector2::Up);
     });
 
     onKeyPress(Key::DownArrow, [=]() mutable {
-        if (*direction == Vector2::Up) {
-            changeScene("result");
-        }
         direction.set(Vector2::Down);
     });
 
     onKeyPress(Key::LeftArrow, [=]() mutable {
-        if (*direction == Vector2::Right * 2) {
-            changeScene("result");
-        }
         direction.set(Vector2::Left * 2);
     });
 
     onKeyPress(Key::RightArrow, [=]() mutable {
-        if (*direction == Vector2::Left * 2) {
-            changeScene("result");
-        }
         direction.set(Vector2::Right * 2);
     });
 
