@@ -51,10 +51,12 @@ void AppData::mount() {
     ColorUtility::mount();
 }
 
-void AppData::update() const {
+void AppData::update() {
+    mutex.lock();
     clear();
     activeScene.update();
     refresh();
+    mutex.unlock();
 }
 
 void AppData::receiveInput() const {

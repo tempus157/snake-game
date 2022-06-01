@@ -20,7 +20,6 @@ int App::run(const std::string &sceneName) const {
     try {
         AppData::getInstance().mount();
         AppData::getInstance().changeScene(sceneName);
-        AppData::getInstance().update();
         AppData::getInstance().receiveInput();
     } catch (const ExitException &exit) {
         return exit.code;

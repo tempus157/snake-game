@@ -6,6 +6,7 @@
 #include "../public/Vector.hpp"
 
 #include <map>
+#include <mutex>
 
 class AppData final {
 public:
@@ -17,13 +18,14 @@ public:
     void quit();
 
     void mount();
-    void update() const;
+    void update();
     void receiveInput() const;
 
 private:
     Vector2 scale = Vector2(-1, -1);
     std::map<const std::string, SceneFunction> scenes;
     Scene activeScene;
+    std::mutex mutex;
     AppData();
 };
 
