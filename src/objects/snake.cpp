@@ -9,10 +9,8 @@ Object snake(Property<std::deque<Vector2>> &position,
 
     asyncLoop(100, [=]() mutable {
         const auto newPosition = position->front() + *direction;
-        if (std::count(position->begin(), position->end(), newPosition) >= 1) {
-            changeScene("result");
-        }
-        if (wallPosition->count({newPosition.x, newPosition.y}) >= 1) {
+        if (std::count(position->begin(), position->end(), newPosition) >= 1 ||
+            wallPosition->count({newPosition.x, newPosition.y}) >= 1) {
             changeScene("result");
         }
 

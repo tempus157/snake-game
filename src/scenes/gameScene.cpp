@@ -1,47 +1,55 @@
 #include "../main.hpp"
 
-#include "../libs/map.hpp"
-#include <deque>
-#include <set>
+#include <fstream>
+#include <sstream>
+
+bool parseData(const std::function<void(char, int, int)> &callback) {
+    std::stringstream path;
+    path << "src/data/map0.dat";
+    auto stream = std::ifstream(path.str());
+
+    if (stream.fail()) {
+        return false;
+    }
+
+    std::string buffer;
+    for (auto y = 0; std::getline(stream, buffer); y++) {
+        for (auto x = 0; x < buffer.length(); x++) {
+            callback(buffer[x], x, y);
+        }
+    }
+
+    return true;
+}
 
 Scene gameScene() {
-    auto immuneWallPosition = Property<std::set<std::pair<int, int>>>();
     auto wallPosition = Property<std::set<std::pair<int, int>>>();
+    auto immuneWallPosition = Property<std::set<std::pair<int, int>>>();
     auto snakePosition = Property<std::deque<Vector2>>();
+    auto isHeadFirst = -1;
 
-    // TODO Refactor this shit
-    int isHeadFirst = -1;
-    for (auto y = 0; y < map.size(); y++) {
-        for (auto x = 0; x < map[y].size(); x++) {
-            const auto cell = static_cast<Cell>(map[y][x]);
-            if (cell == Cell::None) {
-                continue;
+    auto success = parseData([=](char cell, int x, int y) mutable {
+        switch (cell) {
+        case '#':
+            wallPosition->insert({x * 2, y});
+            break;
+        case '@':
+            immuneWallPosition->insert({x * 2, y});
+            break;
+        case '+':
+            snakePosition->push_back({x * 2, y});
+            if (snakePosition->size() != 0) {
+                std::reverse(snakePosition->begin(), snakePosition->end());
             }
-
-            if (cell == Cell::Wall) {
-                wallPosition->insert({x * 2, y});
-                continue;
-            }
-
-            if (cell == Cell::ImmuneWall) {
-                immuneWallPosition->insert({x * 2, y});
-                continue;
-            }
-
-            if (isHeadFirst == -1) {
-                if (cell == Cell::SnakeHead) {
-                    isHeadFirst = 1;
-                } else if (cell == Cell::SnakeBody) {
-                    isHeadFirst = 0;
-                }
-            }
-
-            if (isHeadFirst) {
-                snakePosition->push_back({x * 2, y});
-            } else {
-                snakePosition->push_front({x * 2, y});
-            }
+            break;
+        case '=':
+            snakePosition->push_back({x * 2, y});
+            break;
         }
+    });
+
+    if (!success) {
+        quitApp();
     }
 
     return Object({
@@ -49,7 +57,5 @@ Scene gameScene() {
         wall(wallPosition, immuneWallPosition),
         $goto(Vector2(30, 0)),
         snake(snakePosition, wallPosition),
-        $goto(Vector2(30, 0)),
-        logger(snakePosition),
     });
 }

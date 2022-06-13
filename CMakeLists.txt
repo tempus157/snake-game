@@ -8,7 +8,6 @@ include_directories(${CURSES_INCLUDE_DIR})
 add_executable (
     main.out
     src/main.cpp
-    src/objects/logger.cpp
     src/objects/snake.cpp
     src/objects/wall.cpp
     src/scenes/gameScene.cpp
