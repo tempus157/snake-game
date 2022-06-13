@@ -6,16 +6,13 @@
 #include <functional>
 #include <vector>
 
-class Scene;
-using SceneFunction = std::function<Scene()>;
-
 class Scene final {
 public:
     std::function<void()> update;
-    std::function<void()> destroy;
-
     Scene();
-    Scene(const Object &object);
+    Scene(const std::vector<const Object> &objects);
 };
+
+using SceneFunction = std::function<Scene()>;
 
 #endif

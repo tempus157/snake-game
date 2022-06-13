@@ -9,9 +9,9 @@ Scene resultScene() {
         changeScene("game");
     });
 
-    return Object({
+    return {{
         label("Game Over\n"),
         label("Press Enter to restart\n"),
         label("Press Q to quit"),
-    });
+    }};
 }

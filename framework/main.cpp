@@ -10,7 +10,7 @@
 
 #undef border
 
-Object label(const Property<string> &text) {
+Object label(const Property<std::string> &text) {
     auto update = [=](const Vector2 &origin) {
         printw(text->c_str());
     };
@@ -18,7 +18,7 @@ Object label(const Property<string> &text) {
     return Object(update);
 }
 
-Object label(const Property<string> &text,
+Object label(const Property<std::string> &text,
     const Property<Color> &foreground, const Property<Color> &background) {
     auto update = [=](const Vector2 &origin) {
         ColorUtility::enableColor(*foreground, *background);
@@ -135,7 +135,7 @@ Object $if(const Property<bool> &condition, const Object &ifTrue, const Object &
     return Object(update);
 }
 
-void changeScene(const string &name) {
+void changeScene(const std::string &name) {
     AppData::getInstance().changeScene(name);
 }
 
@@ -147,10 +147,10 @@ void soundBeep() {
     beep();
 }
 
-string readLine() {
+std::string readLine() {
     nocbreak();
     int ch;
-    string input;
+    std::string input;
 
     do {
         ch = getch();

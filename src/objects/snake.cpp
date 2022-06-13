@@ -35,7 +35,7 @@ Object snake(Property<std::deque<Vector2>> &position,
         direction.set(Vector2::Right * 2);
     });
 
-    return Object({
+    return {{
         $goto(Vector2(0, 0)),
         $for(position, [](const Vector2 &pos, int i) {
             return $union({
@@ -45,5 +45,5 @@ Object snake(Property<std::deque<Vector2>> &position,
                     label("ㅇ", Color::Yellow, Color::Black)),
             });
         }),
-    });
+    }};
 }

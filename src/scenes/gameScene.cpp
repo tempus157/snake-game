@@ -3,9 +3,9 @@
 #include <fstream>
 #include <sstream>
 
-bool parseData(const std::function<void(char, int, int)> &callback) {
+bool parseData(int level, const std::function<void(char, int, int)> &callback) {
     std::stringstream path;
-    path << "src/data/map0.dat";
+    path << "src/data/map" << level << ".txt";
     auto stream = std::ifstream(path.str());
 
     if (stream.fail()) {
@@ -28,7 +28,7 @@ Scene gameScene() {
     auto snakePosition = Property<std::deque<Vector2>>();
     auto isHeadFirst = -1;
 
-    auto success = parseData([=](char cell, int x, int y) mutable {
+    auto success = parseData(1, [=](char cell, int x, int y) mutable {
         switch (cell) {
         case '#':
             wallPosition->insert({x * 2, y});
@@ -52,10 +52,10 @@ Scene gameScene() {
         quitApp();
     }
 
-    return Object({
+    return {{
         $goto(Vector2(30, 0)),
         wall(wallPosition, immuneWallPosition),
         $goto(Vector2(30, 0)),
         snake(snakePosition, wallPosition),
-    });
+    }};
 }

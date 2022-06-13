@@ -4,14 +4,11 @@
 #include "../private/Input.hpp"
 #include "LifeCycle.hpp"
 
-Scene::Scene() : update([] {}), destroy([] {}) {}
+Scene::Scene() {}
 
-Scene::Scene(const Object &object)
+Scene::Scene(const std::vector<const Object> &objects)
     : update([=] {
-          object.update(Vector2::Zero);
-      }),
-      destroy([] {
-          AsyncHandler::clearAll();
-          LifeCycle::clearUpdate();
-          Input::clearKeyPress();
+          for (const auto &object : objects) {
+              object.update(Vector2::Zero);
+          }
       }) {}

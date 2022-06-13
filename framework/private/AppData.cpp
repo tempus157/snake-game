@@ -28,7 +28,9 @@ void AppData::useScene(const std::string &name, const SceneFunction &scene) {
 }
 
 void AppData::changeScene(const std::string &name) {
-    activeScene.destroy();
+    AsyncHandler::clearAll();
+    LifeCycle::clearUpdate();
+    Input::clearKeyPress();
     activeScene = scenes[name]();
     update();
 }

@@ -2,7 +2,7 @@
 
 Object wall(const Property<std::set<std::pair<int, int>>> &position,
     const Property<std::set<std::pair<int, int>>> &immunePosition) {
-    return Object({
+    return {{
         $for(position, [=](const std::pair<int, int> &item, int i) {
             return $union({
                 $goto(Vector2(item.first, item.second)),
@@ -15,5 +15,5 @@ Object wall(const Property<std::set<std::pair<int, int>>> &position,
                 label("ㅍ", Color::Blue, Color::Black),
             });
         }),
-    });
+    }};
 }

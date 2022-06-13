@@ -14,11 +14,10 @@
 #include <memory>
 #include <string>
 
-using std::string;
 using Callback = std::function<void()>;
 
-Object label(const Property<string> &text);
-Object label(const Property<string> &text,
+Object label(const Property<std::string> &text);
+Object label(const Property<std::string> &text,
     const Property<Color> &foreground, const Property<Color> &background);
 
 Object box(const Property<char> &ch, const Property<Vector2> &scale);
@@ -60,10 +59,10 @@ Object $for(const TCollection &collection, const TCallback &callback) {
     return Object(update);
 }
 
-void changeScene(const string &name);
+void changeScene(const std::string &name);
 void quitApp();
 void soundBeep();
-string readLine();
+std::string readLine();
 
 int asyncCall(int delay, const Callback &callback);
 int asyncLoop(int delay, const Callback &callback);
