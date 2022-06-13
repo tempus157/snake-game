@@ -3,6 +3,7 @@
 #include <deque>
 #include <set>
 
+Scene introScene();
 Scene gameScene();
 Scene resultScene();
 

@@ -12,6 +12,7 @@ add_executable (
     src/objects/snake.cpp
     src/objects/wall.cpp
     src/scenes/gameScene.cpp
+    src/scenes/introScene.cpp
     src/scenes/resultScene.cpp
     framework/main.cpp
     framework/public/App.cpp
