@@ -3,14 +3,7 @@
 #include <fstream>
 #include <sstream>
 
-enum class Cell : char {
-    Wall = '#',
-    ImmuneWall = '@',
-    SnakeHead = '+',
-    SnakeBody = '=',
-};
-
-bool parseData(const std::function<void(const Cell &, int, int)> &callback) {
+bool parseData(const std::function<void(char, int, int)> &callback) {
     std::stringstream path;
     path << "src/data/map0.dat";
     auto stream = std::ifstream(path.str());
@@ -19,13 +12,10 @@ bool parseData(const std::function<void(const Cell &, int, int)> &callback) {
         return false;
     }
 
-    auto isHeadFirst = -1;
     std::string buffer;
-
     for (auto y = 0; std::getline(stream, buffer); y++) {
         for (auto x = 0; x < buffer.length(); x++) {
-            auto cell = static_cast<Cell>(buffer[x]);
-            callback(cell, x, y);
+            callback(buffer[x], x, y);
         }
     }
 
@@ -38,30 +28,22 @@ Scene gameScene() {
     auto snakePosition = Property<std::deque<Vector2>>();
     auto isHeadFirst = -1;
 
-    auto success = parseData([=](const Cell &cell, int x, int y) mutable {
+    auto success = parseData([=](char cell, int x, int y) mutable {
         switch (cell) {
-        case Cell::Wall:
+        case '#':
             wallPosition->insert({x * 2, y});
             break;
-        case Cell::ImmuneWall:
+        case '@':
             immuneWallPosition->insert({x * 2, y});
             break;
-        case Cell::SnakeHead:
-            if (isHeadFirst == -1) {
-                isHeadFirst = 1;
-            }
-        case Cell::SnakeBody:
-            if (isHeadFirst == -1) {
-                isHeadFirst = 0;
-            }
-
-            if (isHeadFirst) {
-                snakePosition->push_back({x * 2, y});
-            } else {
-                snakePosition->push_front({x * 2, y});
+        case '+':
+            snakePosition->push_back({x * 2, y});
+            if (snakePosition->size() != 0) {
+                std::reverse(snakePosition->begin(), snakePosition->end());
             }
             break;
-        default:
+        case '=':
+            snakePosition->push_back({x * 2, y});
             break;
         }
     });
