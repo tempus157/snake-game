@@ -3,22 +3,20 @@
 #include <algorithm>
 #include <queue>
 
-Object snake(Property<Map> &map) {
+Object snake(Property<std::deque<Vector2>> &position,
+    const Property<std::set<std::pair<int, int>>> &wallPosition) {
     auto direction = Property<Vector2>(Vector2::Right * 2);
 
     asyncLoop(100, [=]() mutable {
-        soundBeep();
-        const auto newPosition = map->snake.front() + *direction;
-        if (std::count(map->snake.begin(), map->snake.end(), newPosition) >= 1) {
-            changeScene("result");
-        }
-        if (map->wall.count({newPosition.x, newPosition.y}) >= 1) {
+        const auto newPosition = position->front() + *direction;
+        if (std::count(position->begin(), position->end(), newPosition) >= 1 ||
+            wallPosition->count({newPosition.x, newPosition.y}) >= 1) {
             changeScene("result");
         }
 
-        map->snake.pop_back();
-        map->snake.push_front(newPosition);
-        map.set(*map);
+        position->pop_back();
+        position->push_front(newPosition);
+        position.set(*position);
     });
 
     onKeyPress(Key::UpArrow, [=]() mutable {
@@ -39,7 +37,7 @@ Object snake(Property<Map> &map) {
 
     return Object({
         $goto(Vector2(0, 0)),
-        $for(map->snake, [](const Vector2 &pos, int i) {
+        $for(position, [](const Vector2 &pos, int i) {
             return $union({
                 $goto(pos),
                 $if(i == 0,
