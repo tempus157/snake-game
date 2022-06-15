@@ -26,7 +26,6 @@ Scene gameScene() {
     auto wallPosition = Property<std::set<std::pair<int, int>>>();
     auto immuneWallPosition = Property<std::set<std::pair<int, int>>>();
     auto snakePosition = Property<std::deque<Vector2>>();
-    auto isHeadFirst = -1;
 
     auto success = parseData(1, [=](char cell, int x, int y) mutable {
         switch (cell) {
