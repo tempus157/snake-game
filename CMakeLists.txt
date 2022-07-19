@@ -6,22 +6,22 @@ find_package (Curses REQUIRED)
 include_directories(${CURSES_INCLUDE_DIR})
 
 add_executable (
-    main.out
+    game.out
     src/main.cpp
     src/objects/snake.cpp
     src/objects/wall.cpp
     src/scenes/gameScene.cpp
     src/scenes/introScene.cpp
     src/scenes/resultScene.cpp
-    framework/main.cpp
-    framework/public/App.cpp
-    framework/public/LifeCycle.cpp
-    framework/public/Object.cpp
-    framework/public/Scene.cpp
-    framework/public/Vector.cpp
-    framework/private/AppData.cpp
-    framework/private/AsyncHandler.cpp
-    framework/private/ColorUtility.cpp
-    framework/private/Input.cpp
+    creact/main.cpp
+    creact/public/App.cpp
+    creact/public/LifeCycle.cpp
+    creact/public/Object.cpp
+    creact/public/Scene.cpp
+    creact/public/Vector.cpp
+    creact/private/AppData.cpp
+    creact/private/AsyncHandler.cpp
+    creact/private/ColorUtility.cpp
+    creact/private/Input.cpp
 )
-target_link_libraries (main.out ${CURSES_LIBRARIES})
+target_link_libraries (game.out ${CURSES_LIBRARIES})
