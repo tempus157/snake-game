@@ -1,5 +1,5 @@
 add_library(
-    creact.out
+    creact
     main.cpp
     public/App.cpp
     public/LifeCycle.cpp
@@ -13,5 +13,5 @@ add_library(
 )
 
 find_package(Curses REQUIRED)
-target_include_directories(creact.out PUBLIC ${CURSES_INCLUDE_DIR})
-target_link_libraries(creact.out ${CURSES_LIBRARIES})
+target_include_directories(creact PUBLIC ${CURSES_INCLUDE_DIR})
+target_link_libraries(creact ${CURSES_LIBRARIES})
