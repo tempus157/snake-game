@@ -1,5 +1,5 @@
-#include "objects.h"
-#include "scenes.h"
+#include "object.h"
+#include "scene.h"
 
 #include <deque>
 #include <fstream>

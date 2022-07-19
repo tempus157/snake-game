@@ -1,4 +1,4 @@
-#include "objects.h"
+#include "object.h"
 
 Object wall(const Property<std::set<std::pair<int, int>>> &position,
     const Property<std::set<std::pair<int, int>>> &immunePosition) {

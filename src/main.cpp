@@ -1,4 +1,4 @@
-#include "scenes.h"
+#include "scene.h"
 
 int main() {
     return App()

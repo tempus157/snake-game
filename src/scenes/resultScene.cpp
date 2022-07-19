@@ -1,4 +1,4 @@
-#include "scenes.h"
+#include "scene.h"
 
 Scene resultScene() {
     onKeyPress(Key::Q, [] {
