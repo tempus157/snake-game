@@ -1,6 +1,9 @@
-#include "../main.hpp"
+#include "objects.h"
+#include "scenes.h"
 
+#include <deque>
 #include <fstream>
+#include <set>
 #include <sstream>
 
 bool parseData(int level, const std::function<void(char, int, int)> &callback) {

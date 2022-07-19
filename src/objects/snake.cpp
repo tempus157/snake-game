@@ -1,7 +1,8 @@
-#include "../main.hpp"
+#include "scenes.h"
 
 #include <algorithm>
-#include <queue>
+#include <deque>
+#include <set>
 
 Object snake(Property<std::deque<Vector2>> &position,
     const Property<std::set<std::pair<int, int>>> &wallPosition) {
