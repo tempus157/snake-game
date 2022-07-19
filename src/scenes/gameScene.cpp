@@ -5,7 +5,7 @@
 
 bool parseData(int level, const std::function<void(char, int, int)> &callback) {
     std::stringstream path;
-    path << "src/data/map" << level << ".txt";
+    path << "data/map" << level << ".txt";
     auto stream = std::ifstream(path.str());
 
     if (stream.fail()) {
