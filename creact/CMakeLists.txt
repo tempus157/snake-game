@@ -1,17 +1,13 @@
 add_library(
     creact
-    main.cpp
-    public/App.cpp
-    public/LifeCycle.cpp
-    public/Object.cpp
-    public/Scene.cpp
-    public/Vector.cpp
-    private/AppData.cpp
-    private/AsyncHandler.cpp
-    private/ColorUtility.cpp
-    private/Input.cpp
+    SHARED
+    src/app.cpp
+    src/color.cpp
+    src/element.cpp
+    src/vector.cpp
 )
 
 find_package(Curses REQUIRED)
 target_include_directories(creact PUBLIC ${CURSES_INCLUDE_DIR})
 target_link_libraries(creact ${CURSES_LIBRARIES})
+target_include_directories(creact PUBLIC ${CMAKE_CURRENT_SOURCE_DIR}/include)

@@ -81,7 +81,8 @@
     "set": "cpp",
     "stack": "cpp",
     "unordered_set": "cpp",
-    "filesystem": "cpp"
+    "filesystem": "cpp",
+    "version": "cpp"
   },
   "cSpell.words": ["Creact"]
 }
